@@ -1,13 +1,18 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { DarkModeService } from './services/dark-mode.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.css',
+  imports: [RouterOutlet, NavbarComponent, CommonModule],
 })
 export class AppComponent {
-  title = 'AdminDashboard';
+  title = 'Admin Dashboard';
+
+  darkModeService: DarkModeService = inject(DarkModeService);
 }
