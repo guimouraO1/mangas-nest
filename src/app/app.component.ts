@@ -8,7 +8,6 @@ import { DarkModeService } from './services/dark-mode.service';
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
   imports: [RouterOutlet, NavbarComponent, CommonModule],
 })
 export class AppComponent {

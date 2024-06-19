@@ -4,10 +4,20 @@ import { Injectable, signal } from '@angular/core';
   providedIn: 'root',
 })
 export class DarkModeService {
-  darkModeSignal = signal<string>('null');
-  updateDarkMode() {
-    this.darkModeSignal.update((value) => (value === 'dark' ? 'null' : 'dark'));
-    console.log(this.darkModeSignal);
+  darkModeSignal = signal<string>('light');
+
+  getInitialTheme() {
+    let theme = localStorage.getItem('theme');
+    if (!theme) return;
+    this.darkModeSignal.update((value) => theme);
   }
+
+  updateDarkMode() {
+    this.darkModeSignal.update((value) =>
+      value === 'dark' ? 'light' : 'dark'
+    );
+    localStorage.setItem('theme', this.darkModeSignal());
+  }
+
   constructor() {}
 }

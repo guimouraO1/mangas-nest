@@ -6,7 +6,6 @@ import { DarkModeService } from '../../services/dark-mode.service';
   standalone: true,
   imports: [],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css',
 })
 export class NavbarComponent {
   darkModeService: DarkModeService = inject(DarkModeService);
