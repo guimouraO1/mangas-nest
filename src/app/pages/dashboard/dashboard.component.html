@@ -1,0 +1,7 @@
+<main
+  class="bg-zinc-50 dark:bg-zinc-900 w-screen h-screen flex justify-center items-center gap-4"
+>
+  @for (manga of mangas; track $index) {
+  <span class="text-zinc-800 dark:text-white">{{ manga.name }}</span>
+  }
+</main>

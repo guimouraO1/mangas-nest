@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { DarkModeService } from './services/dark-mode.service';
 
@@ -8,10 +8,9 @@ import { DarkModeService } from './services/dark-mode.service';
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
-  imports: [RouterOutlet, NavbarComponent, CommonModule],
+  imports: [RouterOutlet, NavbarComponent, CommonModule, RouterLink],
 })
 export class AppComponent {
-  title = 'Admin Dashboard';
-
   darkModeService: DarkModeService = inject(DarkModeService);
+  router: Router = inject(Router);
 }
