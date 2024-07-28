@@ -26,13 +26,19 @@
             "assets": [
               {
                 "glob": "**/*",
+                "input": "src/assets",
+                "output": "/assets/"
+              },
+              {
+                "glob": "**/*",
+                "input": "assets"
+              },
+              {
+                "glob": "**/*",
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/custom-theme.scss",
-              "src/styles.css"
-            ],
+            "styles": ["src/custom-theme.scss", "src/styles.css"],
             "scripts": []
           },
           "configurations": {
@@ -87,6 +93,15 @@
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "css",
             "assets": [
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "/assets/"
+              },
+              {
+                "glob": "**/*",
+                "input": "assets"
+              },
               {
                 "glob": "**/*",
                 "input": "public"

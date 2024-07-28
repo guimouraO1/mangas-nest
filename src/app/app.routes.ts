@@ -32,7 +32,7 @@ export const routes: Routes = [
       if (!user) {
         notificationService.alert({
           message:
-            'Não autorizado. Você deve estar logado para acessar esta página.',
+            'Não autorizado. Você deve estar logado para acessar esta página',
           type: AlertType.Error,
         });
         return `login`;
@@ -69,10 +69,10 @@ export const routes: Routes = [
       if (!user) {
         notificationService.alert({
           message:
-            'Não autorizado. Você deve estar logado para acessar esta página.',
+            'Não autorizado. Você deve estar logado para acessar esta página',
           type: AlertType.Error,
         });
-        return `login`;
+        return 'login';
       }
 
       if (user) {

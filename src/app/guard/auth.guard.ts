@@ -11,7 +11,7 @@ export const authGuard: CanActivateFn = async (route, state) => {
   const router = inject(Router);
   const notificationService = inject(NotificationService);
 
-  let user: User | any = false;
+  let user: User | any = null;
 
   authService
     .getUserObserver()
@@ -21,9 +21,10 @@ export const authGuard: CanActivateFn = async (route, state) => {
     });
 
   if (!user) {
+    console.log('esadsa');
     notificationService.alert({
       message:
-        'Não autorizado. Você deve estar logado para acessar esta página.',
+        'Não autorizado. Você deve estar logado para acessar esta página',
       type: AlertType.Error,
     });
     return router.createUrlTree(['login']);
