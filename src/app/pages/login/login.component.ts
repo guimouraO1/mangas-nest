@@ -9,7 +9,9 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
+import { Alert, AlertType } from '../../models/notification.model';
 import { AuthService } from '../../services/auth.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +23,7 @@ export class LoginComponent {
   router: Router = inject(Router);
   authService = inject(AuthService);
   fb = inject(FormBuilder);
+  notificationService = inject(NotificationService);
 
   loginForm: FormGroup;
   hidePassword = true;
@@ -57,20 +60,25 @@ export class LoginComponent {
       );
 
       localStorage.setItem('token', res.access_token);
-
       this.authService.setUser(res.user);
 
-      if (res.user.role === 'admin') {
-        this.router.navigate([`admin/${res.user.id}`]);
-      }
+      const route =
+        res.user.role === 'admin'
+          ? `admin/${res.user.id}`
+          : `dashboard/${res.user.id}`;
+      this.router.navigate([route]);
 
-      if (res.user.role === 'standart') {
-        this.router.navigate([`dashboard/${res.user.id}`]);
-      }
+      this.newAlert({
+        message: 'Login realizado com sucesso!',
+        type: AlertType.Success,
+      });
     } catch (err) {
       console.log('Login Error:', err);
     } finally {
       this.loadingLogin = false;
     }
+  }
+  newAlert(alert: Alert) {
+    this.notificationService.alert(alert);
   }
 }

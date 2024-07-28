@@ -1,38 +1,55 @@
 <header
-  class="fixed w-full body-font shadow-md border-b-1 border-gray-500 border-b-[1px] border-opacity-20 bg-zinc-50 dark:bg-zinc-900"
+  class="fixed w-full h-[8vh] body-font shadow-md border-b-1 border-gray-500 border-b-[1px] border-opacity-20 bg-zinc-50 dark:bg-zinc-900"
 >
   <div
-    class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center gap-4"
+    class="container mx-auto flex flex-wrap p-2 flex-col md:flex-row items-center gap-4 h-full"
   >
     <nav
-      class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-lflex flex-wrap items-center text-base justify-center"
+      class="md:mr-auto md:ml-4 md:py-1 md:pl-4 flex flex-wrap items-center text-base justify-center gap-2"
     >
-      <button>
+      @if (!user) {
+      <button class="px-8 py-1.5 hover:bg-sky-700 rounded-sm">
         <a
-          routerLink=""
+          routerLink="login"
           class="text-stone-900 dark:text-zinc-200 cursor-pointer font-sans font-semibold"
           >Login</a
         >
       </button>
-      <button (click)="logout()">
+      } @if (user) {
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="size-6 cursor-pointer hover:bg-red-700 rounded-full dark:text-white text-stone-900"
+        (click)="logout()"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6 18 18 6M6 6l12 12"
+        />
+      </svg>
+
+      }
+
+      <button
+        routerLink="dashboard"
+        class="px-5 py-1.5 hover:bg-sky-700 rounded-md"
+      >
         <a
-          routerLink=""
-          class="text-stone-900 ml-5 dark:text-zinc-200 cursor-pointer font-sans font-semibold"
-          >Logout</a
-        >
-      </button>
-      <button (click)="dashboard()">
-        <a
-          routerLink=""
-          class="text-stone-900 ml-5 dark:text-zinc-200 cursor-pointer font-sans font-semibold"
-          >Dash</a
+          class="text-stone-900 dark:text-zinc-200 cursor-pointer font-sans font-semibold"
+          >Dashboard</a
         >
       </button>
 
-      <button (click)="admin()">
+      <button
+        class="px-8 py-1.5 hover:bg-sky-700 rounded-md"
+        routerLink="admin"
+      >
         <a
-          routerLink=""
-          class="text-stone-900 ml-5 dark:text-zinc-200 cursor-pointer font-sans font-semibold"
+          class="text-stone-900 dark:text-zinc-200 cursor-pointer font-sans font-semibold"
           >admin</a
         >
       </button>

@@ -19,8 +19,12 @@ export class AuthService {
     return this.http.post(`${this.urlApi}/login`, loginForm);
   }
 
-  getUserObject(): Observable<any> {
+  getUserObserver(): Observable<any> {
     return this.user$;
+  }
+
+  getUser() {
+    return this.userSubject.value;
   }
 
   logout() {
