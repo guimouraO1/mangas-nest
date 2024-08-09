@@ -72,8 +72,11 @@ export class LoginComponent {
         message: 'Login realizado com sucesso!',
         type: AlertType.Success,
       });
-    } catch (err) {
-      console.log('Login Error:', err);
+    } catch (err: any) {
+      this.newAlert({
+        message: err.error.msg,
+        type: AlertType.Error,
+      });
     } finally {
       this.loadingLogin = false;
     }

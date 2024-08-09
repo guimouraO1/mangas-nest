@@ -12,30 +12,30 @@ import { User } from '../models/user.model';
 export class AuthService {
   private http = inject(HttpClient);
   private urlApi = environment.url;
-  private userSubject = new BehaviorSubject<any>(null);
+  private userSubject = new BehaviorSubject<User | undefined>(undefined);
   user$ = this.userSubject.asObservable();
 
   login(loginForm: LoginForm): Observable<any> {
     return this.http.post(`${this.urlApi}/login`, loginForm);
   }
 
-  getUserObserver(): Observable<any> {
+  getUserObserver(): Observable<User | undefined> {
     return this.user$;
   }
 
-  getUser() {
+  getUser(): User | undefined {
     return this.userSubject.value;
   }
 
-  logout() {
-    this.userSubject.next(null);
+  logout(): void {
+    this.userSubject.next(undefined);
   }
 
-  setUser(user: User) {
+  setUser(user: User): void {
     this.userSubject.next(user);
   }
 
-  async confirmAuthentication() {
+  async confirmAuthentication(): Promise<boolean> {
     const token: any = localStorage.getItem('token');
     const headers = new HttpHeaders().set('authorization', `${token}`);
 
@@ -55,7 +55,7 @@ export class AuthService {
     }
   }
 
-  decodePayloadJWT(token: any) {
+  decodePayloadJWT(token: string) {
     try {
       return jwtDecode(token);
     } catch (Error) {

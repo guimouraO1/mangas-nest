@@ -7,11 +7,11 @@ import {
   ApplicationConfig,
   provideZoneChangeDetection,
 } from '@angular/core';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { AuthService } from './services/auth.service';
 import { DarkModeService } from './services/dark-mode.service';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export function initializer(darkModeService: DarkModeService) {
   return () => darkModeService.getInitialTheme();
@@ -28,15 +28,16 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptorsFromDi()),
     {
       provide: APP_INITIALIZER,
-      useFactory: initializer,
-      deps: [DarkModeService],
+      useFactory: authInitializer,
+      deps: [AuthService],
       multi: true,
     },
     {
       provide: APP_INITIALIZER,
-      useFactory: authInitializer,
-      deps: [AuthService],
+      useFactory: initializer,
+      deps: [DarkModeService],
       multi: true,
-    }, provideAnimationsAsync(),
+    },
+    provideAnimationsAsync(),
   ],
 };

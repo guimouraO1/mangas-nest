@@ -28,3 +28,22 @@ body {
     padding: 0;
   }
 }
+
+* {
+  scrollbar-width: 4px;
+  scrollbar-color: theme("colors.blue.700");
+}
+
+*::-webkit-scrollbar {
+  width: 2px;
+}
+
+*::-webkit-scrollbar-track {
+  background: theme("colors.transparent"); /* Light background */
+  border-radius: 2px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: theme("colors.blue.600"); /* Tailwind blue-700 color */
+  border-radius: 2px;
+}

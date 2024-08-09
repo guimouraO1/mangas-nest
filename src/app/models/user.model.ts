@@ -5,5 +5,10 @@ export interface User {
   email: string;
   password: string;
   createdAt: Date;
-  role: string;
+  role: Role;
+}
+
+export enum Role {
+  Admin = 'admin',
+  User = 'user',
 }

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
@@ -21,13 +21,13 @@ import { NotificationService } from './services/notification.service';
     MatIconModule,
   ],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   darkModeService: DarkModeService = inject(DarkModeService);
   router: Router = inject(Router);
   notificationService = inject(NotificationService);
   snackBar: MatSnackBar = inject(MatSnackBar);
 
-  ngOnInit(): void {
+  constructor() {
     this.notificationService.alert$.subscribe((alert: Alert | null) => {
       if (alert) {
         this.snackBar.openFromComponent(CustomSnackbarComponent, {

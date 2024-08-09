@@ -1,8 +1,8 @@
-import { ErrorHandler, inject } from '@angular/core';
+import { inject } from '@angular/core';
 import { Routes } from '@angular/router';
 import { adminGuard } from './guard/admin.guard';
-import { alreadyLoggedIn } from './guard/alreadyLoggedIn.guard';
 import { authGuard } from './guard/auth.guard';
+import { authRedirectGuard } from './guard/authRedirectGuard';
 import { AlertType } from './models/notification.model';
 import { User } from './models/user.model';
 import { AuthService } from './services/auth.service';
@@ -19,15 +19,14 @@ export const routes: Routes = [
     title: 'Login Page',
     loadComponent: () =>
       import('./pages/login/login.component').then((p) => p.LoginComponent),
-    canActivate: [alreadyLoggedIn],
+    canActivate: [authRedirectGuard],
   },
   {
     path: 'admin',
     redirectTo: () => {
       const notificationService = inject(NotificationService);
       const authService = inject(AuthService);
-      const errorHandler = inject(ErrorHandler);
-      const user: User = authService.getUser();
+      const user: User | undefined = authService.getUser();
 
       if (!user) {
         notificationService.alert({
@@ -39,13 +38,8 @@ export const routes: Routes = [
       }
 
       if (user) {
-        return `/admin/${user.id}`;
+        return `/admin/${user.username}`;
       } else {
-        errorHandler.handleError(
-          new Error(
-            'Tentativa de navegação para a página de administração sem id de usuário'
-          )
-        );
         return `not-found`;
       }
     },
@@ -63,10 +57,9 @@ export const routes: Routes = [
     redirectTo: () => {
       const notificationService = inject(NotificationService);
       const authService = inject(AuthService);
-      const errorHandler = inject(ErrorHandler);
-      const user: User = authService.getUser();
+      const user: User | undefined = authService.getUser();
 
-      if (!user) {
+      if (!user || user === undefined) {
         notificationService.alert({
           message:
             'Não autorizado. Você deve estar logado para acessar esta página',
@@ -76,11 +69,8 @@ export const routes: Routes = [
       }
 
       if (user) {
-        return `/dashboard/${user.id}`;
+        return `/dashboard/${user.username}`;
       } else {
-        errorHandler.handleError(
-          new Error('Tentativa de navegação para a página sem id de usuário')
-        );
         return `login`;
       }
     },

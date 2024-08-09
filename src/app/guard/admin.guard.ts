@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { take } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { AlertType } from '../models/notification.model';
 import { User } from '../models/user.model';
 import { AuthService } from '../services/auth.service';
@@ -10,14 +10,10 @@ export const adminGuard: CanActivateFn = async (route, state) => {
   const notificationService = inject(NotificationService);
   const authService = inject(AuthService);
   const router = inject(Router);
-  let user: User | any = false;
 
-  authService
-    .getUserObserver()
-    .pipe(take(1))
-    .subscribe((value) => {
-      user = value;
-    });
+  let user: User | undefined = await firstValueFrom(
+    authService.getUserObserver()
+  );
 
   if (!user) {
     notificationService.alert({
@@ -33,12 +29,12 @@ export const adminGuard: CanActivateFn = async (route, state) => {
       message: 'Você não tem permissão para acessar essa página',
       type: AlertType.Error,
     });
-    return router.createUrlTree([`dashboard/${user.id}`]);
+    return router.createUrlTree([`dashboard/${user.username}`]);
   }
 
   const param: any = route.params;
-  if (user.id !== param.user) {
-    return router.createUrlTree([`admin/${user.id}`]);
+  if (user.username !== param.user) {
+    return router.createUrlTree([`admin/${user.username}`]);
   }
 
   return true;
