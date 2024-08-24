@@ -18,7 +18,9 @@ export class CardComponent {
   manga = input.required<any>();
 
   newChapter(mangaId: string) {
-    const newChapter = this.dialog.open(NewChapterModalComponent);
+    const newChapter = this.dialog.open(NewChapterModalComponent, {
+      data: this.manga().chapters,
+    });
 
     newChapter.afterClosed().subscribe((confirmed: number | boolean) => {
       if (!confirmed) return;
@@ -47,6 +49,7 @@ export class CardComponent {
     const deleteChapterConfirmation = this.dialog.open(
       ConfirmationModalComponent
     );
+
     deleteChapterConfirmation.afterClosed().subscribe((confirmed: boolean) => {
       if (!confirmed) return;
 

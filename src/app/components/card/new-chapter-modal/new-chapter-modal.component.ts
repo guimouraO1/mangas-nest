@@ -1,5 +1,12 @@
-import { Component, inject, signal } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import {
+  Component,
+  Inject,
+  inject,
+  input,
+  OnInit,
+  signal,
+} from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DarkModeService } from '../../../services/dark-mode.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -13,11 +20,12 @@ import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 })
 export class NewChapterModalComponent {
   darkModeService: DarkModeService = inject(DarkModeService);
-  chapter = signal<number>(0);
+  chapter = signal<number>(+this.data[0].number + 1 || 1);
   chapterValue: any = 0;
 
   constructor(
-    public dialogRef: MatDialogRef<NewChapterModalComponent, boolean>
+    public dialogRef: MatDialogRef<NewChapterModalComponent, boolean>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.chapterValue = this.chapter();
   }
