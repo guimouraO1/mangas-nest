@@ -1,19 +1,10 @@
-<main (keyup.enter)="login()" class="flex flex-row w-full h-[92vh]">
+<main (keyup.enter)="login()" class="flex flex-row w-full h-[92vh] flex-wrap">
   <div class="w-1/2 flex flex-col items-center justify-center">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke-width="1.5"
-      stroke="currentColor"
-      class="size-96 opacity-30 text-blue-500"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"
-      />
-    </svg>
+    <h1 class="text-4xl font-semibold dark:text-white">
+      SON<small class="ms-2 font-semibold text-gray-500 dark:text-gray-400"
+        >Salve e Organize Seus Mangás!</small
+      >
+    </h1>
   </div>
 
   <form
@@ -24,7 +15,7 @@
     <div class="mb-5">
       <label
         for="email"
-        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white relative"
+        class="block mb-2 text-sm text-gray-900 dark:text-white relative"
         >Your email</label
       >
       <div class="relative">
@@ -52,7 +43,7 @@
           type="text"
           id="email-address-icon"
           class="bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-zinc-500 focus:border-zinc-500 block w-full ps-10 p-2.5 dark:bg-zinc-700 dark:placeholder-gray-400 dark:text-white"
-          placeholder="name@flowbite.com"
+          placeholder="youremail@gmail.com"
           [ngClass]="
             !emailControl.valid && emailControl.touched
               ? 'border-red-500 dark:border-red-500 focus:ring-red-500 focus:border-red-500 dark:focus:ring-red-500 dark:focus:border-red-500'
@@ -61,11 +52,10 @@
         />
       </div>
     </div>
-
     <div class="mb-5">
       <label
         for="password"
-        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white relative"
+        class="block mb-2 text-sm text-gray-900 dark:text-white relative"
         >Your Password</label
       >
       <div class="relative">
@@ -121,42 +111,19 @@
       </div>
     </div>
 
-    <div class="flex justify-between mt-6">
-      <!-- <div class="flex items-start mb-5">
-        <div class="flex items-center h-5">
-          <input
-            id="remember"
-            type="checkbox"
-            value=""
-            class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-zinc-300 dark:bg-zinc-700 dark:border-gray-600 dark:focus:ring-zinc-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
-          />
-        </div>
-        <label
-          for="remember"
-          class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-          >Remember me</label
-        >
-      </div>
-      <p
-        class="text-sm text-zinc-400 hover:text-zinc-600 cursor-pointer dark:hover:text-zinc-200"
-      >
-        Forgot password ?
-      </p> -->
-    </div>
-
     @if (!loadingLogin) {
     <button
       type="button"
       (click)="login()"
-      class="w-2/4 m-auto text-white bg-blue-600 hover:bg-blue-700 focus:outline-none font-medium rounded-md text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700"
+      class="w-2/4 m-auto mt-2 text-white bg-blue-600 hover:bg-blue-700 focus:outline-none rounded-md text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700"
     >
-      Submit
+      Login
     </button>
     }@else {
     <button
       disabled
       type="button"
-      class="w-2/4 m-auto text-white bg-blue-600 hover:bg-blue-700 focus:outline-none font-medium rounded-md text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700"
+      class="w-2/4 m-auto mt-2 text-white bg-blue-600 hover:bg-blue-700 focus:outline-none rounded-md text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700"
     >
       <svg
         aria-hidden="true"
@@ -178,77 +145,32 @@
       Loading...
     </button>
     }
-
-    <!-- <div
-      class="my-4 py-3 flex items-center text-xs text-gray-400 uppercase before:flex-1 before:border-t before:border-gray-200 before:me-6 after:flex-1 after:border-t after:border-gray-200 after:ms-6"
+    <div
+      class="my-4 py-3 flex items-center text-xs text-gray-400 uppercase before:flex-1 before:border-t before:border-gray-200 before:me-6 after:flex-1 after:border-t after:border-gray-200 after:ms-6 dark:opacity-20"
     >
       Or
     </div>
-
-    <div class="flex flex-col gap-4 items-center">
+    <div routerLink="/register" class="flex flex-col gap-4 items-center">
       <button
         type="button"
-        class="py-2.5 px-3 w-3/4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+        class="py-2.5 px-3 w-3/4 inline-flex justify-center items-center gap-x-2 text-sm rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
       >
         <svg
-          class="flex-shrink-0 size-4"
-          width="33"
-          height="32"
-          viewBox="0 0 33 32"
+          xmlns="http://www.w3.org/2000/svg"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <g clip-path="url(#clip0_4132_5805adfqfqdq121)">
-            <path
-              d="M32.2566 16.36C32.2566 15.04 32.1567 14.08 31.9171 13.08H16.9166V19.02H25.7251C25.5454 20.5 24.5866 22.72 22.4494 24.22L22.4294 24.42L27.1633 28.1L27.4828 28.14C30.5189 25.34 32.2566 21.22 32.2566 16.36Z"
-              fill="#4285F4"
-            ></path>
-            <path
-              d="M16.9166 32C21.231 32 24.8463 30.58 27.5028 28.12L22.4694 24.2C21.1111 25.14 19.3135 25.8 16.9366 25.8C12.7021 25.8 9.12677 23 7.84844 19.16L7.66867 19.18L2.71513 23L2.65521 23.18C5.2718 28.4 10.6648 32 16.9166 32Z"
-              fill="#34A853"
-            ></path>
-            <path
-              d="M7.82845 19.16C7.48889 18.16 7.28915 17.1 7.28915 16C7.28915 14.9 7.48889 13.84 7.80848 12.84V12.62L2.81499 8.73999L2.6552 8.81999C1.55663 10.98 0.937439 13.42 0.937439 16C0.937439 18.58 1.55663 21.02 2.63522 23.18L7.82845 19.16Z"
-              fill="#FBBC05"
-            ></path>
-            <path
-              d="M16.9166 6.18C19.9127 6.18 21.9501 7.48 23.0886 8.56L27.6027 4.16C24.8263 1.58 21.231 0 16.9166 0C10.6648 0 5.27181 3.6 2.63525 8.82L7.80851 12.84C9.10681 8.98 12.6821 6.18 16.9166 6.18Z"
-              fill="#EB4335"
-            ></path>
-          </g>
-          <defs>
-            <clipPath id="clip0_4132_5805adfqfqdq121">
-              <rect
-                width="32"
-                height="32"
-                fill="white"
-                transform="translate(0.937439)"
-              ></rect>
-            </clipPath>
-          </defs>
-        </svg>
-        Sign in with Google
-      </button>
-
-      <button
-        type="button"
-        class="py-2.5 px-3 w-3/4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
-      >
-        <svg
-          class="w-4 h-4 me-2"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor"
-          viewBox="0 0 20 20"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="size-5"
         >
           <path
-            fill-rule="evenodd"
-            d="M10 .333A9.911 9.911 0 0 0 6.866 19.65c.5.092.678-.215.678-.477 0-.237-.01-1.017-.014-1.845-2.757.6-3.338-1.169-3.338-1.169a2.627 2.627 0 0 0-1.1-1.451c-.9-.615.07-.6.07-.6a2.084 2.084 0 0 1 1.518 1.021 2.11 2.11 0 0 0 2.884.823c.044-.503.268-.973.63-1.325-2.2-.25-4.516-1.1-4.516-4.9A3.832 3.832 0 0 1 4.7 7.068a3.56 3.56 0 0 1 .095-2.623s.832-.266 2.726 1.016a9.409 9.409 0 0 1 4.962 0c1.89-1.282 2.717-1.016 2.717-1.016.366.83.402 1.768.1 2.623a3.827 3.827 0 0 1 1.02 2.659c0 3.807-2.319 4.644-4.525 4.889a2.366 2.366 0 0 1 .673 1.834c0 1.326-.012 2.394-.012 2.72 0 .263.18.572.681.475A9.911 9.911 0 0 0 10 .333Z"
-            clip-rule="evenodd"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z"
           />
         </svg>
-        Sign in with Github
-      </button> -->
-    <!-- </div> -->
+        Create Account
+      </button>
+    </div>
   </form>
 </main>

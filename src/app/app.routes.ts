@@ -16,7 +16,7 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    title: 'Login Page',
+    title: 'Login',
     loadComponent: () =>
       import('./pages/login/login.component').then((p) => p.LoginComponent),
     canActivate: [authRedirectGuard],
@@ -47,7 +47,7 @@ export const routes: Routes = [
   },
   {
     path: 'admin/:user',
-    title: 'Admin Page',
+    title: 'Add manga',
     loadComponent: () =>
       import('./pages/admin/admin.component').then((p) => p.AdminComponent),
     canActivate: [adminGuard],
@@ -78,7 +78,7 @@ export const routes: Routes = [
   },
   {
     path: 'dashboard/:user',
-    title: 'User Page',
+    title: 'Recents mangas',
     loadComponent: () =>
       import('./pages/dashboard/dashboard.component').then(
         (p) => p.DashboardComponent

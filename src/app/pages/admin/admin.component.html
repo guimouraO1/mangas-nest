@@ -1,8 +1,8 @@
-<main class="bg-zinc-50 dark:bg-zinc-900 w-full h-[92vh] flex flex-col">
+<main class="bg-zinc-100 dark:bg-zinc-900 w-full h-[92vh] flex flex-col">
   <form
     [formGroup]="mangaForm"
     (ngSubmit)="addManga()"
-    class="m-auto w-[500px] flex flex-col bg-transparent p-8 rounded-md shadow-xl"
+    class="m-auto w-[500px] flex flex-col bg-transparent border border-opacity-5 shadow-md border-black dark:border-white dark:border-opacity-5 p-8 rounded-md"
   >
     <div class="mb-4">
       <label
@@ -18,17 +18,6 @@
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         placeholder="Sousou no frieren"
       />
-      <!-- <p
-        id="helper-text-explanation"
-        class="mt-2 text-sm text-gray-500 dark:text-gray-400"
-      >
-        We’ll never share your details. Read our
-        <a
-          href="#"
-          class="font-medium text-blue-600 hover:underline dark:text-blue-500"
-          >Privacy Policy</a
-        >.
-      </p> -->
     </div>
 
     <div class="mb-4">

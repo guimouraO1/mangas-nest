@@ -12,6 +12,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { AuthService } from './services/auth.service';
 import { DarkModeService } from './services/dark-mode.service';
+import { provideEnvironmentNgxMask } from 'ngx-mask';
 
 export function initializer(darkModeService: DarkModeService) {
   return () => darkModeService.getInitialTheme();
@@ -39,5 +40,6 @@ export const appConfig: ApplicationConfig = {
       multi: true,
     },
     provideAnimationsAsync(),
+    provideEnvironmentNgxMask(),
   ],
 };

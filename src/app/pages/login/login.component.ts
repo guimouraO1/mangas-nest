@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, Signal, signal } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -7,7 +7,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { Alert, AlertType } from '../../models/notification.model';
 import { AuthService } from '../../services/auth.service';
@@ -16,7 +16,7 @@ import { NotificationService } from '../../services/notification.service';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
@@ -28,9 +28,6 @@ export class LoginComponent {
   loginForm: FormGroup;
   hidePassword = true;
   loadingLogin = false;
-
-  emailSignal = signal('');
-  passwordSignal = signal('');
 
   constructor() {
     this.loginForm = this.fb.group({

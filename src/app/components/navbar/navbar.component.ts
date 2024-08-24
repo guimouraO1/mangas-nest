@@ -1,5 +1,6 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { User } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
 import { DarkModeService } from '../../services/dark-mode.service';
 import { NotificationService } from '../../services/notification.service';
@@ -10,24 +11,24 @@ import { NotificationService } from '../../services/notification.service';
   imports: [RouterLink],
   templateUrl: './navbar.component.html',
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
   authService = inject(AuthService);
   darkModeService: DarkModeService = inject(DarkModeService);
   router: Router = inject(Router);
   notificationService = inject(NotificationService);
-  user: any;
+  user: User | undefined;
 
-  ngOnInit() {
+  constructor() {
     this.authService.getUserObserver().subscribe((value) => {
       this.user = value;
     });
   }
 
-  toggleDarkMode() {
+  toggleDarkMode(): void {
     this.darkModeService.updateDarkMode();
   }
 
-  logout() {
+  signOut(): void {
     this.authService.logout();
     localStorage.removeItem('token');
     this.router.navigate(['login']);

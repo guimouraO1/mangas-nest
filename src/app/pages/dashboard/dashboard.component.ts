@@ -43,6 +43,7 @@ export class DashboardComponent implements OnInit {
       .pipe(take(1))
       .subscribe((mangas: Manga[]) => {
         this.mangas = mangas;
+        console.log(this.mangas);
       });
   }
 }

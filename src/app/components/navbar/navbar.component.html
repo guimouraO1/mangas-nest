@@ -1,12 +1,10 @@
 <header
-  class="w-full h-[8vh] body-font shadow-md border-b-1 border-gray-500 border-b-[1px] border-opacity-20 bg-zinc-50 dark:bg-zinc-900"
+  class="w-full h-[8vh] body-font border-b-1 border-gray-500 border-b-[1px] border-opacity-20 bg-zinc-100 dark:bg-zinc-900"
 >
   <div
-    class="container mx-auto flex flex-wrap p-2 flex-col md:flex-row items-center gap-4 h-full"
+    class="w-full flex flex-wrap px-96 flex-col md:flex-row items-center justify-between gap-4 h-full"
   >
-    <nav
-      class="md:mr-auto md:ml-4 md:py-1 md:pl-4 flex flex-wrap items-center text-base justify-center gap-2"
-    >
+    <nav class="flex flex-wrap items-center text-base justify-center gap-2">
       @if (!user) {
       <button
         class="px-8 py-1.5 dark:hover:bg-sky-700 hover:bg-sky-600 rounded-md"
@@ -25,7 +23,7 @@
         stroke-width="1.5"
         stroke="currentColor"
         class="size-6 cursor-pointer hover:bg-red-700 rounded-full dark:text-white text-stone-900"
-        (click)="logout()"
+        (click)="signOut()"
       >
         <path
           stroke-linecap="round"
@@ -34,8 +32,7 @@
         />
       </svg>
 
-      }
-
+      } @if (user) {
       <button
         routerLink="dashboard"
         class="px-5 py-1.5 dark:hover:bg-sky-700 hover:bg-sky-600 rounded-md ml-10"
@@ -45,15 +42,14 @@
           >Dashboard</a
         >
       </button>
-
-      @if (user && user.role === 'admin') {
+      } @if (user && user.role === 'admin') {
       <button
         class="px-8 py-1.5 dark:hover:bg-sky-700 hover:bg-sky-600 rounded-md"
         routerLink="admin"
       >
         <a
           class="text-stone-900 dark:text-zinc-200 cursor-pointer font-sans font-semibold"
-          >admin</a
+          >Manga</a
         >
       </button>
       }
