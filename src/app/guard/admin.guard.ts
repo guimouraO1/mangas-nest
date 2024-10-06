@@ -7,35 +7,35 @@ import { AuthService } from '../services/auth.service';
 import { NotificationService } from '../services/notification.service';
 
 export const adminGuard: CanActivateFn = async (route, state) => {
-  const notificationService = inject(NotificationService);
-  const authService = inject(AuthService);
-  const router = inject(Router);
+    const notificationService = inject(NotificationService);
+    const authService = inject(AuthService);
+    const router = inject(Router);
 
-  let user: User | undefined = await firstValueFrom(
-    authService.getUserObserver()
-  );
+    let user: User | undefined = await firstValueFrom(
+        authService.getUserObserver()
+    );
 
-  if (!user) {
-    notificationService.alert({
-      message:
-        'Não autorizado. Você deve estar logado para acessar esta página',
-      type: AlertType.Error,
-    });
-    return router.createUrlTree(['login']);
-  }
+    if (!user) {
+        notificationService.alert({
+            message:
+                'Não autorizado. Você deve estar logado para acessar esta página',
+            type: AlertType.Error,
+        });
+        return router.createUrlTree(['login']);
+    }
 
-  if (user.role != 'admin') {
-    notificationService.alert({
-      message: 'Você não tem permissão para acessar essa página',
-      type: AlertType.Error,
-    });
-    return router.createUrlTree([`dashboard/${user.username}`]);
-  }
+    if (user.role != 'admin') {
+        notificationService.alert({
+            message: 'Você não tem permissão para acessar essa página',
+            type: AlertType.Error,
+        });
+        return router.createUrlTree([`dashboard/${user.username}`]);
+    }
 
-  const param: any = route.params;
-  if (user.username !== param.user) {
-    return router.createUrlTree([`admin/${user.username}`]);
-  }
+    const param: any = route.params;
+    if (user.username !== param.user) {
+        return router.createUrlTree([`dashboard/${user.username}`]);
+    }
 
-  return true;
+    return true;
 };

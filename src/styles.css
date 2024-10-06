@@ -5,45 +5,41 @@
 @tailwind utilities;
 
 * {
-  font-family: "Teachers", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
+    font-family: "Teachers", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
 }
-
 html,
 body {
-  height: 100%;
-  width: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+    height: 100vh !important;
+    width: 100% !important;
+    font-family: "Poppins", sans-serif !important;
 }
 
 .custom-snackbar-button-error {
-  .mat-mdc-snackbar-surface {
-    padding: 0;
-  }
-  .mdc-snackbar__label {
-    padding: 0;
-  }
+    .mat-mdc-snackbar-surface {
+        padding: 0;
+    }
+    .mdc-snackbar__label {
+        padding: 0;
+    }
 }
 
 * {
-  scrollbar-width: 4px;
-  scrollbar-color: theme("colors.blue.700");
+    scrollbar-width: 4px;
+    scrollbar-color: theme("colors.blue.700");
 }
 
 *::-webkit-scrollbar {
-  width: 2px;
+    width: 2px;
 }
 
 *::-webkit-scrollbar-track {
-  background: theme("colors.transparent"); /* Light background */
-  border-radius: 2px;
+    background: theme("colors.transparent"); /* Light background */
+    border-radius: 2px;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: theme("colors.blue.600"); /* Tailwind blue-700 color */
-  border-radius: 2px;
+    background-color: theme("colors.blue.600"); /* Tailwind blue-700 color */
+    border-radius: 2px;
 }

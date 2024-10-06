@@ -1,11 +1,12 @@
-<div
-  class="m-auto flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-  <img
-    class="object-cover rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-s-lg cursor-pointer !w-[192px] !h-[275px]"
-    src="http://localhost:3333/{{ manga().url }}" alt="Anime image" />
-  <div class="flex flex-col justify-between px-6 leading-normal h-60 w-[400px]">
-    <div class="flex flex-col">
-      <h5 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+<div class="flex bg-zinc-800 border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl
+ dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+  <div class="w-[192px] h-[200px] overflow-hidden object-cover rounded">
+    <img class="w-full h-full object-cover cursor-pointer rounded-md p-1" src="http://localhost:3333/{{ manga().url }}"
+      alt="Anime image" />
+  </div>
+  <div class="flex flex-col px-6 leading-normal w-[400px] justify-between">
+    <div class="flex flex-col mt-6">
+      <h5 class="mb-1 text-xl tracking-tight text-gray-200">
         {{ manga().name }}
       </h5>
       <div class="flex items-center gap-1">
@@ -24,27 +25,30 @@
         }
       </div>
     </div>
-    <p class="mb-1 text-lg text-gray-900 dark:text-white">Last chapters</p>
-    <div class="flex flex-row gap-2 flex-wrap justify-start justify-self-end self-start overflow-x-visible">
-      @for (chapter of manga().chapters; track $index) {
-      <span id="badge-dismiss-default"
-        class="inline-flex items-center px-2 py-1 me-2 text-sm font-medium text-blue-800 bg-blue-100 rounded dark:bg-blue-900 dark:text-blue-300">
-        {{ chapter.number }}
-        <button (click)="delChapter(chapter.number, manga().id)" type="button"
-          class="inline-flex items-center p-1 ms-2 text-sm text-blue-400 bg-transparent rounded-sm hover:bg-blue-200 hover:text-blue-900 dark:hover:bg-blue-800 dark:hover:text-blue-300"
-          data-dismiss-target="#badge-dismiss-default" aria-label="Remove">
-          <svg class="w-2 h-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-          </svg>
-          <span class="sr-only">Remove badge</span>
-        </button>
-      </span>
-      }
+    <div class="flex flex-col mb-2">
+      <div class="flex flex-wrap gap-2 overflow-x-visible">
+        @for (chapter of manga().chapters; track $index) {
+        <span id="badge-dismiss-default"
+          class="px-2 py-1 me-2 text-sm font-medium text-blue-800 bg-blue-100 rounded dark:bg-blue-900 dark:text-blue-300">
+          {{ chapter.number }}
+          <button (click)="delChapter(chapter.number, manga().id)" type="button"
+            class="inline-flex items-center p-1 ms-2 text-sm text-blue-400 bg-transparent rounded-sm hover:bg-blue-200 hover:text-blue-900 dark:hover:bg-blue-800 dark:hover:text-blue-300"
+            aria-label="Remove">
+            <svg class="w-2 h-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+            </svg>
+            <span class="sr-only">Remove badge</span>
+          </button>
+        </span>
+        }
+      </div>
+      <button (click)="newChapter(manga().id)" class="btn btn-square btn-sm btn-outline self-end">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="size-4 dark:text-white">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+        </svg>
+      </button>
     </div>
-    <button (click)="newChapter(manga().id)"
-      class="bg-blue-600 p-1 text-white rounded-sm w-32 self-end justify-self-end">
-      + add chapter
-    </button>
   </div>
 </div>
