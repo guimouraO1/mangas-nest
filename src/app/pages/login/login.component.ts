@@ -58,7 +58,7 @@ export class LoginComponent {
             localStorage.setItem('token', res.access_token);
             this.authService.setUser(res.user);
 
-            this.router.navigate(['dashboard']);
+            this.router.navigate(['subscriptions']);
 
             this.newAlert({
                 message: 'Login realizado com sucesso!',

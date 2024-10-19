@@ -40,12 +40,7 @@ export class AdminComponent {
             about: new FormControl('', [
                 Validators.maxLength(500),
             ]),
-            image: new FormControl(null, [Validators.required]),
-            rating: new FormControl(5, [
-                Validators.required,
-                Validators.max(5),
-                Validators.min(0),
-            ]),
+            image: new FormControl(null, [Validators.required])
         });
     }
 
@@ -93,7 +88,6 @@ export class AdminComponent {
     }
 
     addManga() {
-        console.log(this.mangaForm)
         if (!this.mangaForm.valid) {
             this.newAlert({
                 message: 'Please fill out all required fields',

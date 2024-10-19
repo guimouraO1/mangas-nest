@@ -11,9 +11,9 @@ export class MangaService {
   protected http = inject(HttpClient);
   private urlApi = environment.url;
 
-  getAllMangas(page: number, date?: string): Observable<Manga[]> {
+  getMangas(page: number): Observable<Manga[]> {
     return this.http.get<Manga[]>(
-      `${this.urlApi}/manga?page=${page}&date=${date}`
+      `${this.urlApi}/manga?page=${page}`
     );
   }
 

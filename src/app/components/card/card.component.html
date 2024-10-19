@@ -1,21 +1,21 @@
 <div class="card lg:card-side !w-[600px] h-[200px] border border-zinc-300 dark:border-zinc-800 shadow-md ">
   <figure class="min-w-[192px] min-h-[200px] max-w-[192px] max-h-[200px]">
-    <img class="w-full h-full object-cover cursor-pointer rounded-md p-1" src="http://localhost:3333/{{ manga().url }}"
-      alt="Album" />
+    <img class="w-full h-full object-cover cursor-pointer rounded-md p-1"
+      src="http://localhost:3333/{{ subscription.manga.url }}" alt="Album" />
   </figure>
   <div class="card-body">
-    <h2 class="card-title dark:text-txt_white text-txt_dark">{{manga().name}}</h2>
+    <h2 class="card-title dark:text-txt_white text-txt_dark">{{subscription.manga.name}}</h2>
     <div class="rating rating-sm">
-      @for (item of [].constructor(manga().rating); track $index) {
+      @for (item of [].constructor(subscription.rating); track $index) {
       <input name="rating-5" class="mask mask-star-2 bg-star" />
       }
     </div>
     <div class="flex flex-col mb-2">
       <div class="flex flex-wrap gap-2 overflow-x-visible">
-        @for (chapter of manga().chapters; track $index) {
+        @for (chapter of subscription.chapters; track $index) {
         <button class="btn btn-xs btn-outline btn-primary hover:!text-txt_white">{{ chapter.number }}
-          <svg (click)="delChapter(chapter.number, manga().id)" class="w-2 h-2 hover:text-highlight" aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+          <svg (click)="delChapter(chapter.number, subscription.id)" class="w-2 h-2 hover:text-highlight"
+            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
           </svg>
@@ -25,6 +25,6 @@
     </div>
   </div>
   <div class="card-actions justify-end p-4">
-    <button (click)="newChapter(manga().id)" class="btn btn-sm btn-primary text-txt_white self-end">+</button>
+    <button (click)="newChapter(subscription.id)" class="btn btn-sm btn-primary text-txt_white self-end">+</button>
   </div>
 </div>

@@ -49,11 +49,11 @@ export const routes: Routes = [
         }
     },
     {
-        path: 'dashboard',
+        path: 'subscriptions',
         title: 'Recents mangas',
         loadComponent: () =>
-            import('./pages/dashboard/dashboard.component').then(
-                (p) => p.DashboardComponent
+            import('./pages/subscriptions/subscriptions.component').then(
+                (p) => p.SubscriptionsComponent
             ),
         canActivate: [authGuard],
         data: {

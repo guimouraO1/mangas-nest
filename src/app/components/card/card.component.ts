@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, input } from '@angular/core';
+import { Component, inject, Input, input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
 import { ChaptersService } from '../../services/chapters.service';
-import { Manga } from '../../models/manga.model'
 import { NewChapterModalComponent } from './new-chapter-modal/new-chapter-modal.component';
+import { Subscription } from '../../models/subscriptions.model';
 
 @Component({
   selector: 'app-card',
@@ -17,11 +17,11 @@ import { NewChapterModalComponent } from './new-chapter-modal/new-chapter-modal.
 export class CardComponent {
   dialog = inject(MatDialog);
   chapterService = inject(ChaptersService);
-  manga = input.required<Manga>();
+  @Input() subscription!: Subscription;
 
   newChapter(mangaId: string) {
     const newChapter = this.dialog.open(NewChapterModalComponent, {
-      data: this.manga().chapters,
+      data: this.subscription.chapters,
     });
 
     newChapter.afterClosed().subscribe((confirmed: number | boolean) => {
@@ -29,16 +29,16 @@ export class CardComponent {
 
       this.chapterService.newChapter(+confirmed, mangaId).subscribe({
         next: (res) => {
-          this.manga().chapters = [
-            ...this.manga().chapters,
+          this.subscription.chapters = [
+            ...this.subscription.chapters,
             {
               id: '',
-              mangaId: this.manga().id,
+              mangaId: this.subscription.id,
               number: +confirmed,
             },
           ].sort((a, b) => b.number - a.number);
-          if (this.manga().chapters.length > 5) {
-            this.manga().chapters = this.manga().chapters.slice(0, 5);
+          if (this.subscription.chapters.length > 5) {
+            this.subscription.chapters = this.subscription.chapters.slice(0, 5);
           }
         },
         error: (res) => console.log(res),
@@ -57,7 +57,7 @@ export class CardComponent {
 
       this.chapterService.delChapter(+chapter, mangaId).subscribe({
         next: (res) => {
-          this.manga().chapters = this.manga().chapters.filter(
+          this.subscription.chapters = this.subscription.chapters.filter(
             (ch: any) => ch.number !== +chapter
           );
         },
