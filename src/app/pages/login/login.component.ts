@@ -26,7 +26,7 @@ export class LoginComponent {
     notificationService = inject(NotificationService);
 
     loginForm: FormGroup;
-    hidePassword = true;
+    isPasswordHiden = true;
     loadingLogin = false;
 
     constructor() {
@@ -44,7 +44,7 @@ export class LoginComponent {
         return this.loginForm.get('password') as FormControl;
     }
 
-    async login() {
+    async onSubmit() {
         if (this.loginForm.invalid) {
             return;
         }

@@ -38,15 +38,8 @@ export class AdminComponent {
                 Validators.required,
             ]),
             about: new FormControl('', [
-                Validators.required,
-                Validators.min(1),
                 Validators.maxLength(500),
             ]),
-            // chapter: new FormControl(0, [
-            //   Validators.required,
-            //   Validators.min(0),
-            //   Validators.maxLength(50),
-            // ]),
             image: new FormControl(null, [Validators.required]),
             rating: new FormControl(5, [
                 Validators.required,
@@ -100,6 +93,7 @@ export class AdminComponent {
     }
 
     addManga() {
+        console.log(this.mangaForm)
         if (!this.mangaForm.valid) {
             this.newAlert({
                 message: 'Please fill out all required fields',

@@ -1,7 +1,7 @@
 <main class="w-full h-[88vh] flex flex-col">
     <div class="flex rounded-md shadow-sm mx-auto mt-16 self-start" role="group">
-        <button class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg
-             dark:bg-gray-800 dark:border-gray-700 dark:text-white "></button>
+        <button
+            class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg dark:bg-gray-800 dark:border-gray-700 dark:text-white"></button>
         @for (day of weekdayNames; track $index) {
         <button (click)="selectDay(day)" type="button"
             class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 focus:z-10 focus:ring-2 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white"
@@ -11,8 +11,8 @@
             {{ day }}
         </button>
         }
-        <button class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-e-lg
-             dark:bg-gray-800 dark:border-gray-700 dark:text-white "></button>
+        <button
+            class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-e-lg dark:bg-gray-800 dark:border-gray-700 dark:text-white"></button>
     </div>
 
     <div class="flex flex-col m-auto">

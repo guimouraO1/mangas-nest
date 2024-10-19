@@ -2,8 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
-import { NewChapterModalComponent } from './new-chapter-modal/new-chapter-modal.component';
 import { ChaptersService } from '../../services/chapters.service';
+import { Manga } from '../../models/manga.model'
+import { NewChapterModalComponent } from './new-chapter-modal/new-chapter-modal.component';
 
 @Component({
   selector: 'app-card',
@@ -12,10 +13,11 @@ import { ChaptersService } from '../../services/chapters.service';
   templateUrl: './card.component.html',
   styleUrl: './card.component.css',
 })
+
 export class CardComponent {
   dialog = inject(MatDialog);
   chapterService = inject(ChaptersService);
-  manga = input.required<any>();
+  manga = input.required<Manga>();
 
   newChapter(mangaId: string) {
     const newChapter = this.dialog.open(NewChapterModalComponent, {

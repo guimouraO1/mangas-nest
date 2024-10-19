@@ -1,8 +1,10 @@
 export interface Manga {
+  id: string;
   name: string;
   date: WeekDays;
+  rating?: any;
   url: string;
-  about: string;
+  about?: string | null;
   chapters: Chapter[];
 }
 
