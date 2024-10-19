@@ -28,8 +28,9 @@ export class LoginComponent {
     loginForm: FormGroup;
     isPasswordHiden = true;
     loadingLogin = false;
+    alertType = AlertType;
 
-    constructor() {
+    constructor(authSerice: AuthService) {
         this.loginForm = this.fb.group({
             email: ['', [Validators.required, Validators.email]],
             password: ['', [Validators.required, Validators.minLength(3)]],
@@ -57,11 +58,7 @@ export class LoginComponent {
             localStorage.setItem('token', res.access_token);
             this.authService.setUser(res.user);
 
-            const route =
-                res.user.role === 'admin'
-                    ? `admin/${res.user.id}`
-                    : `dashboard/${res.user.id}`;
-            this.router.navigate([route]);
+            this.router.navigate(['dashboard']);
 
             this.newAlert({
                 message: 'Login realizado com sucesso!',

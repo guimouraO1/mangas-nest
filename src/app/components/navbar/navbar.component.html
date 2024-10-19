@@ -23,14 +23,14 @@
         class="size-6 cursor-pointer hover:bg-error rounded-full text-txt_white" (click)="signOut()">
         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
       </svg>
-      <button routerLink="dashboard" class="px-5 py-1.5 hover:shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] rounded-md">
+      <button routerLink="dashboard" class="px-5 py-1.5 hover:bg-accent rounded-md">
         <a class="text-txt_white cursor-pointer font-semibold">My mangas</a>
       </button>
-      <button routerLink="list" class="px-5 py-1.5 hover:shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] rounded-md">
+      <button routerLink="list" class="px-5 py-1.5 hover:bg-accent rounded-md">
         <a class="text-txt_white cursor-pointer font-semibold">List mangas</a>
       </button>
       } @if (user && user.role === 'admin') {
-      <button class="px-8 py-1.5 hover:shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] rounded-md" routerLink="admin">
+      <button class="px-8 py-1.5 hover:bg-accent rounded-md" routerLink="admin">
         <a class="text-txt_white cursor-pointer font-semibold">Add new manga</a>
       </button>
       }

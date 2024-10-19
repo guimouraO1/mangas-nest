@@ -12,16 +12,15 @@ import { Alert, AlertType } from '../../models/notification.model';
   selector: 'app-custom-snackbar',
   templateUrl: './custom-snackbar.component.html',
 })
-export class CustomSnackbarComponent implements OnInit {
-  constructor(@Inject(MAT_SNACK_BAR_DATA) public data: { alert: Alert }) { }
+export class CustomSnackbarComponent {
+  constructor(@Inject(MAT_SNACK_BAR_DATA) public data: { alert: Alert }) {
+    this.alert = this.data.alert;
+  }
   alert: Alert | undefined;
   AlertType = AlertType;
   matSnackBarRef: MatSnackBarRef<CustomSnackbarComponent> =
     inject(MatSnackBarRef);
 
-  ngOnInit(): void {
-    this.alert = this.data.alert;
-  }
   closeSnackbar(): void {
     this.matSnackBarRef.dismiss();
   }

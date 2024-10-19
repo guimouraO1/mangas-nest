@@ -37,7 +37,7 @@ export class AppComponent {
                     horizontalPosition: 'end',
                     verticalPosition: 'top',
                     panelClass: [
-                        '!mt-20',
+                        '!mt-24',
                         '!mr-4',
                         'custom-snackbar-button-error',
                     ],

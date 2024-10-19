@@ -9,8 +9,7 @@ import { NotificationService } from '../../services/notification.service';
     selector: 'app-navbar',
     standalone: true,
     imports: [RouterLink],
-    templateUrl: './navbar.component.html',
-    styleUrl: './navbar.component.scss',
+    templateUrl: './navbar.component.html'
 })
 export class NavbarComponent {
     authService = inject(AuthService);

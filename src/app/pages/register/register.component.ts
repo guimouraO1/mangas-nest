@@ -21,9 +21,10 @@ import { firstValueFrom } from 'rxjs';
 export class RegisterComponent {
     registerForm: FormGroup;
     fb = inject(FormBuilder);
-    hidePassword = true;
+    isPasswordHiden = true;
     authService = inject(AuthService);
     notificationService = inject(NotificationService);
+    isDisableButton: boolean = false;
 
     constructor() {
         this.registerForm = this.fb.group({
@@ -38,11 +39,12 @@ export class RegisterComponent {
         });
     }
 
-    async register() {
+    async signUp() {
         if (this.registerForm.invalid) {
             return;
         }
 
+        this.isDisableButton = true;
         try {
             await firstValueFrom(this.authService.register(this.registerForm.value));
             this.newAlert({
@@ -56,6 +58,8 @@ export class RegisterComponent {
                 type: AlertType.Error,
             });
         }
+
+        this.isDisableButton = false;
     }
 
     newAlert(alert: Alert) {

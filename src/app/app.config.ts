@@ -19,7 +19,7 @@ export function initializer(darkModeService: DarkModeService) {
 }
 
 export function authInitializer(authService: AuthService) {
-  return () => authService.confirmAuthentication();
+  return () => authService.Authentication();
 }
 
 export const appConfig: ApplicationConfig = {

@@ -40,23 +40,19 @@ export class AuthService {
         this.userSubject.next(user);
     }
 
-    async confirmAuthentication(): Promise<boolean> {
+    async Authentication(): Promise<void> {
         const token: any = localStorage.getItem('token');
         const headers = new HttpHeaders().set('authorization', `${token}`);
 
         if (!token) {
-            return false;
+            return;
         }
+
         try {
-            const res: any = await firstValueFrom(
-                this.http.get(`${this.urlApi}/auth`, { headers }).pipe(take(1))
-            );
-
+            const res: any = await firstValueFrom(this.http.get(`${this.urlApi}/auth`, { headers }).pipe(take(1)));
             this.userSubject.next(res.user);
-
-            return true;
         } catch (error) {
-            return false;
+            this.userSubject.next(undefined);
         }
     }
 

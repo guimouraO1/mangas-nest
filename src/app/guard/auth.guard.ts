@@ -11,23 +11,18 @@ export const authGuard: CanActivateFn = async (route, state) => {
   const router = inject(Router);
   const notificationService = inject(NotificationService);
 
-  let user: User | undefined = await firstValueFrom(
-    authService.getUserObserver()
-  );
+  const allowedRoles = route.data['roles'] as string[];
 
-  if (!user) {
-    notificationService.alert({
-      message:
-        'Não autorizado. Você deve estar logado para acessar esta página',
-      type: AlertType.Error,
-    });
-    return router.createUrlTree(['login']);
+  const user: User | undefined = authService.getUser();
+
+  if (user && allowedRoles.includes(user.role)) {
+    return true;
   }
 
-  const param: any = route.params;
-  if (user.username !== param.user) {
-    return router.createUrlTree([`dashboard/${user.username}`]);
-  }
-
-  return true;
+  notificationService.alert({
+    message: 'Access denied: You do not have the required permissions',
+    type: AlertType.Error,
+  });
+  return false;
 };
+
