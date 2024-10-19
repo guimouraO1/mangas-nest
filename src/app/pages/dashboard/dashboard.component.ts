@@ -16,7 +16,9 @@ export class DashboardComponent implements OnInit {
   mangas: Manga[] = [];
 
   data = new Date();
-  weekdayNames = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab'];
+
+  weekdayNames = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+  // weekdayNames = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab'];
   dateString: string = '';
 
   getWeekdayAbbreviated(date: Date): string {

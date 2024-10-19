@@ -69,7 +69,7 @@ export class LoginComponent {
             });
         } catch (err: any) {
             this.newAlert({
-                message: err.error.msg,
+                message: err.error.message,
                 type: AlertType.Error,
             });
         } finally {

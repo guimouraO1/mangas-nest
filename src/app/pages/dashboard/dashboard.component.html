@@ -1,23 +1,17 @@
-<main class="w-full h-[88vh] flex flex-col">
-    <div class="flex rounded-md shadow-sm mx-auto mt-16 self-start" role="group">
-        <button
-            class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg dark:bg-gray-800 dark:border-gray-700 dark:text-white"></button>
+<main class="w-full h-[88vh] flex flex-col justify-between">
+    <div class="flex items-center justify-center self-start h-[18vh] w-full">
+        <button class="px-4 h-10 text-sm text-txt_dark rounded-s-lg bg-bg_white shadow"></button>
         @for (day of weekdayNames; track $index) {
-        <button (click)="selectDay(day)" type="button"
-            class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 focus:z-10 focus:ring-2 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white"
-            [ngClass]="{
-                '!bg-blue-700': dateString === day
-            }">
+        <button (click)="selectDay(day)" type="button" class="px-4 h-10 text-txt_dark bg-bg_white shadow "
+            [ngClass]="{'!bg-primary text-txt_white': dateString === day}">
             {{ day }}
         </button>
         }
-        <button
-            class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-e-lg dark:bg-gray-800 dark:border-gray-700 dark:text-white"></button>
+        <button class="px-4 h-10 text-sm text-txt_dark rounded-e-lg bg-bg_white shadow"></button>
     </div>
 
-    <div class="flex flex-col m-auto">
-        <div
-            class="flex flex-col justify-center items-center flex-wrap m-auto gap-2 mt-8 p-12 mx-32 overflow-y-scroll mb-4">
+    <div class="flex flex-col w-full h-[70vh] self-end justify-center">
+        <div class="flex justify-center items-center flex-wrap gap-2 mb-4">
             @for (manga of mangas; track $index) {
             <app-card [manga]="manga" />
             } @empty { @defer {

@@ -5,36 +5,29 @@
   </div>
 
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="max-w-sm mx-auto w-1/2 m-auto pt-[10vh] flex flex-col">
-    <span class="mb-10 m-auto text-4xl dark:text-txt_white">Sign in</span>
+    <span class="mb-10 m-auto text-4xl font-bold text-txt_dark dark:text-txt_white">Sign in</span>
 
     <div class="mb-5">
-      <label for="email" class="block mb-2 text-sm text-gray-900 dark:text-txt_white relative">Your email</label>
+      <label for="email" class="block mb-2 text-sm text-txt_dark dark:text-txt_white relative">Your email</label>
       <div class="relative">
         <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-          <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+          <svg class="w-4 h-4 text-txt_dark dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
             fill="currentColor" viewBox="0 0 20 16">
             <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z" />
             <path
               d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z" />
           </svg>
         </div>
-
-        <input formControlName="email" type="text" id="email-address-icon"
-          class="bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-zinc-500 focus:border-zinc-500 block w-full ps-10 p-2.5 dark:bg-zinc-700 dark:placeholder-gray-400 dark:text-txt_white"
-          placeholder="youremail@gmail.com" [ngClass]="
-            !emailControl.valid && emailControl.touched
-              ? 'border-red-500 dark:border-red-500 focus:ring-red-500 focus:border-red-500 dark:focus:ring-red-500 dark:focus:border-red-500'
-              : 'border-gray-300 focus:ring-red-500 focus:border-red-500 dark:border-gray-600 '
-          " />
+        <input formControlName="email" type="text"
+          class="border text-txt_dark text-sm rounded-lg block w-full ps-10 p-2.5" placeholder="youremail@gmail.com" />
       </div>
     </div>
 
     <div class="mb-5">
-      <label for="password" class="block mb-2 text-sm text-gray-900 dark:text-txt_white relative">Your
-        Password</label>
+      <label for="password" class="block mb-2 text-sm text-txt_dark dark:text-txt_white relative">Your Password</label>
       <div class="relative">
         <div
-          class="absolute inset-y-0 start-0 flex items-center ps-2.5 cursor-pointer text-gray-500 dark:text-gray-400">
+          class="absolute inset-y-0 start-0 flex items-center ps-2.5 cursor-pointer text-txt_dark dark:text-gray-400">
           @if (isPasswordHiden == false) {
           <svg (click)="isPasswordHiden = !isPasswordHiden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
             fill="currentColor" class="size-5">
@@ -54,22 +47,18 @@
           </svg>
           }
         </div>
-        <input formControlName="password" [type]="isPasswordHiden ? 'password' : 'text'" id="password-icon"
-          class="bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-zinc-500 focus:border-zinc-500 block w-full ps-10 p-2.5 dark:bg-zinc-700 dark:placeholder-gray-400 dark:text-txt_white"
-          placeholder="Your Password" [ngClass]="
-            !passwordControl.valid && passwordControl.touched
-              ? 'border-red-500 dark:border-red-500 focus:ring-red-500 focus:border-red-500 dark:focus:ring-red-500 dark:focus:border-red-500'
-              : 'border-gray-300 focus:ring-red-500 focus:border-red-500 dark:border-gray-600 '
-          " />
+        <input formControlName="password" [type]="isPasswordHiden ? 'password' : 'text'"
+          class="border text-txt_dark text-sm rounded-lg block w-full ps-10 p-2.5" placeholder="Your Password" />
       </div>
     </div>
 
-    <button type="submit" class="btn btn-primary w-3/5 self-center text-txt_white">Login</button>
+    <button type="submit" class="btn btn-primary w-3/6 self-center text-txt_white">Login</button>
 
     <div
-      class="my-4 py-3 flex items-center text-xs text-gray-400 uppercase before:flex-1 before:border-t before:border-gray-200 before:me-6 after:flex-1 after:border-t after:border-gray-200 after:ms-6 dark:opacity-20">
+      class="my-4 py-3 flex items-center text-xs text-txt_dark dark:text-txt_white opacity-20 dark:opacity-40  uppercase before:flex-1 before:border-t before:border-txt_dark before:me-6 after:flex-1 after:border-t after:border-txt_dark after:ms-6">
       Or
     </div>
+
     <div routerLink="/register" class="flex flex-col gap-4 items-center">
       <button type="button"
         class="py-2.5 px-3 w-3/4 inline-flex justify-center items-center gap-x-2 text-sm rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">

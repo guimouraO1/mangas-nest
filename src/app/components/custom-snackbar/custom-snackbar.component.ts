@@ -13,7 +13,7 @@ import { Alert, AlertType } from '../../models/notification.model';
   templateUrl: './custom-snackbar.component.html',
 })
 export class CustomSnackbarComponent implements OnInit {
-  constructor(@Inject(MAT_SNACK_BAR_DATA) public data: { alert: Alert }) {}
+  constructor(@Inject(MAT_SNACK_BAR_DATA) public data: { alert: Alert }) { }
   alert: Alert | undefined;
   AlertType = AlertType;
   matSnackBarRef: MatSnackBarRef<CustomSnackbarComponent> =

@@ -15,13 +15,13 @@ export interface Chapter {
 }
 
 export enum WeekDays {
-  Seg = 'seg',
-  Ter = 'ter',
-  Qua = 'qua',
-  Qui = 'qui',
-  Sex = 'sex',
-  Sab = 'sab',
-  Dom = 'dom',
+  Mon = 'mon',
+  Tue = 'tue',
+  Wed = 'wed',
+  Thu = 'thu',
+  Fri = 'fri',
+  Sat = 'sat',
+  Sun = 'sun',
 }
 
 export interface MangaWithImage extends Manga {
