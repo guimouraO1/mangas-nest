@@ -13,6 +13,7 @@ module.exports = {
                 bg_dark: "#202020",
                 bg_white: "#e9ecef",
                 bg_card: "#1c1c1c",
+                border_dark: "#424242",
                 sun: "#f3f3f3",
                 moon: "#f3f3f3",
                 success: "#52b788",
