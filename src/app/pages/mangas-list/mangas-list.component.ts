@@ -4,6 +4,7 @@ import { MangaService } from '../../services/manga.service';
 import { Manga } from '../../models/manga.model';
 import { Subscription } from '../../models/subscriptions.model';
 import { SubscriptionService } from '../../services/subscription.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-mangas-list',
@@ -16,6 +17,7 @@ export class MangasListComponent implements OnInit {
   mangaService = inject(MangaService);
   mangas: Manga[] = [];
   subscriptions: string[] = [];
+  url = environment.url;
 
   async ngOnInit() {
     await this.getSubscriptions();

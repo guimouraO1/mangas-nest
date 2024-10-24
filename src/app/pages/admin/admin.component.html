@@ -2,17 +2,25 @@
   <form [formGroup]="mangaForm"
     class="m-auto w-[500px] flex flex-col bg-transparent border border-opacity-5 shadow-md border-black dark:border-white dark:border-opacity-5 p-8 rounded-md">
     <div class="mb-4">
-      <label for="helper-text" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Anime name</label>
-      <input formControlName="name" type="text" id="helper-text" aria-describedby="helper-text-explanation"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        placeholder="Sousou no frieren" />
+      <label for="helper-text" class="block mb-2 text-sm font-medium text-txt_dark dark:text-txt_white">Anime
+        name</label>
+      <div class="relative">
+        <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5 fill-icon_gray">
+            <path fill-rule="evenodd"
+              d="M4.5 2A2.5 2.5 0 0 0 2 4.5v3.879a2.5 2.5 0 0 0 .732 1.767l7.5 7.5a2.5 2.5 0 0 0 3.536 0l3.878-3.878a2.5 2.5 0 0 0 0-3.536l-7.5-7.5A2.5 2.5 0 0 0 8.38 2H4.5ZM5 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
+              clip-rule="evenodd" />
+          </svg>
+        </div>
+        <input placeholder="Sousou no frieren" formControlName="name" type="text"
+          class="border text-sm rounded-sm block w-full ps-10 p-2.5 bg-bg_white border-border_dark border-opacity-25"
+          placeholder="Frieren" />
+      </div>
     </div>
 
     <div class="mb-4">
-      <label for="weekday" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Week day</label>
-
-      <select formControlName="date" id="weekday"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      <label for="weekday" class="block mb-2 text-sm font-medium text-txt_dark dark:text-txt_white">Week day</label>
+      <select formControlName="date" id="weekday" class="select select-bordered w-full">
         @for (day of weekDays; track $index) {
         <option [value]="day">
           {{ day }}
@@ -21,30 +29,25 @@
       </select>
     </div>
 
+
     <div class="mb-4">
-      <label for="large-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">About manga</label>
-      <textarea id="about" formControlName="about"
-        class="max-h-20 min-h-20 py-2.5 px-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white peer"
-        placeholder="Some text about manga..."></textarea>
+      <label class="block mb-2 text-sm font-medium text-txt_dark dark:text-txt_white">About manga</label>
+      <textarea placeholder="Some text about manga..." formControlName="about" id="about"
+        class="text-sm textarea textarea-bordered textarea-lg w-full max-h-20"></textarea>
     </div>
 
     <div class="mb-4">
       <label
-        class="flex items-center mb-2 text-sm font-medium text-gray-900 dark:text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
-        for="file_input">Upload file</label>
+        class="flex items-center mb-2 text-sm font-medium text-txt_dark dark:text-txt_white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
+        for="file-input">Upload file</label>
 
-      <input id="file_input"
-        class="file:cursor-pointer w-full text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-sm file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-500"
-        type="file" (change)="onFileChange($event)" />
+      <input type="file" class="file-input w-full" (change)="onFileChange($event)" />
       <p class="mt-1 text-xs text-stone-950 dark:text-gray-300 dark:opacity-30 opacity-75" id="file_input_help">
         SVG, PNG or JPG (MAX. 2MB).
       </p>
     </div>
 
-    <button type="submit" (click)="addManga()"
-      class="justify-self-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-      Submit
-    </button>
+    <button (click)="addManga()" class="btn btn-wide btn-primary text-txt_white self-center">Create new manga</button>
+
   </form>
-  <!-- <button (click)="addManga()"></button> -->
 </main>

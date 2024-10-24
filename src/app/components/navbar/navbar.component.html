@@ -1,20 +1,22 @@
 <nav class="h-[12vh] p-4">
-  <div class="bg-primary rounded-md gap-2 flex flex-wrap h-[90%] drop-shadow-2xl">
+  <div class="bg-primary rounded-sm gap-2 flex flex-wrap h-[90%] drop-shadow-2xl">
     <div class="flex items-center ml-20">
+
       <label class="swap swap-rotate">
-        <input [disabled]="!this.user" type="checkbox" />
+        <input id="checkbox" [disabled]="!this.user" type="checkbox" [checked]="isSidenavOpened()" />
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+          class="size-5 swap-on fill-txt_white">
+          <path
+            d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
+        </svg>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
           class="size-5 swap-off fill-txt_white">
           <path fill-rule="evenodd"
             d="M2 4.75A.75.75 0 0 1 2.75 4h14.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 4.75ZM2 10a.75.75 0 0 1 .75-.75h14.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 10Zm0 5.25a.75.75 0 0 1 .75-.75h14.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1-.75-.75Z"
             clip-rule="evenodd" />
         </svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-          class="size-5 swap-on fill-txt_white">
-          <path
-            d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
-        </svg>
       </label>
+
     </div>
 
     <div class="flex flex-1 items-center justify-center self-center justify-self-center gap-4 ">
@@ -23,14 +25,14 @@
         class="size-6 cursor-pointer hover:bg-error rounded-full text-txt_white" (click)="signOut()">
         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
       </svg>
-      <button routerLink="subscriptions" class="px-5 py-1.5 hover:bg-accent rounded-md">
+      <button routerLink="subscriptions" class="px-5 py-1.5 hover:bg-accent rounded-sm">
         <a class="text-txt_white cursor-pointer font-semibold">My mangas</a>
       </button>
-      <button routerLink="list" class="px-5 py-1.5 hover:bg-accent rounded-md">
+      <button routerLink="list" class="px-5 py-1.5 hover:bg-accent rounded-sm">
         <a class="text-txt_white cursor-pointer font-semibold">List mangas</a>
       </button>
       } @if (user && user.role === 'admin') {
-      <button class="px-8 py-1.5 hover:bg-accent rounded-md" routerLink="admin">
+      <button class="px-8 py-1.5 hover:bg-accent rounded-sm" routerLink="admin">
         <a class="text-txt_white cursor-pointer font-semibold">Add new manga</a>
       </button>
       }

@@ -16,12 +16,12 @@ export class AuthService {
     private userSubject = new BehaviorSubject<User | undefined>(undefined);
     user$ = this.userSubject.asObservable();
 
-    login(loginForm: LoginForm): Observable<any> {
-        return this.http.post(`${this.urlApi}/login`, loginForm);
+    signin(loginForm: LoginForm): Observable<any> {
+        return this.http.post(`${this.urlApi}/auth`, loginForm);
     }
 
     register(registerForm: RegisterForm): Observable<any> {
-        return this.http.post(`${this.urlApi}/register`, registerForm);
+        return this.http.post(`${this.urlApi}/signup`, registerForm);
     }
 
     getUserObserver(): Observable<User | undefined> {
@@ -37,20 +37,21 @@ export class AuthService {
     }
 
     setUser(user: User): void {
+        console.log(user);
         this.userSubject.next(user);
     }
 
-    async Authentication(): Promise<void> {
-        const token: any = localStorage.getItem('token');
-        const headers = new HttpHeaders().set('authorization', `${token}`);
+    protected setupRequestHeader() {
+        const token = localStorage.getItem('token');
+        return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    }
 
-        if (!token) {
-            return;
-        }
+    async Authentication(): Promise<void> {
+        const headers = this.setupRequestHeader();
 
         try {
-            const res: any = await firstValueFrom(this.http.get(`${this.urlApi}/auth`, { headers }).pipe(take(1)));
-            this.userSubject.next(res.user);
+            const res: any = await firstValueFrom(this.http.get(`${this.urlApi}/authorize`, { headers }));
+            this.setUser(this.decodePayloadJWT(res.tokenJwt));
         } catch (error) {
             this.userSubject.next(undefined);
         }
@@ -58,7 +59,8 @@ export class AuthService {
 
     decodePayloadJWT(token: string) {
         try {
-            return jwtDecode(token);
+            const jwt: any = jwtDecode(token);
+            return jwt;
         } catch (Error) {
             return false;
         }

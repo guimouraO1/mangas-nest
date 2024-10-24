@@ -40,6 +40,6 @@ export const appConfig: ApplicationConfig = {
       multi: true,
     },
     provideAnimationsAsync(),
-    provideEnvironmentNgxMask(),
-  ],
+    provideEnvironmentNgxMask()
+  ]
 };

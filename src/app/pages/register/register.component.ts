@@ -25,6 +25,7 @@ export class RegisterComponent {
     authService = inject(AuthService);
     notificationService = inject(NotificationService);
     isDisableButton: boolean = false;
+    stepper: boolean = true;
 
     constructor() {
         this.registerForm = this.fb.group({
@@ -36,7 +37,7 @@ export class RegisterComponent {
                 '',
                 [Validators.required, Validators.minLength(3)],
             ],
-        });
+        }, { validators: [this.stepperValidator(), this.passwordsMatches()] });
     }
 
     async signUp() {
@@ -46,7 +47,8 @@ export class RegisterComponent {
 
         this.isDisableButton = true;
         try {
-            await firstValueFrom(this.authService.register(this.registerForm.value));
+            const { confirmPassword, ...formData } = this.registerForm.value;
+            await firstValueFrom(this.authService.register(formData));
             this.newAlert({
                 message: 'Registrado com sucesso!',
                 type: AlertType.Success,
@@ -64,5 +66,38 @@ export class RegisterComponent {
 
     newAlert(alert: Alert) {
         this.notificationService.alert(alert);
+    }
+
+    stepperValidator() {
+        return (formGroup: FormGroup): { [key: string]: any } | null => {
+            const username = formGroup.get('username');
+            const name = formGroup.get('name');
+            const email = formGroup.get('email');
+            const password = formGroup.get('password');
+            const confirmPassword = formGroup.get('confirmPassword');
+
+            if (username?.invalid || name?.invalid || email?.invalid) {
+                return { step1: true };
+            }
+
+            if (password?.invalid && confirmPassword?.invalid) {
+                return { step2: true };
+            }
+
+            return null;
+        };
+    }
+
+    passwordsMatches() {
+        return (formGroup: FormGroup): { [key: string]: any } | null => {
+            const password = formGroup.get('password');
+            const confirmPassword = formGroup.get('confirmPassword');
+
+            if (password?.value !== confirmPassword?.value) {
+                return { passwordsDontMatches: true };
+            }
+
+            return null;
+        };
     }
 }

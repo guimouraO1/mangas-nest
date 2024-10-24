@@ -12,6 +12,7 @@ import { firstValueFrom } from 'rxjs';
 import { Alert, AlertType } from '../../models/notification.model';
 import { AuthService } from '../../services/auth.service';
 import { NotificationService } from '../../services/notification.service';
+import { User } from '../../models/user.model';
 
 @Component({
     selector: 'app-login',
@@ -27,7 +28,7 @@ export class LoginComponent {
 
     loginForm: FormGroup;
     isPasswordHiden = true;
-    loadingLogin = false;
+    isButtonSigninDisable = false;
     alertType = AlertType;
 
     constructor(authSerice: AuthService) {
@@ -50,13 +51,14 @@ export class LoginComponent {
             return;
         }
 
-        this.loadingLogin = true;
+        this.isButtonSigninDisable = true;
 
         try {
-            const res = await firstValueFrom(this.authService.login(this.loginForm.value));
+            const res = await firstValueFrom(this.authService.signin(this.loginForm.value));
 
-            localStorage.setItem('token', res.access_token);
-            this.authService.setUser(res.user);
+            localStorage.setItem('token', res.token);
+
+            this.authService.setUser(this.authService.decodePayloadJWT(res.token));
 
             this.router.navigate(['subscriptions']);
 
@@ -70,7 +72,7 @@ export class LoginComponent {
                 type: AlertType.Error,
             });
         } finally {
-            this.loadingLogin = false;
+            this.isButtonSigninDisable = false;
         }
     }
 

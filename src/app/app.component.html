@@ -1,6 +1,4 @@
-<body [ngClass]="darkModeService.darkModeSignal()">
-  <main data-theme="nord" class="bg-bg_white dark:bg-bg_dark font-poppins">
-    <app-navbar />
-    <router-outlet />
-  </main>
+<body [ngClass]="darkModeService.darkModeSignal()" class="bg-bg_white dark:bg-bg_dark font-poppins" data-theme="nord">
+  <app-navbar />
+  <router-outlet />
 </body>

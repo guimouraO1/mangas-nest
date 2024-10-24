@@ -24,7 +24,6 @@ import { NotificationService } from './services/notification.service';
 })
 export class AppComponent {
     darkModeService: DarkModeService = inject(DarkModeService);
-    router: Router = inject(Router);
     notificationService = inject(NotificationService);
     snackBar: MatSnackBar = inject(MatSnackBar);
 

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { User } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
@@ -17,6 +17,7 @@ export class NavbarComponent {
     router: Router = inject(Router);
     notificationService = inject(NotificationService);
     user: User | undefined;
+    isSidenavOpened = signal<boolean>(false);
 
     constructor() {
         this.authService.getUserObserver().subscribe((value) => {
@@ -29,8 +30,10 @@ export class NavbarComponent {
     }
 
     signOut(): void {
+        this.isSidenavOpened.set(false);
+
         this.authService.logout();
         localStorage.removeItem('token');
-        this.router.navigate(['login']);
+        this.router.navigate(['signin']);
     }
 }

@@ -5,20 +5,20 @@ import { MangasListComponent } from './pages/mangas-list/mangas-list.component';
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: 'login',
+        redirectTo: 'signin',
         pathMatch: 'full',
     },
     {
-        path: 'login',
-        title: 'Login',
+        path: 'signin',
+        title: 'Nest | Sign in',
         loadComponent: () =>
             import('./pages/login/login.component').then(
                 (p) => p.LoginComponent
             ),
     },
     {
-        path: 'register',
-        title: 'Register',
+        path: 'signup',
+        title: 'Nest | Sign up',
         loadComponent: () =>
             import('./pages/register/register.component').then(
                 (p) => p.RegisterComponent
@@ -26,7 +26,7 @@ export const routes: Routes = [
     },
     {
         path: 'list',
-        title: 'List of mangas',
+        title: 'Nest | List of mangas',
         loadComponent: () =>
             import('./pages/mangas-list/mangas-list.component').then(
                 (p) => MangasListComponent
@@ -38,7 +38,7 @@ export const routes: Routes = [
     },
     {
         path: 'admin',
-        title: 'Add manga',
+        title: 'Nest | Add manga',
         loadComponent: () =>
             import('./pages/admin/admin.component').then(
                 (p) => p.AdminComponent
@@ -50,7 +50,7 @@ export const routes: Routes = [
     },
     {
         path: 'subscriptions',
-        title: 'Recents mangas',
+        title: 'Nest | Recents mangas',
         loadComponent: () =>
             import('./pages/subscriptions/subscriptions.component').then(
                 (p) => p.SubscriptionsComponent
@@ -62,7 +62,7 @@ export const routes: Routes = [
     },
     {
         path: '**',
-        title: 'Not found',
+        title: 'Nest | Not found',
         loadComponent: () =>
             import('./pages/not-found/not-found.component').then(
                 (p) => p.NotFoundComponent

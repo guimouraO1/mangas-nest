@@ -5,6 +5,7 @@ import { CardComponent } from '../../components/card/card.component';
 import { Manga } from '../../models/manga.model';
 import { SubscriptionService } from '../../services/subscription.service';
 import { Subscription } from '../../models/subscriptions.model';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-subscriptions',
@@ -15,6 +16,7 @@ import { Subscription } from '../../models/subscriptions.model';
 export class SubscriptionsComponent implements OnInit {
   subscriptionService = inject(SubscriptionService);
   subscriptions: Subscription[] = [];
+  url = environment.url;
 
   data = new Date();
 

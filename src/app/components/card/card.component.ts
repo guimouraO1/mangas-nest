@@ -5,6 +5,7 @@ import { ConfirmationModalComponent } from './confirmation-modal/confirmation-mo
 import { ChaptersService } from '../../services/chapters.service';
 import { NewChapterModalComponent } from './new-chapter-modal/new-chapter-modal.component';
 import { Subscription } from '../../models/subscriptions.model';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-card',
@@ -18,6 +19,7 @@ export class CardComponent {
   dialog = inject(MatDialog);
   chapterService = inject(ChaptersService);
   @Input() subscription!: Subscription;
+  url = environment.url;
 
   newChapter(mangaId: string) {
     const newChapter = this.dialog.open(NewChapterModalComponent, {
