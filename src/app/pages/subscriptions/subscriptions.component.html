@@ -2,8 +2,8 @@
     <div class="flex items-center justify-center self-start h-[18vh] w-full">
         <button class="px-4 h-10 text-sm text-txt_dark rounded-s-lg bg-bg_white shadow"></button>
         @for (day of weekdayNames; track $index) {
-        <button (click)="selectDay(day)" type="button" class="px-4 h-10 text-txt_dark bg-bg_white shadow "
-            [ngClass]="{'!bg-primary text-txt_white': dateString === day}">
+        <button (click)="selectDay(day)" type="button" class="px-4 h-10 text-txt_dark bg-bg_white shadow"
+            [ngClass]="{ '!bg-primary text-txt_white': dateString === day }">
             {{ day }}
         </button>
         }
@@ -12,20 +12,7 @@
 
     <div class="flex flex-col w-full h-[70vh] self-end justify-center">
         <div class="flex justify-center items-center flex-wrap gap-2 mb-4">
-            @for (manga of this.subscriptions; track $index) {
-            <app-card [subscription]="manga" />
-            } @empty {
-            @defer {
-            <h1
-                class="text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-                No mangas on this date
-            </h1>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="size-20 text-sky-700">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M15.182 16.318A4.486 4.486 0 0 0 12.016 15a4.486 4.486 0 0 0-3.198 1.318M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z" />
-            </svg>
-            } @placeholder (minimum 2000ms) {
+            @if (isLoadingGetSubscriptions) {
             <div role="status"
                 class="space-y-8 animate-pulse md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
                 <div class="flex items-center justify-center w-full h-48 bg-gray-300 rounded sm:w-96 dark:bg-gray-700">
@@ -45,8 +32,24 @@
                 </div>
                 <span class="sr-only">Loading...</span>
             </div>
-            } }
-
+            } @else {
+            @for(manga of subscriptions; track $index) {
+            <app-card [subscription]="manga" />
+            } @empty {
+            <div class="flex justify-center items-center flex-wrap gap-2 mb-4">
+                <div class=" hero-content text-center">
+                    <div class="max-w-md">
+                        <h1 class="text-5xl font-bold text-highlight dark:text-txt_white">
+                            Oops!</h1>
+                        <p class="py-6 text-txt_dark dark:text-txt_white">
+                            It looks like we can't find a manga for that date. But don't worry, we're here to help!
+                        </p>
+                        <button [routerLink]="['/list']" class="btn btn-primary text-txt_white">Subscribe new
+                            Manga</button>
+                    </div>
+                </div>
+            </div> }
+            }
         </div>
     </div>
 </main>

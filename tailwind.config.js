@@ -21,8 +21,8 @@ module.exports = {
                 highlight: "#ef4c53",
                 star: "#fb923c",
                 icon_gray: "#6b7280",
-            },
-        },
+            }
+        }
     },
     plugins: [require("daisyui")],
     daisyui: {

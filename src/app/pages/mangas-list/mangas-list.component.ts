@@ -17,21 +17,15 @@ export class MangasListComponent implements OnInit {
   mangaService = inject(MangaService);
   mangas: Manga[] = [];
   subscriptions: string[] = [];
-  url = environment.url;
+  url = environment.urlImages;
 
   async ngOnInit() {
-    await this.getSubscriptions();
     await this.getMangas();
-  }
-
-  async getSubscriptions() {
-    const subscriptions = await firstValueFrom(this.subscriptionService.getSubscriptions(1, ''));
-    this.subscriptions = subscriptions.map((subscription) => subscription.manga.id);
   }
 
   async getMangas() {
     try {
-      const mangas = await firstValueFrom(this.mangaService.getMangas(1));
+      const mangas = await firstValueFrom(this.mangaService.getMangas(1, 5));
       this.mangas = mangas;
     } catch (error) {
 

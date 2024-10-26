@@ -64,7 +64,8 @@
       </div>
     </div>
 
-    <button type="submit" class="btn btn-primary w-3/6 self-center text-txt_white">Sign in</button>
+    <button [disabled]="isButtonSigninDisable" type="submit"
+      class="btn btn-primary w-3/6 self-center text-txt_white">Sign in</button>
 
     <div class="my-4 py-3 flex items-center text-xs text-txt_dark dark:text-txt_white 
     uppercase before:flex-1 before:border-t before:border-txt_dark dark:before:border-txt_white 
@@ -72,7 +73,7 @@
       Or
     </div>
 
-    <button [disabled]="isButtonSigninDisable" routerLink="/signup" type="button"
+    <button routerLink="/signup" type="button"
       class="btn btn-wide btn-warning self-center flex items-center text-txt_white">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
         class="size-5 fill-txt_white">

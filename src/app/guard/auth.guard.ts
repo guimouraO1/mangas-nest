@@ -13,7 +13,7 @@ export const authGuard: CanActivateFn = async (route: ActivatedRouteSnapshot, st
   const allowedRoles = route.data['roles'] as string[];
 
   const user: User | undefined = authService.getUser();
-  console.log(state)
+
   if (user && allowedRoles.includes(user.role)) {
     return true;
   }

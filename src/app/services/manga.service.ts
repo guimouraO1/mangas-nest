@@ -1,8 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
-import { Manga, MangaWithImage } from '../models/manga.model';
+import { Manga } from '../models/manga.model';
 
 @Injectable({
   providedIn: 'root',
@@ -11,21 +11,39 @@ export class MangaService {
   protected http = inject(HttpClient);
   private urlApi = environment.url;
 
-  getMangas(page: number): Observable<Manga[]> {
-    return this.http.get<Manga[]>(
-      `${this.urlApi}/manga?page=${page}`
-    );
+  getMangas(page: number, offset: number): Observable<Manga[]> {
+    const headers = this.setupRequestHeader();
+
+    let params = new HttpParams();
+
+    params = params.set('page', page);
+    params = params.set('offset', offset);
+
+    return this.http.get<Manga[]>(`${this.urlApi}/manga`, { params, headers });
   }
 
-  uploadManga(manga: MangaWithImage): Observable<Manga[]> {
-    const token: string | null = localStorage.getItem('token');
-    const headers = new HttpHeaders().set('authorization', `${token}`);
+  createManga(manga: Manga): Observable<Manga[]> {
+    const headers = this.setupRequestHeader();
+    return this.http.post<any>(`${this.urlApi}/manga`, manga, { headers });
+  }
 
-    const formData = new FormData();
-    formData.append('image', manga.image);
-    const { image, ...mangaData } = manga;
-    formData.append('data', JSON.stringify(mangaData));
+  getPresignedUrl(imageType: string) {
+    const headers = this.setupRequestHeader();
+    let params = new HttpParams().set('fileType', imageType);
 
-    return this.http.post<any>(`${this.urlApi}/manga`, formData, { headers });
+    return this.http.get<any>(`${this.urlApi}/uploads`, { params, headers });
+  }
+
+  uploadImageToS3(urlPresigned: string, file: File) {
+    const headers = new HttpHeaders({
+      'Content-Type': file.type
+    });
+
+    return this.http.put(urlPresigned, file, { headers });
+  }
+
+  protected setupRequestHeader() {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders().set('Authorization', `Bearer ${token}`);
   }
 }

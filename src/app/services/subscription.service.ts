@@ -3,19 +3,29 @@ import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Subscription } from '../models/subscriptions.model';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubscriptionService {
+
   protected http = inject(HttpClient);
+  protected authService = inject(AuthService)
   private urlApi = environment.url;
 
-  getSubscriptions(page: number, date: string): Observable<Subscription[]> {
-    const token: string | null = localStorage.getItem('token');
-    const headers = new HttpHeaders().set('authorization', `${token}`);
+  protected setupRequestHeader() {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  }
 
-    let params = new HttpParams().set('page', page);
+  getSubscriptions(page: number, offset: number, date: string): Observable<Subscription[]> {
+    const headers = this.setupRequestHeader();
+
+    let params = new HttpParams();
+
+    params = params.set('page', page);
+    params = params.set('offset', offset);
 
     if (date) {
       params = params.set('date', date);

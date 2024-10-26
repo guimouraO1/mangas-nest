@@ -37,7 +37,6 @@ export class AuthService {
     }
 
     setUser(user: User): void {
-        console.log(user);
         this.userSubject.next(user);
     }
 

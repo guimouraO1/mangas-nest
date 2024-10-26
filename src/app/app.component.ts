@@ -32,7 +32,7 @@ export class AppComponent {
             if (alert) {
                 this.snackBar.openFromComponent(CustomSnackbarComponent, {
                     data: { alert },
-                    duration: 3000,
+                    duration: alert.duration ?? 3000,
                     horizontalPosition: 'end',
                     verticalPosition: 'top',
                     panelClass: [

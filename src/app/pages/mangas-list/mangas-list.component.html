@@ -16,8 +16,7 @@
             <thead
                 class="text-xs text-txt_dark uppercase dark:bg-bg_card border border-opacity-25 border-x-border_dark  border-t-border_dark">
                 <tr>
-
-                    <th scope="col" class="p-4">
+                    <th scope="col" class="flex justify-center p-4">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                             class="size-5 fill-txt_dark">
                             <path fill-rule="evenodd"
@@ -39,12 +38,10 @@
             <tbody>
                 @for (manga of mangas; track $index) {
                 <tr class="dark:bg-bg_card border border-opacity-25 border-border_dark  border-t-border_dark">
-                    <td class="w-4 p-4">
-                        <div class="flex items-center">
-                            <span class="font-extrabold text-txt_dark">{{$index + 1}}</span>
-                        </div>
-                    </td>
-                    <th scope="row" class="flex items-center px-6 py-4 text-txt_dark whitespace-nowrap ">
+                    <th class="p-2 text-center">
+                        <span class="font-extrabold text-txt_dark text-center">{{$index + 1}}</span>
+                    </th>
+                    <th scope="row" class="flex items-center px-6 py-4 text-txt_dark whitespace-nowrap w-[30vw]">
                         <div class="w-10 h-10 rounded-full object-cover overflow-hidden">
                             <img src="{{url}}{{ manga.url }}">
                         </div>
@@ -56,18 +53,34 @@
                         {{manga.date}}
                     </td>
                     <td class="px-6 py-4">
-                        @if (this.subscriptions.includes(manga.id)) {
+                        @if (manga.subscriptions && manga.subscriptions.length > 0) {
                         <button class="btn btn-success text-txt_white no-animation cursor-default">Already
                             subscribed</button>
 
                         } @else {
                         <button class="btn btn-primary text-txt_white">Subscribe</button>
-
                         }
                     </td>
                 </tr>
 
                 } @empty {
+                @for (item of [1,2,3,4,5]; track $index) {
+                <tr class="flexdark:bg-bg_card border border-opacity-25 border-border_dark  border-t-border_dark">
+                    <th class="p-2 text-center">
+                        <span class="font-extrabold text-txt_dark text-center">{{item}}</span>
+                    </th>
+                    <th scope="row" class="flex items-center px-6 py-4 text-txt_dark whitespace-nowrap w-[30vw]">
+                        <div class="skeleton h-10 w-10 shrink-0 rounded-full"></div>
+                        <div class="skeleton h-2 w-full m-2"></div>
+                    </th>
+                    <td class="px-6 py-4 text-txt_dark">
+                        <div class="skeleton h-2 w-12"></div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="skeleton h-12 w-40"></div>
+                    </td>
+                </tr>
+                }
 
                 }
 

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, inject, Input, input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
@@ -10,7 +10,7 @@ import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [CommonModule, ConfirmationModalComponent],
+  imports: [CommonModule, ConfirmationModalComponent, NgOptimizedImage],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css',
 })
@@ -18,12 +18,13 @@ import { environment } from '../../../environments/environment';
 export class CardComponent {
   dialog = inject(MatDialog);
   chapterService = inject(ChaptersService);
-  @Input() subscription!: Subscription;
-  url = environment.url;
+  subscription = input.required<Subscription>();
+
+  url = environment.urlImages;
 
   newChapter(mangaId: string) {
     const newChapter = this.dialog.open(NewChapterModalComponent, {
-      data: this.subscription.chapters,
+      data: this.subscription().chapters,
     });
 
     newChapter.afterClosed().subscribe((confirmed: number | boolean) => {
@@ -31,16 +32,16 @@ export class CardComponent {
 
       this.chapterService.newChapter(+confirmed, mangaId).subscribe({
         next: (res) => {
-          this.subscription.chapters = [
-            ...this.subscription.chapters,
+          this.subscription().chapters = [
+            ...this.subscription().chapters,
             {
               id: '',
-              mangaId: this.subscription.id,
+              mangaId: this.subscription().id,
               number: +confirmed,
             },
           ].sort((a, b) => b.number - a.number);
-          if (this.subscription.chapters.length > 5) {
-            this.subscription.chapters = this.subscription.chapters.slice(0, 5);
+          if (this.subscription().chapters.length > 5) {
+            this.subscription().chapters = this.subscription().chapters.slice(0, 5);
           }
         },
         error: (res) => console.log(res),
@@ -59,7 +60,7 @@ export class CardComponent {
 
       this.chapterService.delChapter(+chapter, mangaId).subscribe({
         next: (res) => {
-          this.subscription.chapters = this.subscription.chapters.filter(
+          this.subscription().chapters = this.subscription().chapters.filter(
             (ch: any) => ch.number !== +chapter
           );
         },

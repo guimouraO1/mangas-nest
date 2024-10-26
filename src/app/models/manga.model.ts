@@ -1,9 +1,13 @@
+import { Subscription } from "./subscriptions.model";
+
+
 export interface Manga {
   id: string;
   name: string;
   date: WeekDays;
   url: string;
   about?: string | null;
+  subscriptions?: Subscription[];
 }
 
 export enum WeekDays {
@@ -16,6 +20,3 @@ export enum WeekDays {
   Sun = 'sun',
 }
 
-export interface MangaWithImage extends Manga {
-  image: File;
-}

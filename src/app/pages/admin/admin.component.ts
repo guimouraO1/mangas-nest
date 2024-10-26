@@ -7,7 +7,7 @@ import {
     ReactiveFormsModule,
     Validators,
 } from '@angular/forms';
-import { take } from 'rxjs';
+import { firstValueFrom, take } from 'rxjs';
 import { WeekDays } from '../../models/manga.model';
 import { Alert, AlertType } from '../../models/notification.model';
 import { MangaService } from '../../services/manga.service';
@@ -27,6 +27,7 @@ export class AdminComponent {
     inputValue: number = 0;
     maxFileSizeBytes = 2 * 1024 * 1024;
     notificationService = inject(NotificationService);
+    file: File | null = null;
 
     constructor() {
         this.mangaForm = this.fb.group({
@@ -55,27 +56,37 @@ export class AdminComponent {
     }
 
     onFileChange(event: any): void {
-        const file = event.target.files[0];
-        if (file) {
-            if (!this.isValidFileType(file)) {
-                alert(
-                    'Invalid file type. Please upload an SVG, PNG, JPG, or GIF image.'
-                );
+        this.file = event.target.files[0];
+
+        if (this.file) {
+            if (!this.isValidFileType(this.file)) {
+                this.newAlert({
+                    type: AlertType.Warning,
+                    message: 'Invalid file type. Please upload an PNG, JPG, or GIF image.',
+                    duration: 5000
+                });
+                this.file = null;
                 return;
             }
-            if (file.size > this.maxFileSizeBytes) {
-                alert('File size exceeds 2MB.');
+
+            if (this.file.size > this.maxFileSizeBytes) {
+                this.newAlert({
+                    type: AlertType.Warning,
+                    message: 'File size exceeds 2MB.',
+                    duration: 5000
+                });
+
+                this.file = null;
                 return;
             }
             this.mangaForm.patchValue({
-                image: file,
+                image: this.file,
             });
         }
     }
 
     isValidFileType(file: File): boolean {
         const validTypes = [
-            'image/svg+xml',
             'image/png',
             'image/jpeg',
             'image/gif',
@@ -87,34 +98,41 @@ export class AdminComponent {
         this.notificationService.alert(alert);
     }
 
-    addManga() {
-        if (!this.mangaForm.valid) {
+    async addManga() {
+        if (this.mangaForm.invalid || !this.file) {
             this.newAlert({
                 message: 'Please fill out all required fields',
                 type: AlertType.Warning,
             });
+
             return;
         }
 
-        this.mangaService
-            .uploadManga(this.mangaForm.value)
-            .pipe(take(1))
-            .subscribe({
-                next: (res) => {
-                    this.newAlert({
-                        message: 'New manga added!',
-                        type: AlertType.Success,
-                    });
-                    this.mangaForm.reset();
-                },
-                error: (err) => {
-                    this.newAlert({
-                        message: err,
-                        type: AlertType.Error,
-                    });
-                    this.mangaForm.reset();
-                },
-                complete: () => console.log('COMPLETED'),
+        const { image, ...mangaData } = this.mangaForm.value;
+
+
+        try {
+            const response: any = await firstValueFrom(this.mangaService.getPresignedUrl(this.file.type));
+
+            await firstValueFrom(this.mangaService.uploadImageToS3(response.signedUrl, this.file));
+
+            const newMangaData = {
+                ...mangaData,
+                url: response.key
+            };
+
+            console.log(newMangaData);
+
+            await firstValueFrom(this.mangaService.createManga(newMangaData));
+
+            this.newAlert({
+                message: 'New manga created!',
+                type: AlertType.Success,
             });
+
+            this.mangaForm.reset();
+        } catch (error) {
+
+        }
     }
 }

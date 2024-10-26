@@ -1,6 +1,7 @@
 export interface Alert {
     type: AlertType;
     message: string;
+    duration?: number;
 }
 
 export enum AlertType {

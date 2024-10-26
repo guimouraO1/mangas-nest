@@ -53,6 +53,8 @@ export class RegisterComponent {
                 message: 'Registrado com sucesso!',
                 type: AlertType.Success,
             });
+
+            this.stepper = false;
             this.registerForm.reset();
         } catch (err: any) {
             this.newAlert({
