@@ -13,6 +13,7 @@ import { Alert, AlertType } from '../../models/notification.model';
 import { MangaService } from '../../services/manga.service';
 import { NotificationService } from '../../services/notification.service';
 
+
 @Component({
     selector: 'app-admin',
     standalone: true,
@@ -22,11 +23,12 @@ import { NotificationService } from '../../services/notification.service';
 export class AdminComponent {
     fb = inject(FormBuilder);
     mangaService = inject(MangaService);
+    notificationService = inject(NotificationService);
+
     mangaForm: FormGroup;
     weekDays = Object.values(WeekDays);
     inputValue: number = 0;
     maxFileSizeBytes = 2 * 1024 * 1024;
-    notificationService = inject(NotificationService);
     file: File | null = null;
 
     constructor() {
@@ -45,22 +47,12 @@ export class AdminComponent {
         });
     }
 
-    currentRating(index: number) {
-        this.mangaForm.get('rating')?.setValue(index);
-    }
-
-    setCurrentRating(index: number) {
-        const currentRating = this.mangaForm.get('rating')?.value ?? 0;
-        const newRating = index + currentRating;
-        this.mangaForm.get('rating')?.setValue(newRating);
-    }
-
     onFileChange(event: any): void {
         this.file = event.target.files[0];
 
         if (this.file) {
             if (!this.isValidFileType(this.file)) {
-                this.newAlert({
+                this.notificationService.alert({
                     type: AlertType.Warning,
                     message: 'Invalid file type. Please upload an PNG, JPG, or GIF image.',
                     duration: 5000
@@ -70,7 +62,7 @@ export class AdminComponent {
             }
 
             if (this.file.size > this.maxFileSizeBytes) {
-                this.newAlert({
+                this.notificationService.alert({
                     type: AlertType.Warning,
                     message: 'File size exceeds 2MB.',
                     duration: 5000
@@ -94,16 +86,13 @@ export class AdminComponent {
         return validTypes.includes(file.type);
     }
 
-    newAlert(alert: Alert) {
-        this.notificationService.alert(alert);
-    }
-
     async addManga() {
         if (this.mangaForm.invalid || !this.file) {
-            this.newAlert({
+            this.notificationService.alert({
                 message: 'Please fill out all required fields',
                 type: AlertType.Warning,
             });
+
 
             return;
         }
@@ -121,11 +110,9 @@ export class AdminComponent {
                 url: response.key
             };
 
-            console.log(newMangaData);
-
             await firstValueFrom(this.mangaService.createManga(newMangaData));
 
-            this.newAlert({
+            this.notificationService.alert({
                 message: 'New manga created!',
                 type: AlertType.Success,
             });

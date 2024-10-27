@@ -13,16 +13,17 @@
           </svg>
         </div>
         <input placeholder="Sousou no frieren" formControlName="name" type="text"
-          class="border text-sm rounded-sm block w-full ps-10 p-2.5 bg-bg_white border-border_dark border-opacity-25"
+          class="border text-sm rounded-sm block w-full ps-10 p-2.5 border-border_dark border-opacity-25 text-txt_dark"
           placeholder="Frieren" />
       </div>
     </div>
 
     <div class="mb-4">
-      <label for="weekday" class="block mb-2 text-sm font-medium text-txt_dark dark:text-txt_white">Week day</label>
-      <select formControlName="date" id="weekday" class="select select-bordered w-full">
+      <label for="weekday" class="block mb-2 text-sm font-medium text-txt_dark dark:text-txt_white ">Week
+        day</label>
+      <select formControlName="date" id="weekday" class="select select-bordered w-full bg-white">
         @for (day of weekDays; track $index) {
-        <option [value]="day">
+        <option class="text-txt_dark" [value]="day">
           {{ day }}
         </option>
         }
@@ -31,22 +32,33 @@
 
 
     <div class="mb-4">
-      <label class="block mb-2 text-sm font-medium text-txt_dark dark:text-txt_white">About manga</label>
-      <textarea placeholder="Some text about manga..." formControlName="about" id="about"
-        class="text-sm textarea textarea-bordered textarea-lg w-full max-h-20"></textarea>
-    </div>
-
-    <div class="mb-4">
       <label
-        class="flex items-center mb-2 text-sm font-medium text-txt_dark dark:text-txt_white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
-        for="file-input">Upload file</label>
-
-      <input type="file" class="file-input w-full" (change)="onFileChange($event)" />
-      <p class="mt-1 text-xs text-stone-950 dark:text-gray-300 dark:opacity-30 opacity-75" id="file_input_help">
-        SVG, PNG or JPG (MAX. 2MB).
-      </p>
+        class="block mb-2 text-sm font-medium text-txt_dark border-border_dark border-opacity-25 dark:text-txt_white">About
+        manga</label>
+      <textarea placeholder="Some text about manga..." formControlName="about" id="about"
+        class="text-sm textarea textarea-bordered textarea-lg w-full max-h-20 bg-white text-txt_dark"></textarea>
     </div>
 
+
+    <div class="flex items-center justify-center w-full mb-4">
+      <label for="dropzone-file"
+        class="flex flex-col items-center justify-center w-full h-32 border  rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 ">
+        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+            class="size-5 fill-txt_dark m-2">
+            <path
+              d="M9.25 13.25a.75.75 0 0 0 1.5 0V4.636l2.955 3.129a.75.75 0 0 0 1.09-1.03l-4.25-4.5a.75.75 0 0 0-1.09 0l-4.25 4.5a.75.75 0 1 0 1.09 1.03L9.25 4.636v8.614Z" />
+            <path
+              d="M3.5 12.75a.75.75 0 0 0-1.5 0v2.5A2.75 2.75 0 0 0 4.75 18h10.5A2.75 2.75 0 0 0 18 15.25v-2.5a.75.75 0 0 0-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5Z" />
+          </svg>
+          <p class="mb-2 text-sm text-txt_dark "><span class="font-semibold">Click to upload</span> or
+            drag and drop</p>
+          <p class="mt-1 text-xs text-highlight opacity-75" id="file_input_help"> PNG
+            or JPG (MAX. 2MB).</p>
+        </div>
+        <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden" />
+      </label>
+    </div>
     <button (click)="addManga()" class="btn btn-wide btn-primary text-txt_white self-center">Create new manga</button>
 
   </form>

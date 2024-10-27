@@ -12,7 +12,7 @@ module.exports = {
                 txt_disable: '#6c6c6c',
                 bg_dark: "#202020",
                 bg_white: "#e9ecef",
-                bg_card: "#1c1c1c",
+                bg_card: "#343434",
                 border_dark: "#424242",
                 sun: "#f3f3f3",
                 moon: "#f3f3f3",

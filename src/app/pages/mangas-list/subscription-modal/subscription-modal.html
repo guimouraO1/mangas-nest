@@ -1,0 +1,33 @@
+<div [ngClass]="darkModeService.darkModeSignal()" class="!w-[500px] !m-0">
+  <div class="w-full max-h-full">
+    <div class="bg-bg_white rounded shadow">
+
+      <div class="flex items-center justify-between p-4 rounded-t dark:border-gray-600 bg-primary">
+        <h3 class="text-xl font-medium text-txt_white">
+          Subscribe this manga
+        </h3>
+      </div>
+
+      <div class="pt-4">
+        <label class="font-bold p-4 text-txt_dark mb-4">Select your rating for this manga!</label>
+        <div class="rating flex items-center justify-center mt-4">
+          <input type="radio" name="rating" class="mask mask-star-2 bg-orange-400" [value]="1"
+            (change)="onRatingChange(1)" [checked]="rating.value === 1" />
+          <input type="radio" name="rating" class="mask mask-star-2 bg-orange-400" [value]="2"
+            (change)="onRatingChange(2)" [checked]="rating.value === 2" />
+          <input type="radio" name="rating" class="mask mask-star-2 bg-orange-400" [value]="3"
+            (change)="onRatingChange(3)" [checked]="rating.value === 3" />
+          <input type="radio" name="rating" class="mask mask-star-2 bg-orange-400" [value]="4"
+            (change)="onRatingChange(4)" [checked]="rating.value === 4" />
+          <input type="radio" name="rating" class="mask mask-star-2 bg-orange-400" [value]="5"
+            (change)="onRatingChange(5)" [checked]="rating.value === 5" />
+        </div>
+      </div>
+
+      <div class="flex gap-2 p-4 justify-end">
+        <button class="btn btn-primary text-txt_white" (click)="confirm()">Subscribe</button>
+        <button class="btn" (click)="cancel()">Decline</button>
+      </div>
+    </div>
+  </div>
+</div>
