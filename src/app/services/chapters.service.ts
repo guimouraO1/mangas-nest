@@ -12,25 +12,21 @@ export class ChaptersService {
 
   constructor() {}
 
-  newChapter(number: number, mangaId: string): Observable<any> {
-    const token: string | null = localStorage.getItem('token');
-    const headers = new HttpHeaders().set('authorization', `${token}`);
+  protected setupRequestHeader() {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  }
 
-    const body = {
-      mangaId,
-      number,
-    };
+  createChapter(number: number, subscriptionId: string): Observable<any> {
+    const headers = this.setupRequestHeader();
+    const body = { subscriptionId, number };
 
     return this.http.post<any>(`${this.urlApi}/chapter`, body, { headers });
   }
 
-  delChapter(number: number, mangaId: string): Observable<any> {
-    const token: string | null = localStorage.getItem('token');
-    const headers = new HttpHeaders().set('authorization', `${token}`);
-
-    const params = new HttpParams()
-      .set('mangaId', mangaId)
-      .set('number', number.toString());
+  deleteChapter(number: number, subscriptionId: string): Observable<any> {
+    const headers = this.setupRequestHeader();
+    const params = new HttpParams().set('subscriptionId', subscriptionId).set('number', number.toString());
 
     return this.http.delete<any>(`${this.urlApi}/chapter`, { headers, params });
   }

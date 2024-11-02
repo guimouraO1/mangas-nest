@@ -42,13 +42,6 @@ export class MangaService {
     return this.http.put(urlPresigned, file, { headers });
   }
 
-  subscribe(mangaId: string, rating: number) {
-    const headers = this.setupRequestHeader();
-    const body = { mangaId, rating }
-
-    return this.http.post(`${this.urlApi}/sub`, body, { headers });
-  }
-
   protected setupRequestHeader() {
     const token = localStorage.getItem('token');
     return new HttpHeaders().set('Authorization', `Bearer ${token}`);

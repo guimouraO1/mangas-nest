@@ -10,11 +10,8 @@ import { CommonModule } from '@angular/common';
   templateUrl: './confirmation-modal.component.html',
 })
 export class ConfirmationModalComponent {
-  constructor(
-    public dialogRef: MatDialogRef<ConfirmationModalComponent, boolean>
-  ) {}
-
   darkModeService: DarkModeService = inject(DarkModeService);
+  constructor(public dialogRef: MatDialogRef<ConfirmationModalComponent, boolean>) {}
 
   confirm(): void {
     this.dialogRef.close(true);

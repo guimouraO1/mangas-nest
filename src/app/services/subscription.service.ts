@@ -34,4 +34,17 @@ export class SubscriptionService {
     return this.http.get<Subscription[]>(`${this.urlApi}/sub`, { params, headers });
   }
 
+  subscribe(mangaId: string, rating: number) {
+    const headers = this.setupRequestHeader();
+    const body = { mangaId, rating }
+
+    return this.http.post(`${this.urlApi}/sub`, body, { headers });
+  }
+
+  unSubscribe(subscriptionId: string) {
+    const headers = this.setupRequestHeader();
+    let params = new HttpParams().set('subscriptionId', subscriptionId);
+
+    return this.http.delete(`${this.urlApi}/sub`, { params, headers });
+  }
 }

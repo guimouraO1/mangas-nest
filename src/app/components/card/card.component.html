@@ -1,8 +1,8 @@
 <div
   class="card lg:card-side !w-[600px] h-[200px] border border-opacity-25 border-zinc-300 dark:border-border_dark shadow-md ">
-  <figure class="relative w-[192px] h-[200px] overflow-hidden p-1">
+  <figure class="relative min-w-[192px] min-h-[200px] max-w-[192px] max-h-[200px] overflow-hidden p-1">
     <div class="skeleton w-full h-full p-1"></div>
-    <img fill ngSrc="{{url}}{{ subscription().manga.url }}" class="rounded-md p-1">
+    <img fill ngSrc="{{url}}{{ subscription().manga.url }}" class="rounded-md p-1 object-cover">
   </figure>
   <div class="card-body">
     <h2 class="card-title dark:text-txt_white text-txt_dark">{{subscription().manga.name}}</h2>
@@ -15,7 +15,7 @@
       <div class="flex flex-wrap gap-2 overflow-x-visible">
         @for (chapter of subscription().chapters; track $index) {
         <button class="btn btn-xs btn-outline btn-primary hover:!text-txt_white">{{ chapter.number }}
-          <svg (click)="delChapter(chapter.number, subscription().id)" class="w-2 h-2 hover:text-highlight"
+          <svg (click)="deleteChapter(chapter.number, subscription().id)" class="w-2 h-2 hover:text-highlight"
             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />

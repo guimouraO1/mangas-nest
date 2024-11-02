@@ -33,6 +33,9 @@
                     <th scope="col" class="px-6 py-3">
                         Status
                     </th>
+                    <th  class="px-6 py-4">
+                        Unsubscribe                       
+                    </th >
                 </tr>
             </thead>
             <tbody>
@@ -42,9 +45,10 @@
                         <span class="font-extrabold text-txt_dark text-center">{{$index + 1}}</span>
                     </th>
                     <th scope="row" class="flex items-center px-6 py-4 text-txt_dark whitespace-nowrap w-[30vw]">
-                        <div class="w-10 h-10 rounded-full object-cover overflow-hidden">
-                            <img src="{{url}}{{ manga.url }}">
-                        </div>
+                        <figure class="relative w-10 h-10 rounded-full overflow-hidden p-1">
+                            <div class="skeleton w-full h-full p-1 rounded-full"></div>
+                            <img fill ngSrc="{{url}}{{ manga.url }}" class="object-cover">
+                        </figure>
                         <div class="ps-3">
                             <div class="text-base font-semibold">{{manga.name}}</div>
                         </div>
@@ -54,13 +58,21 @@
                     </td>
                     <td class="px-6 py-4">
                         @if (manga.subscriptions && manga.subscriptions.length > 0) {
-                        <button class="btn btn-success text-txt_white no-animation cursor-default">Already
-                            subscribed</button>
-
+                            <button class="btn btn-success text-txt_white no-animation cursor-default">Already subscribed</button>
                         } @else {
-                        <button (click)="subscribe(manga.id)" class="btn btn-primary text-txt_white">Subscribe</button>
+                            <button (click)="subscribe(manga.id)" class="btn btn-primary text-txt_white">Subscribe</button>
                         }
                     </td>
+                    @if (manga.subscriptions && manga.subscriptions.length > 0) {
+                        <td class="px-6 py-4">
+                            <button (click)="unSubscribe(manga.subscriptions[0].id, manga.id)" class="btn btn-error text-txt_white">Unsubscribe</button>
+                        </td>
+                    } @else {
+                        <td class="px-6 py-4">
+                            <button [disabled]="true" class="btn !text-txt_disable">Unsubscribe</button>
+                        </td>
+                    }
+
                 </tr>
 
                 } @empty {
