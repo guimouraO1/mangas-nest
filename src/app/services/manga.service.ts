@@ -22,6 +22,12 @@ export class MangaService {
     return this.http.get<Manga[]>(`${this.urlApi}/manga`, { params, headers });
   }
 
+  getMangasCount(): Observable<any> {
+    const headers = this.setupRequestHeader();
+
+    return this.http.get<any>(`${this.urlApi}/manga/count`, { headers });
+  }
+
   createManga(manga: Manga): Observable<Manga[]> {
     const headers = this.setupRequestHeader();
     return this.http.post<any>(`${this.urlApi}/manga`, manga, { headers });

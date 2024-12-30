@@ -2,9 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { MangaService } from '../../services/manga.service';
 import { Manga } from '../../models/manga.model';
-import { Subscription } from '../../models/subscriptions.model';
 import { SubscriptionService } from '../../services/subscription.service';
-import { environment } from '../../../environments/environment';
 import { MatDialog } from '@angular/material/dialog';
 import { SubscritionModalConfimation } from './subscription-modal/subscription-modal.component';
 import { NotificationService } from '../../services/notification.service';
@@ -26,28 +24,43 @@ export class MangasListComponent implements OnInit {
   notificationService = inject(NotificationService);
   offset: number = 4;
   page: number = 1;
+  mangaPages: number = 1;
 
   mangas: Manga[] = [];
   subscriptions: string[] = [];
 
   async ngOnInit() {
+    await this.getMangasCount();
     await this.getMangas();
   }
 
-  incrementPage(): void {
-    if (this.page < 1) return;
+  async incrementPage() {
+    if (this.page >= this.mangaPages) return;
     this.page += 1;
+    await this.getMangas();
   }
   
-  decrementPage(): void {
+  async decrementPage() {
     if (this.page <= 1) return;
     this.page -= 1;
+
+    await this.getMangas();
   }
 
   async getMangas() {
     try {
       const mangas = await firstValueFrom(this.mangaService.getMangas(this.page, this.offset));
       this.mangas = mangas;
+    } catch (error) {
+
+    }
+  }
+
+  async getMangasCount() {
+    try {
+      const res = await firstValueFrom(this.mangaService.getMangasCount());
+
+      this.mangaPages = res.mangas;
     } catch (error) {
 
     }

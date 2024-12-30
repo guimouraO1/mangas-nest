@@ -2,18 +2,16 @@ import {
     Component,
     Inject,
     inject,
-    input,
-    OnInit,
     signal,
 } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DarkModeService } from '../../../services/dark-mode.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
+import { NgxMaskDirective } from 'ngx-mask';
 
 @Component({
-    imports: [FormsModule, CommonModule, NgxMaskDirective, NgxMaskPipe],
+    imports: [FormsModule, CommonModule, NgxMaskDirective],
     standalone: true,
     selector: 'app-new-chapter-modal',
     templateUrl: './new-chapter-modal.component.html',

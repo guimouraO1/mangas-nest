@@ -1,24 +1,13 @@
 <main class="w-full h-[88vh] flex">
-    <div class="flex flex-col items-center justify-center w-full px-40 shadow-2xl ">
-        <div class="flex items-center justify-end flex-column flex-wrap w-full p-4 
-            rounded-t-md space-y-4 md:space-y-0 pb-4 dark:bg-bg_card border  border-border_dark border-opacity-25 ">
-            <label class="input input-bordered flex items-center gap-2">
-                <input type="text" class="grow" placeholder="Search" />
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
-                    class="h-4 w-4 opacity-70">
-                    <path fill-rule="evenodd"
-                        d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                        clip-rule="evenodd" />
-                </svg>
-            </label>
-        </div>
-        <table class="w-full text-sm text-left p-8 rounded-b-md">
+    <div class="flex flex-col items-center justify-center w-full px-40 gap-10">
+
+        <table class="w-full text-sm text-left p-8 shadow-md">
             <thead
-                class="text-xs text-txt_dark uppercase dark:bg-bg_card border border-opacity-25 border-x-border_dark  border-t-border_dark">
+                class="text-xs text-@text-theme-white dark:text-@text-theme-dark uppercase border border-stone-300 dark:border-border_dark">
                 <tr>
                     <th scope="col" class="flex justify-center p-4">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-                            class="size-5 fill-txt_dark">
+                            class="size-5 fill-@texttext-@text-theme-white dark:text-@text-theme-dark">
                             <path fill-rule="evenodd"
                                 d="M6 4.75A.75.75 0 0 1 6.75 4h10.5a.75.75 0 0 1 0 1.5H6.75A.75.75 0 0 1 6 4.75ZM6 10a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H6.75A.75.75 0 0 1 6 10Zm0 5.25a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H6.75a.75.75 0 0 1-.75-.75ZM1.99 4.75a1 1 0 0 1 1-1H3a1 1 0 0 1 1 1v.01a1 1 0 0 1-1 1h-.01a1 1 0 0 1-1-1v-.01ZM1.99 15.25a1 1 0 0 1 1-1H3a1 1 0 0 1 1 1v.01a1 1 0 0 1-1 1h-.01a1 1 0 0 1-1-1v-.01ZM1.99 10a1 1 0 0 1 1-1H3a1 1 0 0 1 1 1v.01a1 1 0 0 1-1 1h-.01a1 1 0 0 1-1-1V10Z"
                                 clip-rule="evenodd" />
@@ -40,12 +29,15 @@
             </thead>
             <tbody>
                 @for (manga of mangas; track $index) {
-                <tr class="dark:bg-bg_card border border-opacity-25 border-border_dark  border-t-border_dark">
+                <tr class="border border-stone-300 dark:border-border_dark">
                     <th class="p-2 text-center">
-                        <span class="font-extrabold text-txt_dark text-center">{{$index + 1}}</span>
+                        <span
+                            class="font-extrabold text-@text-theme-white dark:text-@text-theme-dark text-center">{{$index
+                            + 1}}</span>
                     </th>
-                    <th scope="row" class="flex items-center px-6 py-4 text-txt_dark whitespace-nowrap w-[30vw]">
-                        <figure class="relative w-10 h-10 rounded-full overflow-hidden p-1">
+                    <th scope="row"
+                        class="flex items-center px-6 py-4 text-@text-theme-white dark:text-@text-theme-dark whitespace-nowrap w-[30vw]">
+                        <figure class="relative w-14 h-14 rounded-full overflow-hidden p-1">
                             <div class="skeleton w-full h-full p-1 rounded-full"></div>
                             <img fill ngSrc="{{ manga.url }}" class="object-cover">
                         </figure>
@@ -53,7 +45,7 @@
                             <div class="text-base font-semibold">{{manga.name}}</div>
                         </div>
                     </th>
-                    <td class="px-6 py-4 text-txt_dark">
+                    <td class="px-6 py-4 text-@text-theme-white dark:text-@text-theme-dark">
                         {{manga.date}}
                     </td>
                     <td class="px-6 py-4">
@@ -78,15 +70,17 @@
 
                 } @empty {
                 @for (item of [1,2,3,4,5]; track $index) {
-                <tr class="flexdark:bg-bg_card border border-opacity-25 border-border_dark  border-t-border_dark">
+                <tr class="flex border border-opacity-25 border-border_dark  border-t-border_dark">
                     <th class="p-2 text-center">
-                        <span class="font-extrabold text-txt_dark text-center">{{item}}</span>
+                        <span
+                            class="font-extrabold text-@text-theme-white dark:text-@text-theme-dark text-center">{{item}}</span>
                     </th>
-                    <th scope="row" class="flex items-center px-6 py-4 text-txt_dark whitespace-nowrap w-[30vw]">
+                    <th scope="row"
+                        class="flex items-center px-6 py-4 text-@text-theme-white dark:text-@text-theme-dark whitespace-nowrap w-[30vw]">
                         <div class="skeleton h-10 w-10 shrink-0 rounded-full"></div>
                         <div class="skeleton h-2 w-full m-2"></div>
                     </th>
-                    <td class="px-6 py-4 text-txt_dark">
+                    <td class="px-6 py-4 text-@text-theme-white dark:text-@text-theme-dark">
                         <div class="skeleton h-2 w-12"></div>
                     </td>
                     <td class="px-6 py-4">
@@ -94,15 +88,15 @@
                     </td>
                 </tr>
                 }
-
                 }
 
             </tbody>
         </table>
-        <div
-            class="flex items-center justify-end flex-column flex-wrap w-full p-4 rounded-b-md space-y-4 md:space-y-0 pb-4 dark:bg-bg_card border border-opacity-25 border-border_dark ">
+
+        <div class="join justify-self-end">
+            <button (click)="decrementPage()" class="join-item btn btn-primary">«</button>
+            <button class="join-item btn btn-primary">Page {{this.page}} of {{mangaPages}}</button>
+            <button (click)="incrementPage()" class="join-item btn btn-primary">»</button>
         </div>
-
-
     </div>
 </main>

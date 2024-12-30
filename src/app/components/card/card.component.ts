@@ -1,11 +1,10 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, inject, Input, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
 import { ChaptersService } from '../../services/chapters.service';
 import { NewChapterModalComponent } from './new-chapter-modal/new-chapter-modal.component';
 import { Subscription } from '../../models/subscriptions.model';
-import { environment } from '../../../environments/environment';
 import { firstValueFrom } from 'rxjs';
 
 @Component({
@@ -20,8 +19,6 @@ export class CardComponent {
   dialog = inject(MatDialog);
   chapterService = inject(ChaptersService);
   subscription = input.required<Subscription>();
-
-  url = environment.urlImages;
 
   async newChapter(subscriptionId: string) {
     const newChapter = this.dialog.open(NewChapterModalComponent, {data: this.subscription().chapters});
