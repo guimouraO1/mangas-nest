@@ -12,6 +12,7 @@ import { WeekDays } from '../../models/manga.model';
 import { Alert, AlertType } from '../../models/notification.model';
 import { MangaService } from '../../services/manga.service';
 import { NotificationService } from '../../services/notification.service';
+import { environment } from '../../../environments/environment';
 
 
 @Component({
@@ -107,7 +108,7 @@ export class AdminComponent {
 
             const newMangaData = {
                 ...mangaData,
-                url: response.key
+                url: `${environment.urlImages}${response.key}`
             };
 
             await firstValueFrom(this.mangaService.createManga(newMangaData));

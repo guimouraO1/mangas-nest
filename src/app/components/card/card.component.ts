@@ -11,7 +11,7 @@ import { firstValueFrom } from 'rxjs';
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [CommonModule, ConfirmationModalComponent, NgOptimizedImage],
+  imports: [CommonModule, NgOptimizedImage],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css',
 })

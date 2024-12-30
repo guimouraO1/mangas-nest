@@ -1,17 +1,17 @@
 <div
-  class="card lg:card-side !w-[600px] h-[200px] border border-opacity-25 border-zinc-300 dark:border-border_dark shadow-md ">
-  <figure class="relative min-w-[192px] min-h-[200px] max-w-[192px] max-h-[200px] overflow-hidden p-1">
+  class="card lg:card-side !w-[600px] h-[200px] border border-opacity-25 border-zinc-300 dark:border-border_dark shadow-md relative">
+  <figure class="relative w-[160px] h-[200px] p-2">
     <div class="skeleton w-full h-full p-1"></div>
-    <img fill ngSrc="{{url}}{{ subscription().manga.url }}" class="rounded-md p-1 object-cover">
+    <img fill ngSrc="{{ subscription().manga.url }}" class="rounded-md p-1 object-cover">
   </figure>
-  <div class="card-body">
-    <h2 class="card-title dark:text-txt_white text-txt_dark">{{subscription().manga.name}}</h2>
+  <div class="card-body pl-4 gap-4">
+    <span class="card-title dark:text-@text-theme-dark text-@text-theme-white">{{subscription().manga.name}}</span>
     <div class="rating rating-sm">
       @for (item of [].constructor(subscription().rating); track $index) {
       <input name="rating-5" class="mask mask-star-2 bg-star" />
       }
     </div>
-    <div class="flex flex-col mb-2">
+    <div class="flex flex-col">
       <div class="flex flex-wrap gap-2 overflow-x-visible">
         @for (chapter of subscription().chapters; track $index) {
         <button class="btn btn-xs btn-outline btn-primary hover:!text-txt_white">{{ chapter.number }}
@@ -25,7 +25,7 @@
       </div>
     </div>
   </div>
-  <div class="card-actions justify-end p-4">
+  <div class="card-actions absolute p-2 right-1 bottom-1">
     <button (click)="newChapter(subscription().id)" class="btn btn-sm btn-primary text-txt_white self-end">+</button>
   </div>
 </div>

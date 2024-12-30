@@ -1,55 +1,47 @@
-<main class="w-full h-[88vh] flex flex-col justify-between">
-    <div class="flex items-center justify-center self-start h-[18vh] w-full">
-        <button class="px-4 h-10 text-sm text-txt_dark rounded-s-lg bg-bg_white shadow"></button>
-        @for (day of weekdayNames; track $index) {
-        <button (click)="selectDay(day)" type="button" class="px-4 h-10 text-txt_dark bg-bg_white shadow"
-            [ngClass]="{ '!bg-primary text-txt_white': dateString === day }">
-            {{ day }}
-        </button>
-        }
-        <button class="px-4 h-10 text-sm text-txt_dark rounded-e-lg bg-bg_white shadow"></button>
-    </div>
-
-    <div class="flex flex-col w-full h-[70vh] self-end justify-center">
-        <div class="flex justify-center items-center flex-wrap gap-2 mb-4">
-            @if (isLoadingGetSubscriptions) {
-            <div role="status"
-                class="space-y-8 animate-pulse md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
-                <div class="flex items-center justify-center w-full h-48 bg-gray-300 rounded sm:w-96 dark:bg-gray-700">
-                    <svg class="w-10 h-10 text-gray-200 dark:text-gray-600" aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
-                        <path
-                            d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
-                    </svg>
-                </div>
-                <div class="w-full">
-                    <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
-                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[480px] mb-2.5"></div>
-                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
-                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[440px] mb-2.5"></div>
-                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[460px] mb-2.5"></div>
-                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
-                </div>
-                <span class="sr-only">Loading...</span>
+<main class="h-[88vh] flex flex-col gap-4 items-center justify-center p-10">
+    <div class="flex flex-wrap justify-center content-center items-center gap-2 w-3/4 h-[60vh]">
+        @if (isLoadingGetSubscriptions) {
+        <div role="status"
+            class="space-y-8 animate-pulse md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
+            <div class="flex items-center justify-center w-full h-48 bg-gray-300 rounded sm:w-96 dark:bg-gray-700">
+                <svg class="w-10 h-10 text-gray-200 dark:text-gray-600" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+                    <path
+                        d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
+                </svg>
             </div>
-            } @else {
-            @for(manga of subscriptions; track $index) {
-            <app-card [subscription]="manga" />
-            } @empty {
-            <div class="flex justify-center items-center flex-wrap gap-2 mb-4">
-                <div class=" hero-content text-center">
-                    <div class="max-w-md">
-                        <h1 class="text-5xl font-bold text-highlight dark:text-txt_white">
-                            Oops!</h1>
-                        <p class="py-6 text-txt_dark dark:text-txt_white">
-                            It looks like we can't find a manga for that date. But don't worry, we're here to help!
-                        </p>
-                        <button [routerLink]="['/list']" class="btn btn-primary text-txt_white">Subscribe new
-                            Manga</button>
-                    </div>
-                </div>
-            </div> }
-            }
+            <div class="w-full">
+                <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[480px] mb-2.5"></div>
+                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[440px] mb-2.5"></div>
+                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[460px] mb-2.5"></div>
+                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+            </div>
+            <span class="sr-only">Loading...</span>
         </div>
+        } @else {
+        @for(manga of subscriptions; track $index) {
+            <app-card [subscription]="manga" />
+        } @empty {
+        <div class="flex justify-center items-center flex-wrap gap-2 mb-4">
+            <div class=" hero-content text-center">
+                <div class="max-w-md">
+                    <h1 class="text-5xl font-bold text-highlight dark:@text-theme-dark">
+                        Oops!</h1>
+                    <p class="py-6 text-@text-theme-white dark:@text-theme-dark">
+                        It looks like we can't find a manga for that date. But don't worry, we're here to help!
+                    </p>
+                    <button [routerLink]="['/list']" class="btn btn-primary text-txt_white">Subscribe new
+                        Manga</button>
+                </div>
+            </div>
+        </div> }
+        }
     </div>
+    <div class="join justify-self-end">
+        <button (click)="decrementPage(); getSubscriptions()" class="join-item btn btn-primary">«</button>
+        <button class="join-item btn btn-primary">Page {{this.page}}</button>
+        <button (click)="incrementPage(); getSubscriptions()" class="join-item btn btn-primary">»</button>
+      </div>
 </main>

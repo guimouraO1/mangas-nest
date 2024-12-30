@@ -24,7 +24,8 @@ export class MangasListComponent implements OnInit {
   mangaService = inject(MangaService);
   dialog = inject(MatDialog);
   notificationService = inject(NotificationService);
-
+  offset: number = 4;
+  page: number = 1;
   mangas: Manga[] = [];
   subscriptions: string[] = [];
   url = environment.urlImages;
@@ -36,7 +37,7 @@ export class MangasListComponent implements OnInit {
 
   async getMangas() {
     try {
-      const mangas = await firstValueFrom(this.mangaService.getMangas(1, 5));
+      const mangas = await firstValueFrom(this.mangaService.getMangas(this.page, this.offset));
       this.mangas = mangas;
     } catch (error) {
 
@@ -51,7 +52,7 @@ export class MangasListComponent implements OnInit {
 
     await firstValueFrom(this.subscriptionService.subscribe(mangaId, +result.rating));
 
-    const mangas = await firstValueFrom(this.mangaService.getMangas(1, 5));
+    const mangas = await firstValueFrom(this.mangaService.getMangas(this.page, this.offset));
     this.mangas = mangas;
 
     this.notificationService.alert({

@@ -19,17 +19,13 @@ export class SubscriptionService {
     return new HttpHeaders().set('Authorization', `Bearer ${token}`);
   }
 
-  getSubscriptions(page: number, offset: number, date: string): Observable<Subscription[]> {
+  getSubscriptions(page: number, offset: number): Observable<Subscription[]> {
     const headers = this.setupRequestHeader();
 
     let params = new HttpParams();
 
     params = params.set('page', page);
     params = params.set('offset', offset);
-
-    if (date) {
-      params = params.set('date', date);
-    }
 
     return this.http.get<Subscription[]>(`${this.urlApi}/sub`, { params, headers });
   }

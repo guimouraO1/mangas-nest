@@ -17,36 +17,28 @@ export class SubscriptionsComponent implements OnInit {
   subscriptionService = inject(SubscriptionService);
   subscriptions: Subscription[] = [];
   isLoadingGetSubscriptions: boolean = false;
-
-  url = environment.urlImages;
-
-  data = new Date();
-
-  weekdayNames = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-  dateString: string = '';
+  offset: number = 4;
+  page: number = 1;
 
   async ngOnInit() {
-    this.dateString = this.getWeekdayAbbreviated(this.data);
     await this.getSubscriptions();
   }
 
-  getWeekdayAbbreviated(date: Date): string {
-    if (!date) {
-      return '';
-    }
-    return this.weekdayNames[date.getDay()];
+  incrementPage(): void {
+    if (this.page < 1) return;
+    this.page += 1;
   }
-
-  async selectDay(day: string) {
-    this.dateString = day;
-    await this.getSubscriptions();
+  
+  decrementPage(): void {
+    if (this.page <= 1) return;
+    this.page -= 1;
   }
 
   async getSubscriptions() {
     this.subscriptions = [];
     this.isLoadingGetSubscriptions = true;
     try {
-      const subscriptions: Subscription[] | [] = await firstValueFrom(this.subscriptionService.getSubscriptions(1, 5, this.dateString));
+      const subscriptions: Subscription[] = await firstValueFrom(this.subscriptionService.getSubscriptions(this.page, this.offset));
       this.isLoadingGetSubscriptions = false;
       this.subscriptions = subscriptions;
 
