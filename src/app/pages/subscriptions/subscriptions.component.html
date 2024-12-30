@@ -1,4 +1,5 @@
 <main class="h-[88vh] flex flex-col gap-4 items-center justify-center p-10">
+    <span class="text-@text-theme-white dark:text-@text-theme-dark font-bold text-6xl">Subscriptions</span>
     <div class="flex flex-wrap justify-center content-center items-center gap-2 w-3/4 h-[60vh]">
         @if (isLoadingGetSubscriptions) {
         <div role="status"
@@ -40,8 +41,8 @@
         }
     </div>
     <div class="join justify-self-end">
-        <button (click)="decrementPage(); getSubscriptions()" class="join-item btn btn-primary">«</button>
+        <button (click)="decrementPage()" class="join-item btn btn-primary">«</button>
         <button class="join-item btn btn-primary">Page {{this.page}} of {{subscriptionsCount}}</button>
-        <button (click)="incrementPage(); getSubscriptions()" class="join-item btn btn-primary">»</button>
+        <button (click)="incrementPage()" class="join-item btn btn-primary">»</button>
       </div>
 </main>

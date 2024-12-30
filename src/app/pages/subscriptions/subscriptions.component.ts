@@ -26,14 +26,16 @@ export class SubscriptionsComponent implements OnInit {
     await this.getSubscriptions();
   }
 
-  incrementPage(): void {
+  async incrementPage() {
     if (this.page >= this.subscriptionsCount) return;
     this.page += 1;
+    await this.getSubscriptions();
   }
   
-  decrementPage(): void {
+  async decrementPage() {
     if (this.page <= 1) return;
     this.page -= 1;
+    await this.getSubscriptions();
   }
 
   async getSubscriptions() {
