@@ -26,13 +26,22 @@ export class MangasListComponent implements OnInit {
   notificationService = inject(NotificationService);
   offset: number = 4;
   page: number = 1;
+
   mangas: Manga[] = [];
   subscriptions: string[] = [];
-  url = environment.urlImages;
-
 
   async ngOnInit() {
     await this.getMangas();
+  }
+
+  incrementPage(): void {
+    if (this.page < 1) return;
+    this.page += 1;
+  }
+  
+  decrementPage(): void {
+    if (this.page <= 1) return;
+    this.page -= 1;
   }
 
   async getMangas() {

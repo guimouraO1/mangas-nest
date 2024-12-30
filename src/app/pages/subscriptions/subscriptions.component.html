@@ -41,7 +41,7 @@
     </div>
     <div class="join justify-self-end">
         <button (click)="decrementPage(); getSubscriptions()" class="join-item btn btn-primary">«</button>
-        <button class="join-item btn btn-primary">Page {{this.page}}</button>
+        <button class="join-item btn btn-primary">Page {{this.page}} of {{subscriptionsCount}}</button>
         <button (click)="incrementPage(); getSubscriptions()" class="join-item btn btn-primary">»</button>
       </div>
 </main>

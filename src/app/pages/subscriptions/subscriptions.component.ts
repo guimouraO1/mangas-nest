@@ -19,13 +19,15 @@ export class SubscriptionsComponent implements OnInit {
   isLoadingGetSubscriptions: boolean = false;
   offset: number = 4;
   page: number = 1;
+  subscriptionsCount: number = 1;
 
   async ngOnInit() {
+    await this.getSubscriptionsCount();
     await this.getSubscriptions();
   }
 
   incrementPage(): void {
-    if (this.page < 1) return;
+    if (this.page >= this.subscriptionsCount) return;
     this.page += 1;
   }
   
@@ -41,6 +43,17 @@ export class SubscriptionsComponent implements OnInit {
       const subscriptions: Subscription[] = await firstValueFrom(this.subscriptionService.getSubscriptions(this.page, this.offset));
       this.isLoadingGetSubscriptions = false;
       this.subscriptions = subscriptions;
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async getSubscriptionsCount() {
+    try {
+      const res: any = await firstValueFrom(this.subscriptionService.getSubscriptionsCount());
+      
+      this.subscriptionsCount = res.subscriptions;
 
     } catch (error) {
       console.log(error)

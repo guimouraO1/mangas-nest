@@ -30,6 +30,12 @@ export class SubscriptionService {
     return this.http.get<Subscription[]>(`${this.urlApi}/sub`, { params, headers });
   }
 
+  getSubscriptionsCount() {
+    const headers = this.setupRequestHeader();
+
+    return this.http.get<number>(`${this.urlApi}/sub-count`, { headers });
+  }
+
   subscribe(mangaId: string, rating: number) {
     const headers = this.setupRequestHeader();
     const body = { mangaId, rating }
