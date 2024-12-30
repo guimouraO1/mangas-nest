@@ -5,20 +5,21 @@
 
 * {
     font-family: "Baloo Paaji 2", sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
-}
-html,
-body {
-    height: 100vh !important;
-    width: 100% !important;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 .custom-snackbar-button-error {
     .mat-mdc-snackbar-surface {
         padding: 0;
     }
+
     .mdc-snackbar__label {
         padding: 0;
     }
+}
+
+.btn {
+    color: #fff;
 }

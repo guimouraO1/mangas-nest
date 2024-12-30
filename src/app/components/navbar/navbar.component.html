@@ -1,38 +1,21 @@
 <nav class="h-[12vh] p-4">
   <div class="bg-primary rounded-sm gap-2 flex flex-wrap h-[90%] drop-shadow-2xl">
-    <!-- <div class="flex items-center ml-20">
-
-      <label class="swap swap-rotate">
-        <input id="checkbox" [disabled]="!this.user" type="checkbox" [checked]="isSidenavOpened()" />
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-          class="size-5 swap-on fill-txt_white">
-          <path
-            d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
-        </svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-          class="size-5 swap-off fill-txt_white">
-          <path fill-rule="evenodd"
-            d="M2 4.75A.75.75 0 0 1 2.75 4h14.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 4.75ZM2 10a.75.75 0 0 1 .75-.75h14.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 10Zm0 5.25a.75.75 0 0 1 .75-.75h14.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1-.75-.75Z"
-            clip-rule="evenodd" />
-        </svg>
-      </label>
-
-    </div> -->
-
     <div class="flex flex-1 items-center justify-center self-center justify-self-center gap-4 ">
       @if (user) {
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-        class="size-6 cursor-pointer hover:bg-error rounded-full text-txt_white" (click)="signOut()">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-      </svg>
-      <button routerLink="subscriptions" class="px-5 py-1.5 hover:bg-accent rounded-sm">
+
+        <svg (click)="signOut()" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
+          class="size-6 cursor-pointer text-@white hover:text-error">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
+        </svg>
+        
+      <button routerLink="subscriptions" class="px-5 py-1.5 hover:bg-secondary rounded-sm transition duration-500">
         <a class="text-txt_white cursor-pointer font-semibold">My mangas</a>
       </button>
-      <button routerLink="list" class="px-5 py-1.5 hover:bg-accent rounded-sm">
+      <button routerLink="list" class="px-5 py-1.5 hover:bg-secondary rounded-sm transition duration-500">
         <a class="text-txt_white cursor-pointer font-semibold">List mangas</a>
       </button>
       } @if (user && user.role === 'admin') {
-      <button class="px-8 py-1.5 hover:bg-accent rounded-sm" routerLink="admin">
+      <button class="px-8 py-1.5 hover:bg-secondary rounded-sm transition duration-500" routerLink="admin">
         <a class="text-txt_white cursor-pointer font-semibold">Add new manga</a>
       </button>
       }
@@ -41,12 +24,13 @@
     <div class="flex mr-20">
       <label class="swap swap-rotate">
         <input type="checkbox" [checked]="darkModeService.darkModeSignal() === 'dark'" (click)="toggleDarkMode()" />
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-6 swap-on fill-sun">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+          class="size-6 swap-on fill-@white">
           <path
             d="M10 2a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 10 2ZM10 15a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 10 15ZM10 7a3 3 0 1 0 0 6 3 3 0 0 0 0-6ZM15.657 5.404a.75.75 0 1 0-1.06-1.06l-1.061 1.06a.75.75 0 0 0 1.06 1.06l1.06-1.06ZM6.464 14.596a.75.75 0 1 0-1.06-1.06l-1.06 1.06a.75.75 0 0 0 1.06 1.06l1.06-1.06ZM18 10a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 18 10ZM5 10a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 5 10ZM14.596 15.657a.75.75 0 0 0 1.06-1.06l-1.06-1.061a.75.75 0 1 0-1.06 1.06l1.06 1.06ZM5.404 6.464a.75.75 0 0 0 1.06-1.06l-1.06-1.06a.75.75 0 1 0-1.061 1.06l1.06 1.06Z" />
         </svg>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-          class="size-6 swap-off fill-moon">
+          class="size-6 swap-off fill-@white">
           <path fill-rule="evenodd"
             d="M7.455 2.004a.75.75 0 0 1 .26.77 7 7 0 0 0 9.958 7.967.75.75 0 0 1 1.067.853A8.5 8.5 0 1 1 6.647 1.921a.75.75 0 0 1 .808.083Z"
             clip-rule="evenodd" />

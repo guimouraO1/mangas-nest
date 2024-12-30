@@ -21,7 +21,7 @@
     <div class="mb-4">
       <label for="weekday" class="block mb-2 text-sm font-medium text-txt_dark dark:text-txt_white ">Week
         day</label>
-      <select formControlName="date" id="weekday" class="select select-bordered w-full bg-white">
+      <select formControlName="date" id="weekday" class="select select-bordered w-full">
         @for (day of weekDays; track $index) {
         <option class="text-txt_dark" [value]="day">
           {{ day }}
@@ -36,7 +36,7 @@
         class="block mb-2 text-sm font-medium text-txt_dark border-border_dark border-opacity-25 dark:text-txt_white">About
         manga</label>
       <textarea placeholder="Some text about manga..." formControlName="about" id="about"
-        class="text-sm textarea textarea-bordered textarea-lg w-full max-h-20 bg-white text-txt_dark"></textarea>
+        class="text-sm textarea textarea-bordered textarea-lg w-full max-h-20 text-txt_dark"></textarea>
     </div>
 
 
@@ -59,7 +59,7 @@
         <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden" />
       </label>
     </div>
-    <button (click)="addManga()" class="btn btn-wide btn-primary text-txt_white self-center">Create new manga</button>
+    <button (click)="addManga()" class="btn btn-wide btn-primary self-center">Create new manga</button>
 
   </form>
 </main>

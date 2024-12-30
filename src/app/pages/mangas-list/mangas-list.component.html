@@ -33,9 +33,9 @@
                     <th scope="col" class="px-6 py-3">
                         Status
                     </th>
-                    <th  class="px-6 py-4">
-                        Unsubscribe                       
-                    </th >
+                    <th class="px-6 py-4">
+                        Unsubscribe
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -58,19 +58,20 @@
                     </td>
                     <td class="px-6 py-4">
                         @if (manga.subscriptions && manga.subscriptions.length > 0) {
-                            <button class="btn btn-success text-txt_white no-animation cursor-default">Already subscribed</button>
+                        <button class="btn btn-success  no-animation cursor-default">Already subscribed</button>
                         } @else {
-                            <button (click)="subscribe(manga.id)" class="btn btn-primary text-txt_white">Subscribe</button>
+                        <button (click)="subscribe(manga.id)" class="btn btn-primary ">Subscribe</button>
                         }
                     </td>
                     @if (manga.subscriptions && manga.subscriptions.length > 0) {
-                        <td class="px-6 py-4">
-                            <button (click)="unSubscribe(manga.subscriptions[0].id, manga.id)" class="btn btn-error text-txt_white">Unsubscribe</button>
-                        </td>
+                    <td class="px-6 py-4">
+                        <button (click)="unSubscribe(manga.subscriptions[0].id, manga.id)"
+                            class="btn btn-error ">Unsubscribe</button>
+                    </td>
                     } @else {
-                        <td class="px-6 py-4">
-                            <button [disabled]="true" class="btn !text-txt_disable">Unsubscribe</button>
-                        </td>
+                    <td class="px-6 py-4">
+                        <button [disabled]="true" class="btn !text-txt_disable">Unsubscribe</button>
+                    </td>
                     }
 
                 </tr>

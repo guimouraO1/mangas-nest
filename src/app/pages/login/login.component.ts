@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Signal, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
     FormBuilder,
     FormControl,
@@ -12,7 +12,6 @@ import { firstValueFrom } from 'rxjs';
 import { Alert, AlertType } from '../../models/notification.model';
 import { AuthService } from '../../services/auth.service';
 import { NotificationService } from '../../services/notification.service';
-import { User } from '../../models/user.model';
 
 @Component({
     selector: 'app-login',
@@ -20,6 +19,7 @@ import { User } from '../../models/user.model';
     imports: [ReactiveFormsModule, CommonModule, RouterLink],
     templateUrl: './login.component.html',
 })
+
 export class LoginComponent {
     router: Router = inject(Router);
     authService = inject(AuthService);

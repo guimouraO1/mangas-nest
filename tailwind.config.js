@@ -5,19 +5,18 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                primary: "#516f95",
-                accent: "#cbaf78",
-                txt_white: "#f3f3f3",
-                txt_dark: '#848884',
+                '@theme-dark': "#202020",
+                '@theme-ligth': "#e9ecef",
+                '@white': '#fff',
+                '@text-theme-dark': "#e9ecef",
+                '@text-theme-white': "#595959",
+
+                txt_white: "#fff",
+                txt_dark: '#d20000',
                 txt_disable: '#6c6c6c',
-                bg_dark: "#202020",
-                bg_white: "#e9ecef",
                 bg_card: "#343434",
                 border_dark: "#424242",
-                sun: "#f3f3f3",
-                moon: "#f3f3f3",
-                success: "#52b788",
-                error: "#d00000",
+
                 highlight: "#ef4c53",
                 star: "#fb923c",
                 icon_gray: "#6b7280",
@@ -26,6 +25,17 @@ module.exports = {
     },
     plugins: [require("daisyui")],
     daisyui: {
-        themes: ["nord"],
+        themes: [
+            {
+                nord: {
+                    ...require("daisyui/src/theming/themes")["nord"],
+                    // accent: "#81a1c1",
+                    secondary: "#ebcb8b",
+                    warning: "#d08670",
+                    info: "#81a1c1",
+                    success: "#52b788"
+                },
+            },
+        ],
     },
 };

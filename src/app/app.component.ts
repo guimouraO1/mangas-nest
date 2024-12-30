@@ -18,7 +18,6 @@ import { NotificationService } from './services/notification.service';
         RouterOutlet,
         NavbarComponent,
         CommonModule,
-        RouterLink,
         MatIconModule,
     ],
 })
