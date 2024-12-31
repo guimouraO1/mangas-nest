@@ -52,5 +52,9 @@ export class NavbarComponent {
         localStorage.setItem('lg', language);
         this.languageService.setLanguage(language);
         this.translateService.use(language);
+        const dropdown = document.getElementById('dropdown') as HTMLDetailsElement;
+        if (dropdown) {
+            dropdown.removeAttribute('open'); // Fecha o dropdown
+        }
     }
 }

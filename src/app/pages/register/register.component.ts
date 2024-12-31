@@ -6,7 +6,7 @@ import {
     ReactiveFormsModule,
     Validators,
 } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { AlertType } from '../../models/notification.model';
 import { NotificationService } from '../../services/notification.service';
@@ -26,7 +26,8 @@ export class RegisterComponent {
     authService = inject(AuthService);
     notificationService = inject(NotificationService);
     translateService = inject(TranslateService);
-
+    router = inject(Router);
+    
     isDisableButton: boolean = false;
     stepper: boolean = true;
 
@@ -62,6 +63,7 @@ export class RegisterComponent {
 
             this.stepper = true;
             this.registerForm.reset();
+            this.router.navigate(['signin']);
 
         } catch (err: any) {
             const errorMessage = await firstValueFrom(this.translateService.get("pages.signup.alerts.error"));

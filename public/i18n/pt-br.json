@@ -64,12 +64,12 @@
             "page": "Página",
             "of": "de",
             "unsubscribe-modal": {
-                "title": "Tem certeza de que deseja cancelar a assinatura deste capítulo?",
+                "title": "Tem certeza de que deseja cancelar a assinatura deste manga?",
                 "confirm": "Sim, tenho certeza",
                 "cancel": "Recusar"
             },
             "subscription-modal": {
-                "title": "Tem certeza de que deseja cancelar a assinatura deste mangá?",
+                "title": "Tem certeza de que deseja se inscrever neste mangá?",
                 "subtitle": "Selecione sua avaliação para este mangá",
                 "confirm": "Sim, tenho certeza",
                 "cancel": "Recusar"

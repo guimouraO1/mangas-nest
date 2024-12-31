@@ -26,8 +26,10 @@ export class ChaptersService {
 
   deleteChapter(number: number, subscriptionId: string): Observable<any> {
     const headers = this.setupRequestHeader();
-    const params = new HttpParams().set('subscriptionId', subscriptionId).set('number', number.toString());
-
-    return this.http.delete<any>(`${this.urlApi}/chapter`, { headers, params });
+  
+    const url = `${this.urlApi}/chapter/${subscriptionId}/${number}`;
+  
+    return this.http.delete<any>(url, { headers });
   }
+  
 }

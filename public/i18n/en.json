@@ -64,12 +64,12 @@
             "page": "Page",
             "of": "of",
             "unsubscribe-modal": {
-                "title": "Are you sure you want to unsubscribe this chapter?",
+                "title": "Are you sure you want to unsubscribe this manga?",
                 "confirm": "Yes, I'm sure",
                 "cancel": "Decline"
             },
             "subscription-modal": {
-                "title": "Are you sure you want to unsubscribe this manga?",
+                "title": "Are you sure you want to subscribe this manga?",
                 "subtitle": "Select your rating for this manga",
                 "confirm": "Yes, I'm sure",
                 "cancel": "Decline"
