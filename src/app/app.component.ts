@@ -8,7 +8,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { Alert } from './models/notification.model';
 import { DarkModeService } from './services/dark-mode.service';
 import { NotificationService } from './services/notification.service';
-import {TranslateModule, TranslateService} from "@ngx-translate/core";
+import { TranslateModule } from "@ngx-translate/core";
+import { LanguageService } from './services/language.service';
 
 @Component({
     selector: 'app-root',
@@ -27,12 +28,9 @@ export class AppComponent {
     darkModeService: DarkModeService = inject(DarkModeService);
     notificationService = inject(NotificationService);
     snackBar: MatSnackBar = inject(MatSnackBar);
+    languageService = inject(LanguageService);
 
-    constructor(private translate: TranslateService) {
-        this.translate.addLangs(['pt-br', 'en']);
-        this.translate.setDefaultLang('en');
-        this.translate.use('en');
-        
+    constructor() {        
         this.notificationService.alert$.subscribe((alert: Alert | null) => {
             if (alert) {
                 this.snackBar.openFromComponent(CustomSnackbarComponent, {

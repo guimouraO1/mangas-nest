@@ -1,3 +1,113 @@
 {
-    "teste": "caasdsadsa"
+    "pages": {
+        "signin": {
+            "hero": "Salve e Organize Seus Mangás",
+            "form": {
+                "title": "Faça login na sua conta",
+                "email": "E-mail",
+                "password": "Senha",
+                "submit": "Entrar",
+                "or": "ou"
+            },
+            "signup": "Cadastrar-se",
+            "alerts": {
+                "success": "Login realizado com sucesso!",
+                "error": "Ocorreu um erro, tente novamente mais tarde"
+            }
+        },
+        "signup": {
+            "return": "Voltar para o login",
+            "hero": "Cadastre-se gratuitamente!",
+            "form": {
+                "title": "Cadastre-se",
+                "email": "E-mail",
+                "username": "Nome de usuário",
+                "name": "Nome",
+                "password": "Senha",
+                "confirm-password": "Confirmar senha",
+                "steps": "Etapas",
+                "submit": "Cadastrar",
+                "next": "Próximo",
+                "back": "Voltar"
+            },
+            "alerts": {
+                "success": "Cadastro realizado com sucesso!",
+                "error": "Ocorreu um erro, tente novamente mais tarde"
+            }
+        },
+        "not-found": {
+            "hero": "Página Não Encontrada",
+            "return": "Voltar para o Login"
+        },
+        "subscriptions": {
+            "hero": "Assinaturas",
+            "page": "Página",
+            "of": "de",
+            "subscribe-new-manga": "Assinar novo Mangá",
+            "ops": "Ops!",
+            "help-message": "Parece que não encontramos um mangá. Mas não se preocupe, estamos aqui para ajudar!"
+        },
+        "mangas-list": {
+            "table": {
+                "name": "Nome",
+                "weekday": "Dia da semana",
+                "status": "Status",
+                "unsubscribe": "Cancelar assinatura",
+                "already": "Já assinado",
+                "subscribe": "Assinar"
+            },
+            "alerts": {
+                "subscribed": "Assinado!",
+                "unsubscribed": "Assinatura cancelada",
+                "error": "Ocorreu um erro, tente novamente mais tarde"
+            },
+            "page": "Página",
+            "of": "de",
+            "unsubscribe-modal": {
+                "title": "Tem certeza de que deseja cancelar a assinatura deste capítulo?",
+                "confirm": "Sim, tenho certeza",
+                "cancel": "Recusar"
+            },
+            "subscription-modal": {
+                "title": "Tem certeza de que deseja cancelar a assinatura deste mangá?",
+                "subtitle": "Selecione sua avaliação para este mangá",
+                "confirm": "Sim, tenho certeza",
+                "cancel": "Recusar"
+            }
+        }
+    },
+    "components": {
+        "navbar": {
+            "subscriptions": "Assinaturas",
+            "mangaslist": "Todos os mangás",
+            "newmanga": "Adicionar novo mangá"
+        },
+        "card": {
+            "confirmation-modal": {
+                "title": "Tem certeza de que deseja excluir este capítulo?",
+                "confirm": "Sim, tenho certeza",
+                "cancel": "Recusar"
+            },
+            "new-chapter-modal": {
+                "title": "Adicionar novo capítulo",
+                "confirm": "Adicionar capítulo",
+                "cancel": "Recusar"
+            }
+        },
+        "custom-snackbar": {}
+    },
+    "general": {
+        "days": {
+            "mon": "seg",
+            "tue": "ter",
+            "wed": "qua",
+            "thu": "qui",
+            "fri": "sex",
+            "sat": "sáb",
+            "sun": "dom"
+        }
+    },
+    "guard": {
+        "denied": "Acesso negado: Você não tem as permissões necessárias"
+    }
 }

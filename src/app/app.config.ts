@@ -17,6 +17,7 @@ import { DarkModeService } from './services/dark-mode.service';
 import { provideEnvironmentNgxMask } from 'ngx-mask';
 import {TranslateModule, TranslateLoader} from "@ngx-translate/core";
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { LanguageService } from './services/language.service';
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (http: HttpClient) =>
   new TranslateHttpLoader(http, './i18n/', '.json');
@@ -27,6 +28,10 @@ export function initializer(darkModeService: DarkModeService) {
 
 export function authInitializer(authService: AuthService) {
   return () => authService.Authentication();
+}
+
+export function languageInitializer(languageService: LanguageService) {
+  return () => languageService.initialize();
 }
 
 export const appConfig: ApplicationConfig = {
@@ -42,13 +47,18 @@ export const appConfig: ApplicationConfig = {
     },
     {
       provide: APP_INITIALIZER,
+      useFactory: languageInitializer,
+      deps: [LanguageService],
+      multi: true,
+    },
+    {
+      provide: APP_INITIALIZER,
       useFactory: initializer,
       deps: [DarkModeService],
       multi: true,
     },
     provideAnimationsAsync(),
     provideEnvironmentNgxMask(),
-    
     importProvidersFrom([TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

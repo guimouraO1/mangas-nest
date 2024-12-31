@@ -26,7 +26,7 @@
                 "name": "Name",
                 "password": "Password",
                 "confirm-password": "Confirm password",
-                "steps": "steps",
+                "steps": "Steps",
                 "submit": "Sign up",
                 "next": "Next",
                 "back": "Back"

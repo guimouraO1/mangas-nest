@@ -4,7 +4,13 @@ import { User } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
 import { DarkModeService } from '../../services/dark-mode.service';
 import { NotificationService } from '../../services/notification.service';
-import { TranslateModule } from "@ngx-translate/core";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
+import { LanguageService } from '../../services/language.service';
+
+enum Languages {
+    PT_BR = 'pt-br',
+    EN = 'en',
+}
 
 @Component({
     selector: 'app-navbar',
@@ -17,13 +23,17 @@ export class NavbarComponent {
     darkModeService: DarkModeService = inject(DarkModeService);
     router: Router = inject(Router);
     notificationService = inject(NotificationService);
+    languageService = inject(LanguageService)
+
     user: User | undefined;
     isSidenavOpened = signal<boolean>(false);
+    translateService = inject(TranslateService);
+
+    language: string = 'en';
 
     constructor() {
-        this.authService.getUserObserver().subscribe((value) => {
-            this.user = value;
-        });
+        this.authService.getUserObserver().subscribe((value) => this.user = value);
+        this.languageService.getLanguageObserver().subscribe((value) => this.language = value);
     }
 
     toggleDarkMode() {
@@ -36,5 +46,11 @@ export class NavbarComponent {
         this.authService.logout();
         localStorage.removeItem('token');
         this.router.navigate(['signin']);
+    }
+
+    changeLanguage(language: any): void {
+        localStorage.setItem('lg', language);
+        this.languageService.setLanguage(language);
+        this.translateService.use(language);
     }
 }
