@@ -29,9 +29,8 @@ module.exports = {
             {
                 nord: {
                     ...require("daisyui/src/theming/themes")["nord"],
-                    // accent: "#81a1c1",
                     secondary: "#ebcb8b",
-                    warning: "#d08670",
+                    warning: "#ebcb8b",
                     info: "#81a1c1",
                     success: "#52b788"
                 },

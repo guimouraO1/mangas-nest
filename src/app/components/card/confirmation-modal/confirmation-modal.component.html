@@ -9,14 +9,12 @@
             clip-rule="evenodd" />
         </svg>
         <h3 class="mb-5 text-lg text-@text-theme-white dark:text-@text-theme-dark">
-          Are you sure you want to delete this chapter?
+          {{'components.card.confirmation-modal.title' | translate }}
         </h3>
-
         <div class="flex gap-2 pt-2 justify-end">
-          <button (click)="confirm()" class="btn btn-active btn-error text-txt_white">Yes, I'm sure</button>
-          <button class="btn btn-primary" (click)="cancel()">Decline</button>
+          <button (click)="confirm()" class="btn btn-active btn-error text-txt_white">{{'components.card.confirmation-modal.confirm' | translate }}</button>
+          <button class="btn btn-primary" (click)="cancel()">{{'components.card.confirmation-modal.cancel' | translate }}</button>
         </div>
-
       </div>
     </div>
   </div>

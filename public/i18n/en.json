@@ -1,0 +1,88 @@
+{
+    "pages": {
+        "signin": {
+            "hero": "Save and Organize Your Mangas",
+            "form": {
+                "title": "Sign in to your account",
+                "email": "Email",
+                "password": "Password",
+                "submit": "Sign in",
+                "or": "or"
+            },
+            "signup": "Sign up",
+            "alerts": {
+                "success": "Login successful!",
+                "error": "Login error!"
+            }
+            
+        },
+        "signup": {
+            "return": "Return to sign in",
+            "hero": "Sign up for free!",
+            "form": {
+                "title": "Sign up",
+                "email": "Email",
+                "username": "Username",
+                "name": "Name",
+                "password": "Password",
+                "confirm-password": "Confirm password",
+                "steps": "steps",
+                "submit": "Sign up",
+                "next": "Next",
+                "back": "Back"
+            },
+            "alerts": {
+                "success": "Registered successfully!",
+                "error": "An error has occurred, please try again later"
+            }
+        },
+        "not-found": {
+            "hero": "Page Not Found",
+            "return": "Return to Signin"
+        },
+        "subscriptions": {
+            "hero": "Subscriptions",
+            "page": "Page",
+            "of": "of",
+            "subscribe-new-manga": "Subscribe new Manga",
+            "ops": "Oops!",
+            "help-message": "It looks like we can't find a manga. But don't worry, we're here to help!"
+        }
+    },
+    "components": {
+        "navbar": {
+            "subscriptions": "Subscriptions",
+            "mangaslist": "All mangas",
+            "newmanga": "Add new manga"
+        },
+        "card": {
+            "confirmation-modal":{
+                "title": "Are you sure you want to delete this chapter?", 
+                "confirm": "Yes, I'm sure",
+                "cancel": "Decline"
+            },
+            "new-chapter-modal":{
+                "title": "Add new chapter", 
+                "confirm": "Add chapter",
+                "cancel": "Decline"
+            }
+        },
+        "custom-snackbar": {
+            
+        }
+    },
+    "general": {
+        "days": {
+            "mon": "mon",
+            "tue": "tue",
+            "wed": "wed",
+            "thu": "thu",
+            "fri": "fri",
+            "sat": "sat",
+            "sun": "sun"
+        }
+    },
+    "guard": {
+        "denied": "Access denied: You do not have the required permissions"
+    }
+}

@@ -1,3 +1,6 @@
-<main class="w-full h-[88vh] flex">
-  <p class="m-auto text-txt_dark">Not found works!!</p>
+<main class="w-full h-[88vh] flex items-center justify-center">
+  <div class="flex flex-col gap-8 items-center">
+      <span class="text-7xl font-extrabold text-@text-theme-white dark:text-@text-theme-dark">{{'pages.not-found.hero' | translate }}</span>
+      <button [routerLink]="['/signin']" class="btn btn-error px-12">{{'pages.not-found.return' | translate }}</button>
+  </div>
 </main>

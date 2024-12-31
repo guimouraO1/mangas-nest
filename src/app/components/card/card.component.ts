@@ -6,13 +6,13 @@ import { ChaptersService } from '../../services/chapters.service';
 import { NewChapterModalComponent } from './new-chapter-modal/new-chapter-modal.component';
 import { Subscription } from '../../models/subscriptions.model';
 import { firstValueFrom } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage],
-  templateUrl: './card.component.html',
-  styleUrl: './card.component.css',
+  imports: [CommonModule, NgOptimizedImage, TranslateModule],
+  templateUrl: './card.component.html'
 })
 
 export class CardComponent {

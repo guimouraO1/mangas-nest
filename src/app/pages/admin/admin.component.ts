@@ -7,9 +7,9 @@ import {
     ReactiveFormsModule,
     Validators,
 } from '@angular/forms';
-import { firstValueFrom, take } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { WeekDays } from '../../models/manga.model';
-import { Alert, AlertType } from '../../models/notification.model';
+import { AlertType } from '../../models/notification.model';
 import { MangaService } from '../../services/manga.service';
 import { NotificationService } from '../../services/notification.service';
 import { environment } from '../../../environments/environment';

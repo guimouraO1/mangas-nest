@@ -6,11 +6,12 @@ import { SubscriptionService } from '../../services/subscription.service';
 import { environment } from '../../../environments/environment';
 import { Subscription } from '../../models/subscriptions.model';
 import { RouterLink } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-subscriptions',
   standalone: true,
-  imports: [CommonModule, CardComponent, RouterLink],
+  imports: [CommonModule, CardComponent, RouterLink, TranslateModule],
   templateUrl: './subscriptions.component.html',
 })
 export class SubscriptionsComponent implements OnInit {

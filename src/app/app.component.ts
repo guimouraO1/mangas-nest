@@ -2,12 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { CustomSnackbarComponent } from './components/custom-snackbar/custom-snackbar.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { Alert } from './models/notification.model';
 import { DarkModeService } from './services/dark-mode.service';
 import { NotificationService } from './services/notification.service';
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-root',
@@ -19,6 +20,7 @@ import { NotificationService } from './services/notification.service';
         NavbarComponent,
         CommonModule,
         MatIconModule,
+        TranslateModule
     ],
 })
 export class AppComponent {
@@ -26,7 +28,11 @@ export class AppComponent {
     notificationService = inject(NotificationService);
     snackBar: MatSnackBar = inject(MatSnackBar);
 
-    constructor() {
+    constructor(private translate: TranslateService) {
+        this.translate.addLangs(['pt-br', 'en']);
+        this.translate.setDefaultLang('en');
+        this.translate.use('en');
+        
         this.notificationService.alert$.subscribe((alert: Alert | null) => {
             if (alert) {
                 this.snackBar.openFromComponent(CustomSnackbarComponent, {

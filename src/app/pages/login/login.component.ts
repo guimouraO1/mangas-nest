@@ -9,14 +9,15 @@ import {
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
-import { Alert, AlertType } from '../../models/notification.model';
+import { AlertType } from '../../models/notification.model';
 import { AuthService } from '../../services/auth.service';
 import { NotificationService } from '../../services/notification.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-login',
     standalone: true,
-    imports: [ReactiveFormsModule, CommonModule, RouterLink],
+    imports: [ReactiveFormsModule, CommonModule, RouterLink, TranslateModule],
     templateUrl: './login.component.html',
 })
 
@@ -25,6 +26,7 @@ export class LoginComponent {
     authService = inject(AuthService);
     fb = inject(FormBuilder);
     notificationService = inject(NotificationService);
+    translateService = inject(TranslateService);
 
     loginForm: FormGroup;
     isPasswordHiden = true;
@@ -62,21 +64,22 @@ export class LoginComponent {
 
             this.router.navigate(['subscriptions']);
 
-            this.newAlert({
-                message: 'Login realizado com sucesso!',
+            const successMessage = await firstValueFrom(this.translateService.get("pages.signin.alerts.success"));
+            
+            this.notificationService.alert({
+                message: successMessage,
                 type: AlertType.Success,
             });
+
         } catch (err: any) {
-            this.newAlert({
-                message: err.error.message,
+            const errorMessage = await firstValueFrom(this.translateService.get("pages.signin.alerts.error"));
+
+            this.notificationService.alert({
+                message: errorMessage,
                 type: AlertType.Error,
             });
         } finally {
             this.isButtonSigninDisable = false;
         }
-    }
-
-    newAlert(alert: Alert) {
-        this.notificationService.alert(alert);
     }
 }

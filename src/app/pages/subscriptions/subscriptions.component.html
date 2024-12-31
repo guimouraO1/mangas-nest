@@ -1,5 +1,5 @@
 <main class="h-[88vh] flex flex-col gap-4 items-center justify-center p-10">
-    <span class="text-@text-theme-white dark:text-@text-theme-dark font-bold text-6xl">Subscriptions</span>
+    <span class="text-@text-theme-white dark:text-@text-theme-dark font-bold text-6xl">{{'pages.subscriptions.hero' | translate }}</span>
     <div class="flex flex-wrap justify-center content-center items-center gap-2 w-3/4 h-[60vh]">
         @if (isLoadingGetSubscriptions) {
         <div role="status"
@@ -19,30 +19,29 @@
                 <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[460px] mb-2.5"></div>
                 <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
             </div>
-            <span class="sr-only">Loading...</span>
         </div>
         } @else {
-        @for(manga of subscriptions; track $index) {
-            <app-card [subscription]="manga" />
-        } @empty {
-        <div class="flex justify-center items-center flex-wrap gap-2 mb-4">
-            <div class=" hero-content text-center">
-                <div class="max-w-md">
-                    <h1 class="text-5xl font-bold text-highlight dark:@text-theme-dark">
-                        Oops!</h1>
-                    <p class="py-6 text-@text-theme-white dark:@text-theme-dark">
-                        It looks like we can't find a manga for that date. But don't worry, we're here to help!
-                    </p>
-                    <button [routerLink]="['/list']" class="btn btn-primary text-txt_white">Subscribe new
-                        Manga</button>
+            @for(manga of subscriptions; track $index) {
+                <app-card [subscription]="manga" />
+            }
+            @empty {
+            <div class="flex justify-center items-center flex-wrap gap-2 mb-4">
+                <div class=" hero-content text-center">
+                    <div class="max-w-md">
+                        <h1 class="text-5xl font-bold text-highlight dark:@text-theme-dark">{{'pages.subscriptions.ops' | translate }}</h1>
+                        <p class="py-6 text-@text-theme-white dark:@text-theme-dark">
+                            {{'pages.subscriptions.help-message' | translate }}
+                        </p>
+                        <button [routerLink]="['/list']" class="btn btn-primary text-txt_white">{{'pages.subscriptions.subscribe-new-manga' | translate }}</button>
+                    </div>
                 </div>
-            </div>
-        </div> }
+            </div> 
+        }
         }
     </div>
     <div class="join justify-self-end">
         <button (click)="decrementPage()" class="join-item btn btn-primary">«</button>
-        <button class="join-item btn btn-primary">Page {{this.page}} of {{subscriptionsCount}}</button>
+        <button class="join-item btn btn-primary">{{'pages.subscriptions.page' | translate }} {{this.page}} {{'pages.subscriptions.of' | translate }} {{this.subscriptionsCount}}</button>
         <button (click)="incrementPage()" class="join-item btn btn-primary">»</button>
-      </div>
+    </div>
 </main>

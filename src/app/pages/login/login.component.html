@@ -1,15 +1,14 @@
 <main class="flex flex-row w-full h-[88vh] flex-wrap">
   <div class="w-1/2 flex flex-col items-center justify-center">
-    <h1 class="text-5xl font-semibold text-primary">Save and Organize Your Mangas</h1>
+    <h1 class="text-5xl font-semibold text-primary">{{'pages.signin.hero' | translate }}</h1>
   </div>
 
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="max-w-sm w-1/2 p-4 m-auto flex flex-col">
-    <span class="my-10 m-auto text-3xl font-bold text-@text-theme-white dark:text-@text-theme-dark">Sign in to your
-      account</span>
-
+    <span class="my-10 m-auto text-3xl font-bold text-@text-theme-white dark:text-@text-theme-dark">{{'pages.signin.form.title' | translate }}</span>
     <div class="mb-5">
       <label for="email"
-        class="block mb-2 text-sm text-@text-theme-white dark:text-@text-theme-dark relative">Email</label>
+        class="block mb-2 text-sm text-@text-theme-white dark:text-@text-theme-dark relative">{{'pages.signin.form.email'
+        | translate }}</label>
       <div class="relative">
         <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
           <svg class="w-4 h-4 fill-icon_gray" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -21,13 +20,14 @@
         </div>
         <input formControlName="email" type="text"
           class="border text-@text-theme-white text-sm rounded-sm block w-full ps-10 p-2.5"
-          placeholder="youremail@gmail.com" />
+          placeholder="example@email.com" />
       </div>
     </div>
 
     <div class="mb-5">
       <label for="password"
-        class="block mb-2 text-sm text-@text-theme-white dark:text-@text-theme-dark relative">Password</label>
+        class="block mb-2 text-sm text-@text-theme-white dark:text-@text-theme-dark relative">{{'pages.signin.form.password'
+        | translate }}</label>
       <div class="relative">
         <div class="absolute inset-y-0 start-0 flex items-center ps-2.5 cursor-pointers">
           @if (isPasswordHiden == false) {
@@ -50,27 +50,23 @@
           }
         </div>
         <input formControlName="password" [type]="isPasswordHiden ? 'password' : 'text'"
-          class="border text-@text-theme-white text-sm rounded-sm block w-full ps-10 p-2.5"
-          placeholder="Your Password" />
+          class="border text-@text-theme-white text-sm rounded-sm block w-full ps-10 p-2.5" />
       </div>
     </div>
 
-    <button [disabled]="isButtonSigninDisable" type="submit" class="btn btn-primary btn-wide self-center mt-4">Sign
-      in</button>
+    <button [disabled]="isButtonSigninDisable" type="submit" class="btn btn-primary btn-wide self-center mt-4">{{'pages.signin.form.submit' | translate }}</button>
+    
     <div
       class="my-2 py-3 flex items-center text-xs text-@text-theme-white dark:text-@text-theme-dark 
     uppercase before:flex-1 before:border-t before:border-@text-theme-white dark:before:border-@text-theme-dark 
-    before:me-6 after:flex-1 after:border-t after:border-@text-theme-white dark:after:border-@text-theme-dark after:ms-6">
-      or
-    </div>
+    before:me-6 after:flex-1 after:border-t after:border-@text-theme-white dark:after:border-@text-theme-dark after:ms-6">{{'pages.signin.form.or' | translate }}</div>
 
     <button routerLink="/signup" type="button" class="btn btn-wide btn-secondary self-center flex items-center">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-        class="size-5 fill-txt_white">
+        class="size-5 fill-@white">
         <path stroke-linecap="round" stroke-linejoin="round"
           d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
-      </svg>
-      Sign up</button>
+      </svg>{{'pages.signin.signup' | translate }}</button>
   </form>
 
 </main>

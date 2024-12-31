@@ -9,9 +9,10 @@ import { DarkModeService } from '../../../services/dark-mode.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgxMaskDirective } from 'ngx-mask';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-    imports: [FormsModule, CommonModule, NgxMaskDirective],
+    imports: [FormsModule, CommonModule, NgxMaskDirective, TranslateModule],
     standalone: true,
     selector: 'app-new-chapter-modal',
     templateUrl: './new-chapter-modal.component.html',

@@ -4,11 +4,12 @@ import { User } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
 import { DarkModeService } from '../../services/dark-mode.service';
 import { NotificationService } from '../../services/notification.service';
+import { TranslateModule } from "@ngx-translate/core";
 
 @Component({
     selector: 'app-navbar',
     standalone: true,
-    imports: [RouterLink],
+    imports: [RouterLink, TranslateModule],
     templateUrl: './navbar.component.html'
 })
 export class NavbarComponent {

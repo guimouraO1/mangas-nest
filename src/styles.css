@@ -23,3 +23,14 @@
 .btn {
     color: #fff;
 }
+
+.mat-mdc-dialog-surface {
+    background-color: transparent !important;
+    padding: 0px 0px 0px 0px !important;
+    overflow: hidden !important;
+    border-radius: unset !important;
+}
+
+.mat-mdc-snack-bar-container .mat-mdc-snackbar-surface {
+    background-color: transparent !important;
+}

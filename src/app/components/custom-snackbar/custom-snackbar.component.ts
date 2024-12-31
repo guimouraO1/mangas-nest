@@ -5,10 +5,11 @@ import {
   MatSnackBarRef,
 } from '@angular/material/snack-bar';
 import { Alert, AlertType } from '../../models/notification.model';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   standalone: true,
-  imports: [MatIconModule],
+  imports: [MatIconModule, TranslateModule],
   selector: 'app-custom-snackbar',
   templateUrl: './custom-snackbar.component.html',
 })
@@ -16,12 +17,9 @@ export class CustomSnackbarComponent {
   constructor(@Inject(MAT_SNACK_BAR_DATA) public data: { alert: Alert }) {
     this.alert = this.data.alert;
   }
+
   alert: Alert | undefined;
   AlertType = AlertType;
-  matSnackBarRef: MatSnackBarRef<CustomSnackbarComponent> =
-    inject(MatSnackBarRef);
+  matSnackBarRef: MatSnackBarRef<CustomSnackbarComponent> = inject(MatSnackBarRef);
 
-  closeSnackbar(): void {
-    this.matSnackBarRef.dismiss();
-  }
 }

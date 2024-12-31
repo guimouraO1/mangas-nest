@@ -1,6 +1,0 @@
-::ng-deep .mat-mdc-dialog-surface {
-    background-color: transparent !important;
-    padding: 0px 0px 0px 0px !important;
-    overflow: hidden !important;
-    border-radius: unset !important;
-}

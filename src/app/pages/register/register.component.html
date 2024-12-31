@@ -1,17 +1,17 @@
 <main class="flex flex-row w-full h-[88vh] flex-wrap">
     <div class="w-1/2 flex p-4">
-        <button routerLink="/signin" class="btn btn-secondary">Return to Sign in</button>
-        <h1 class="text-5xl font-semibold text-primary m-auto">Sign up for free!</h1>
+        <button routerLink="/signin" class="btn btn-secondary">{{'pages.signup.return' | translate }}</button>
+        <h1 class="text-5xl font-semibold text-primary m-auto">{{'pages.signup.hero' | translate }}</h1>
     </div>
 
     <form [formGroup]="registerForm" (ngSubmit)="signUp()" class="max-w-sm w-1/2 p-4 m-auto flex flex-col">
 
-        <span class="my-10 m-auto text-3xl font-bold text-@text-theme-white dark:text-@text-theme-dark">Sign up</span>
+        <span class="my-10 m-auto text-3xl font-bold text-@text-theme-white dark:text-@text-theme-dark">{{'pages.signup.form.title' | translate }}</span>
         @if (stepper) {
         <div class="flex flex-col gap-5 mb-auto">
             <div>
                 <label for="email"
-                    class="block mb-2 text-sm text-@text-theme-white dark:text-@text-theme-dark relative">Email</label>
+                    class="block mb-2 text-sm text-@text-theme-white dark:text-@text-theme-dark relative">{{'pages.signup.form.email' | translate }}</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                         <svg class="w-4 h-4 fill-icon_gray" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -24,13 +24,13 @@
                     </div>
                     <input formControlName="email" type="email"
                         class="border text-@text-theme-white text-sm rounded-sm block w-full ps-10 p-2.5"
-                        placeholder="youremail@gmail.com" />
+                        placeholder="example@email.com" />
                 </div>
             </div>
 
             <div>
                 <label for="username"
-                    class="block mb-2 text-sm text-@text-theme-white dark:text-@text-theme-dark relative">Username</label>
+                    class="block mb-2 text-sm text-@text-theme-white dark:text-@text-theme-dark relative">{{'pages.signup.form.username' | translate }}</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                         <svg class="w-4 h-4 fill-icon_gray" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
@@ -41,13 +41,13 @@
                     </div>
                     <input formControlName="username" type="text"
                         class="border text-@text-theme-white text-sm rounded-sm block w-full ps-10 p-2.5"
-                        placeholder="yourusername" />
+                        placeholder="john123" />
                 </div>
             </div>
 
             <div>
                 <label for="email"
-                    class="block mb-2 text-sm text-@text-theme-white dark:text-@text-theme-dark relative">Name</label>
+                    class="block mb-2 text-sm text-@text-theme-white dark:text-@text-theme-dark relative">{{'pages.signup.form.name' | translate }}</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                         <svg class="w-4 h-4 fill-icon_gray dark:text-gray-400" xmlns="http://www.w3.org/2000/svg"
@@ -58,7 +58,7 @@
                     </div>
                     <input formControlName="name" type="text"
                         class="border text-@text-theme-white text-sm rounded-sm block w-full ps-10 p-2.5"
-                        placeholder="Guilherme Oliveira" />
+                        placeholder="John Clinton" />
                 </div>
             </div>
         </div>
@@ -68,7 +68,7 @@
             <div>
                 <label for="password"
                     class="block mb-2 text-sm text-@text-theme-white dark:text-@text-theme-dark relative">
-                    Password</label>
+                    {{'pages.signup.form.password' | translate }}</label>
                 <div class="relative">
                     <div
                         class="absolute inset-y-0 start-0 flex items-center ps-2.5 cursor-pointer fill-icon_gray dark:text-gray-400">
@@ -92,15 +92,13 @@
                         }
                     </div>
                     <input formControlName="password" [type]="isPasswordHiden ? 'password' : 'text'" id="password-icon"
-                        class="border text-@text-theme-white text-sm rounded-sm block w-full ps-10 p-2.5"
-                        placeholder="Password" />
+                        class="border text-@text-theme-white text-sm rounded-sm block w-full ps-10 p-2.5"/>
                 </div>
             </div>
 
             <div>
                 <label for="confirmPassword"
-                    class="block mb-2 text-sm text-@text-theme-white dark:text-@text-theme-dark relative">Confirm
-                    Password</label>
+                    class="block mb-2 text-sm text-@text-theme-white dark:text-@text-theme-dark relative">{{'pages.signup.form.confirm-password' | translate }}</label>
                 <div class="relative">
                     <div
                         class="absolute inset-y-0 start-0 flex items-center ps-2.5 cursor-pointer fill-icon_gray dark:text-gray-400">
@@ -125,15 +123,14 @@
                     </div>
                     <input formControlName="confirmPassword" [type]="isPasswordHiden ? 'password' : 'text'"
                         id="password-icon"
-                        class="border text-@text-theme-white text-sm rounded-sm block w-full ps-10 p-2.5 "
-                        placeholder="Confirm Password" />
+                        class="border text-@text-theme-white text-sm rounded-sm block w-full ps-10 p-2.5 "/>
                 </div>
             </div>
         </div>
         }
 
         <div class="my-5 flex flex-col items-center justify-center p-4">
-            <span class="text-sm text-@white px-4 py-2 bg-neutral rounded mb-2">Steps</span>
+            <span class="text-sm text-@white px-4 py-2 bg-neutral rounded mb-2">{{'pages.signup.form.steps' | translate }}</span>
             <ul class="w-full steps">
                 <li [attr.data-content]="registerForm.errors?.['step1'] && stepper || stepper ? '1' : '✓'" class="step"
                     [ngClass]="{'step-success': !registerForm.errors?.['step1'] && !stepper}">
@@ -147,14 +144,13 @@
 
         @if (stepper) {
         <button type="button" [disabled]="registerForm.errors?.['step1']" (click)="this.stepper = !this.stepper"
-            class="btn btn-primary w-3/5 self-center  pt-auto">Next</button>
+            class="btn btn-primary w-3/5 self-center  pt-auto">{{'pages.signup.form.next' | translate }}</button>
         } @else {
         <div class="flex justify-between">
             <button type="button" (click)="this.stepper = !this.stepper"
-                class="btn btn-secondary self-center   w-40">Back</button>
+                class="btn btn-secondary self-center   w-40">{{'pages.signup.form.back' | translate }}</button>
             <button [disabled]="this.registerForm.invalid || this.isDisableButton" type="submit"
-                class="btn btn-primary self-center   w-40">Sign
-                up</button>
+                class="btn btn-primary self-center   w-40">{{'pages.signup.form.submit' | translate }}</button>
         </div>
         }
     </form>

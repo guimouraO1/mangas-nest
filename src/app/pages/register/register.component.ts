@@ -8,14 +8,15 @@ import {
 } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { Alert, AlertType } from '../../models/notification.model';
+import { AlertType } from '../../models/notification.model';
 import { NotificationService } from '../../services/notification.service';
 import { firstValueFrom } from 'rxjs';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-register',
     standalone: true,
-    imports: [ReactiveFormsModule, CommonModule, RouterLink],
+    imports: [ReactiveFormsModule, CommonModule, RouterLink, TranslateModule],
     templateUrl: './register.component.html',
 })
 export class RegisterComponent {
@@ -24,6 +25,8 @@ export class RegisterComponent {
     isPasswordHiden = true;
     authService = inject(AuthService);
     notificationService = inject(NotificationService);
+    translateService = inject(TranslateService);
+
     isDisableButton: boolean = false;
     stepper: boolean = true;
 
@@ -49,25 +52,27 @@ export class RegisterComponent {
         try {
             const { confirmPassword, ...formData } = this.registerForm.value;
             await firstValueFrom(this.authService.register(formData));
-            this.newAlert({
-                message: 'Registrado com sucesso!',
+            
+            const successMessage = await firstValueFrom(this.translateService.get("pages.signup.alerts.success"));
+
+            this.notificationService.alert({
+                message: successMessage,
                 type: AlertType.Success,
             });
 
             this.stepper = false;
             this.registerForm.reset();
+
         } catch (err: any) {
-            this.newAlert({
-                message: err.error.message,
+            const errorMessage = await firstValueFrom(this.translateService.get("pages.signup.alerts.error"));
+
+            this.notificationService.alert({
+                message: errorMessage,
                 type: AlertType.Error,
             });
         }
 
         this.isDisableButton = false;
-    }
-
-    newAlert(alert: Alert) {
-        this.notificationService.alert(alert);
     }
 
     stepperValidator() {
