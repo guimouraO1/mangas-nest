@@ -10,7 +10,8 @@ module.exports = {
                 '@white': '#fff',
                 '@text-theme-dark': "#e9ecef",
                 '@text-theme-white': "#595959",
-
+                '@icon-gray': "#6b7280",
+                '@border-gray': "#ced4da",
                 txt_white: "#fff",
                 txt_dark: '#d20000',
                 txt_disable: '#6c6c6c',
@@ -19,7 +20,7 @@ module.exports = {
 
                 highlight: "#ef4c53",
                 star: "#fb923c",
-                icon_gray: "#6b7280",
+                
             }
         }
     },

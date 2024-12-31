@@ -14,7 +14,6 @@
                 "success": "Login successful!",
                 "error": "An error has occurred, please try again later"
             }
-            
         },
         "signup": {
             "return": "Return to sign in",
@@ -65,15 +64,36 @@
             "page": "Page",
             "of": "of",
             "unsubscribe-modal": {
-                "title": "Are you sure you want to unsubscribe this chapter?", 
+                "title": "Are you sure you want to unsubscribe this chapter?",
                 "confirm": "Yes, I'm sure",
                 "cancel": "Decline"
             },
             "subscription-modal": {
-                "title": "Are you sure you want to unsubscribe this manga?", 
+                "title": "Are you sure you want to unsubscribe this manga?",
                 "subtitle": "Select your rating for this manga",
                 "confirm": "Yes, I'm sure",
                 "cancel": "Decline"
+            }
+        },
+        "admin": {
+            "form": {
+                "title": "Add new manga",
+                "name": "Anime name",
+                "weekday": "Week day",
+                "about": "About",
+                "steps": "Steps",
+                "next": "Next",
+                "back": "Back",
+                "anime-image": "Upload and anime image",
+                "some-text": "Some text about manga...",
+                "placeholder-anime": "Sousou no frieren",
+                "submit": "Create new manga"
+            },
+            "alerts": {
+                "invalid-file-type": "Invalid file type. Please upload an PNG, JPG, or GIF image.",
+                "file-size-exceeds": "File size exceeds 2MB.",
+                "all-fields-required": "Please fill out all required fields",
+                "success": "New manga created!"
             }
         }
     },
@@ -84,20 +104,18 @@
             "newmanga": "Add new manga"
         },
         "card": {
-            "confirmation-modal":{
-                "title": "Are you sure you want to delete this chapter?", 
+            "confirmation-modal": {
+                "title": "Are you sure you want to delete this chapter?",
                 "confirm": "Yes, I'm sure",
                 "cancel": "Decline"
             },
-            "new-chapter-modal":{
-                "title": "Add new chapter", 
+            "new-chapter-modal": {
+                "title": "Add new chapter",
                 "confirm": "Add chapter",
                 "cancel": "Decline"
             }
         },
-        "custom-snackbar": {
-            
-        }
+        "custom-snackbar": {}
     },
     "general": {
         "days": {

@@ -60,7 +60,7 @@ export class RegisterComponent {
                 type: AlertType.Success,
             });
 
-            this.stepper = false;
+            this.stepper = true;
             this.registerForm.reset();
 
         } catch (err: any) {

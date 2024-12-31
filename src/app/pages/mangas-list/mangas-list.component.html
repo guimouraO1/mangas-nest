@@ -2,7 +2,7 @@
     <div class="flex flex-col items-center justify-center w-full px-40 gap-10">
         <table class="w-full text-sm text-left p-8 shadow-md">
             <thead
-                class="text-xs text-@text-theme-white dark:text-@text-theme-dark uppercase border border-stone-300 dark:border-border_dark">
+                class="text-xs text-@text-theme-white dark:text-@text-theme-dark uppercase border border-@border-gray border-opacity-30 rounded-md">
                 <tr>
                     <th scope="col" class="flex justify-center p-4">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
@@ -28,7 +28,7 @@
             </thead>
             <tbody>
                 @for (manga of mangas; track $index) {
-                <tr class="border border-stone-300 dark:border-border_dark">
+                <tr class="border border-@border-gray border-opacity-30 rounded-md">
                     <th class="p-2 text-center">
                         <span
                             class="font-extrabold text-@text-theme-white dark:text-@text-theme-dark text-center">{{$index + 1}}</span>

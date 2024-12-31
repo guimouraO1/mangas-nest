@@ -13,18 +13,22 @@ import { AlertType } from '../../models/notification.model';
 import { MangaService } from '../../services/manga.service';
 import { NotificationService } from '../../services/notification.service';
 import { environment } from '../../../environments/environment';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
     selector: 'app-admin',
     standalone: true,
-    imports: [ReactiveFormsModule, FormsModule],
+    imports: [ReactiveFormsModule, FormsModule, TranslateModule, CommonModule],
     templateUrl: './admin.component.html',
 })
 export class AdminComponent {
     fb = inject(FormBuilder);
     mangaService = inject(MangaService);
     notificationService = inject(NotificationService);
+    stepper: boolean = true;
+    translateService = inject(TranslateService);
 
     mangaForm: FormGroup;
     weekDays = Object.values(WeekDays);
@@ -45,17 +49,19 @@ export class AdminComponent {
                 Validators.maxLength(500),
             ]),
             image: new FormControl(null, [Validators.required])
-        });
+        }, { validators: this.stepperValidator() });
     }
 
-    onFileChange(event: any): void {
+    async onFileChange(event: any) {
         this.file = event.target.files[0];
 
         if (this.file) {
             if (!this.isValidFileType(this.file)) {
+                const invalidFileType = await firstValueFrom(this.translateService.get("pages.admin.alerts.invalid-file-type"));
+
                 this.notificationService.alert({
                     type: AlertType.Warning,
-                    message: 'Invalid file type. Please upload an PNG, JPG, or GIF image.',
+                    message: invalidFileType,
                     duration: 5000
                 });
                 this.file = null;
@@ -63,9 +69,10 @@ export class AdminComponent {
             }
 
             if (this.file.size > this.maxFileSizeBytes) {
+                const fileSizeExceeds = await firstValueFrom(this.translateService.get("pages.admin.alerts.file-size-exceeds"));
                 this.notificationService.alert({
                     type: AlertType.Warning,
-                    message: 'File size exceeds 2MB.',
+                    message: fileSizeExceeds,
                     duration: 5000
                 });
 
@@ -89,8 +96,10 @@ export class AdminComponent {
 
     async addManga() {
         if (this.mangaForm.invalid || !this.file) {
+            const fileSizeExceeds = await firstValueFrom(this.translateService.get("pages.admin.alerts.all-fields-required"));
+
             this.notificationService.alert({
-                message: 'Please fill out all required fields',
+                message: fileSizeExceeds,
                 type: AlertType.Warning,
             });
 
@@ -112,15 +121,35 @@ export class AdminComponent {
             };
 
             await firstValueFrom(this.mangaService.createManga(newMangaData));
+            const successMessage = await firstValueFrom(this.translateService.get("pages.admin.alerts.success"));
 
             this.notificationService.alert({
-                message: 'New manga created!',
+                message: successMessage,
                 type: AlertType.Success,
             });
-
+            this.stepper = true;
             this.mangaForm.reset();
         } catch (error) {
 
         }
+    }
+
+    stepperValidator() {
+        return (formGroup: FormGroup): { [key: string]: any } | null => {
+            const name = formGroup.get('name');
+            const date = formGroup.get('email');
+            const about = formGroup.get('about');
+            const image = formGroup.get('image');
+
+            if (date && date.invalid || name && name.invalid || about && about.invalid) {
+                return { step1: true };
+            }
+
+            if (image && image.invalid) {
+                return { step2: true };
+            }
+
+            return null;
+        };
     }
 }

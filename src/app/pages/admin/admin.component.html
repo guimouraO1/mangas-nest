@@ -1,64 +1,78 @@
-<main class="w-full h-[88vh] flex flex-col">
-  <form [formGroup]="mangaForm"
-    class="m-auto w-[500px] flex flex-col bg-transparent border border-opacity-5 shadow-md border-black dark:border-white dark:border-opacity-5 p-8 rounded-md">
-    <div class="mb-4">
-      <label for="helper-text" class="block mb-2 text-sm font-medium text-txt_dark dark:text-txt_white">Anime name</label>
+<main class="w-full h-[88vh] flex">
+  <form [formGroup]="mangaForm" class="m-auto w-[500px] flex flex-col p-8 rounded-md gap-4">
+    <span
+      class="text-center text-3xl font-bold text-@text-theme-white dark:text-@text-theme-dark mb-4">{{'pages.admin.form.title'
+      | translate }}</span>
+
+  @if (stepper) {
+
+    <div>
+      <label for="helper-text"
+        class="text-sm text-@text-theme-white dark:text-@text-theme-dark">{{ 'pages.admin.form.name' | translate }}</label>
       <div class="relative">
         <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5 fill-icon_gray">
-            <path fill-rule="evenodd"
-              d="M4.5 2A2.5 2.5 0 0 0 2 4.5v3.879a2.5 2.5 0 0 0 .732 1.767l7.5 7.5a2.5 2.5 0 0 0 3.536 0l3.878-3.878a2.5 2.5 0 0 0 0-3.536l-7.5-7.5A2.5 2.5 0 0 0 8.38 2H4.5ZM5 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
-              clip-rule="evenodd" />
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="size-5 stroke-@icon-gray">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
           </svg>
         </div>
-        <input placeholder="Sousou no frieren" formControlName="name" type="text"
-          class="border text-sm rounded-sm block w-full ps-10 p-2.5 border-border_dark border-opacity-25 text-txt_dark"
-          placeholder="Frieren" />
+        <input placeholder="{{'pages.admin.form.placeholder-anime' | translate }}" formControlName="name" type="text"
+          class="text-sm rounded-sm block w-full ps-10 p-3 text-@text-theme-white dark:text-@text-theme-dark dark:bg-@theme-dark bg-@white border border-@border-gray border-opacity-15" />
       </div>
     </div>
 
-    <div class="mb-4">
-      <label for="weekday" class="block mb-2 text-sm font-medium text-txt_dark dark:text-txt_white ">Week
-        day</label>
-      <select formControlName="date" id="weekday" class="select select-bordered w-full">
-        @for (day of weekDays; track $index) {
-        <option class="text-txt_dark" [value]="day">
-          {{ day }}
-        </option>
-        }
-      </select>
-    </div>
-
-
-    <div class="mb-4">
-      <label
-        class="block mb-2 text-sm font-medium text-txt_dark border-border_dark border-opacity-25 dark:text-txt_white">About
-        manga</label>
-      <textarea placeholder="Some text about manga..." formControlName="about" id="about"
-        class="text-sm textarea textarea-bordered textarea-lg w-full max-h-20 text-txt_dark"></textarea>
-    </div>
-
-
-    <div class="flex items-center justify-center w-full mb-4">
-      <label for="dropzone-file"
-        class="flex flex-col items-center justify-center w-full h-32 border  rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 ">
-        <div class="flex flex-col items-center justify-center pt-5 pb-6">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-            class="size-5 fill-txt_dark m-2">
-            <path
-              d="M9.25 13.25a.75.75 0 0 0 1.5 0V4.636l2.955 3.129a.75.75 0 0 0 1.09-1.03l-4.25-4.5a.75.75 0 0 0-1.09 0l-4.25 4.5a.75.75 0 1 0 1.09 1.03L9.25 4.636v8.614Z" />
-            <path
-              d="M3.5 12.75a.75.75 0 0 0-1.5 0v2.5A2.75 2.75 0 0 0 4.75 18h10.5A2.75 2.75 0 0 0 18 15.25v-2.5a.75.75 0 0 0-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5Z" />
+    <div>
+      <label for="helper-text" class="text-sm text-@text-theme-white dark:text-@text-theme-dark">{{'pages.admin.form.weekday' | translate
+        }}</label>
+      <div class="relative">
+        <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 stroke-@icon-gray">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
           </svg>
-          <p class="mb-2 text-sm text-txt_dark "><span class="font-semibold">Click to upload</span> or
-            drag and drop</p>
-          <p class="mt-1 text-xs text-highlight opacity-75" id="file_input_help"> PNG
-            or JPG (MAX. 2MB).</p>
         </div>
-        <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden" />
-      </label>
+        <select formControlName="date" id="weekday" class="select border-@border-gray border-opacity-15 w-full text-@text-theme-white dark:text-@text-theme-dark dark:bg-@theme-dark bg-@white ps-10">
+          @for (day of weekDays; track $index) {
+          <option class="text-@text-theme-white " [value]="day">
+            {{ 'general.days.' + day | translate }}
+          </option>
+          }
+        </select>
+      </div>
     </div>
-    <button (click)="addManga()" class="btn btn-wide btn-primary self-center">Create new manga</button>
 
+    <div>
+      <label for="helper-text" class="text-sm text-@text-theme-white dark:text-@text-theme-dark">{{'pages.admin.form.about' | translate }}</label>
+      <textarea placeholder="{{'pages.admin.form.some-text' | translate }}" formControlName="about" id="about"
+        class="text-sm textarea textarea-lg w-full max-h-20 text-@text-theme-white dark:text-@text-theme-dark dark:bg-@theme-dark bg-@white border-@border-gray border-opacity-15"></textarea>
+    </div>
+  } @else {
+    <label for="helper-text" class="text-sm text-@text-theme-white dark:text-@text-theme-dark">{{'pages.admin.form.anime-image' | translate }}</label>
+    <div class="flex items-center justify-center w-full mb-4">
+      <input (change)="onFileChange($event)" type="file" class="file-input file-input-primary w-full max-w-xs" />
+    </div>
+  }
+
+  <div class="my-5 flex flex-col items-center justify-center p-4">
+    <span class="text-sm text-@white px-4 py-2 bg-neutral rounded mb-2">{{'pages.admin.form.steps' | translate }}</span>
+    <ul class="w-full steps">
+        <li [attr.data-content]="mangaForm.errors?.['step1'] && stepper || stepper ? '1' : '✓'" class="step"
+            [ngClass]="{'step-success': !mangaForm.errors?.['step1'] && !stepper}">
+        </li>
+
+        <li [attr.data-content]="this.mangaForm.invalid ? '2' : '✓'" class="step" [ngClass]="{'step-success': this.mangaForm.valid && !stepper}">
+        </li>
+    </ul>
+</div>
+
+    @if (stepper) {
+      <button type="button" [disabled]="mangaForm.errors?.['step1']" (click)="this.stepper = !this.stepper" 
+        class="btn btn-primary w-3/5 self-center  pt-auto">{{'pages.admin.form.next' | translate }}</button>
+      } @else {
+      <div class="flex justify-between">
+          <button type="button" (click)="this.stepper = !this.stepper" class="btn btn-secondary self-center w-40">{{'pages.admin.form.back' | translate }}</button>
+          <button [disabled]="this.mangaForm.invalid" (click)="addManga()" class="btn btn-primary self-center">{{'pages.admin.form.submit' | translate }}</button>  
+      </div>
+      }
   </form>
 </main>

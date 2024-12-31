@@ -74,6 +74,27 @@
                 "confirm": "Sim, tenho certeza",
                 "cancel": "Recusar"
             }
+        },
+        "admin": {
+            "form": {
+                "title": "Adicionar novo mangá",
+                "name": "Nome do anime",
+                "weekday": "Dia da semana",
+                "about": "Sobre",
+                "steps": "Etapas",
+                "next": "Próximo",
+                "back": "Voltar",
+                "anime-image": "Carregar uma imagem do anime",
+                "some-text": "Algum texto sobre o mangá...",
+                "placeholder-anime": "Sousou no Frieren",
+                "submit": "Adicionar novo manga"
+            },
+            "alerts": {
+                "invalid-file-type": "Tipo de arquivo inválido. Por favor, envie uma imagem PNG, JPG ou GIF.",
+                "file-size-exceeds": "O tamanho do arquivo excede 2MB.",
+                "all-fields-required": "Por favor, preencha todos os campos obrigatórios.",
+                "success": "Novo mangá criado!"
+            }
         }
     },
     "components": {
