@@ -1,20 +1,20 @@
 <div [ngClass]="darkModeService.darkModeSignal()" class="!w-[500px] !m-0">
   <div class="w-full max-h-full">
-    <div class="bg-bg_white rounded shadow">
-
-      <div class="flex items-center justify-between p-4 rounded-t dark:border-gray-600 bg-highlight">
-        <h3 class="text-xl font-medium text-txt_white">
-          Unsubscribing
+    <div class="relative bg-@theme-ligth dark:bg-@theme-dark rounded-lg shadow">
+      <div class="p-4 md:p-5 text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+          class="size-5 mx-auto mb-4 fill-error w-12 h-12">
+          <path fill-rule="evenodd"
+            d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495ZM10 5a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 10 5Zm0 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
+            clip-rule="evenodd" />
+        </svg>
+        <h3 class="mb-5 text-lg text-@text-theme-white dark:text-@text-theme-dark">
+          {{'pages.mangas-list.unsubscribe-modal.title' | translate }}
         </h3>
-      </div>
-
-      <div class="pt-4 h-20">
-        <label class="font-bold p-4 text-txt_dark mb-4">Are you sure you want to unsubscribe this chapter?</label>
-      </div>
-
-      <div class="flex gap-2 p-4 justify-end">
-        <button class="btn btn-error" (click)="confirm()">Yes, I'm sure</button>
-        <button class="btn" (click)="cancel()">Decline</button>
+        <div class="flex gap-2 pt-2 justify-end">
+          <button (click)="confirm()" class="btn btn-active btn-error text-txt_white">{{'pages.mangas-list.unsubscribe-modal.confirm' | translate }}</button>
+          <button class="btn btn-primary" (click)="cancel()">{{'pages.mangas-list.unsubscribe-modal.cancel' | translate }}</button>
+        </div>
       </div>
     </div>
   </div>

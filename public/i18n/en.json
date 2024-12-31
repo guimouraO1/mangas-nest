@@ -12,7 +12,7 @@
             "signup": "Sign up",
             "alerts": {
                 "success": "Login successful!",
-                "error": "Login error!"
+                "error": "An error has occurred, please try again later"
             }
             
         },
@@ -47,6 +47,34 @@
             "subscribe-new-manga": "Subscribe new Manga",
             "ops": "Oops!",
             "help-message": "It looks like we can't find a manga. But don't worry, we're here to help!"
+        },
+        "mangas-list": {
+            "table": {
+                "name": "Name",
+                "weekday": "Week day",
+                "status": "Status",
+                "unsubscribe": "Unsubscribe",
+                "already": "Already subscribed",
+                "subscribe": "Subscribe"
+            },
+            "alerts": {
+                "subscribed": "Subscribed!",
+                "unsubscribed": "Unsubscribed",
+                "error": "An error has occurred, please try again later"
+            },
+            "page": "Page",
+            "of": "of",
+            "unsubscribe-modal": {
+                "title": "Are you sure you want to unsubscribe this chapter?", 
+                "confirm": "Yes, I'm sure",
+                "cancel": "Decline"
+            },
+            "subscription-modal": {
+                "title": "Are you sure you want to unsubscribe this manga?", 
+                "subtitle": "Select your rating for this manga",
+                "confirm": "Yes, I'm sure",
+                "cancel": "Decline"
+            }
         }
     },
     "components": {

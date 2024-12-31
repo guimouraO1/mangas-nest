@@ -2,14 +2,14 @@ import {
     Component,
     inject,
 } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { DarkModeService } from '../../../services/dark-mode.service';
 import { FormControl, FormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-    imports: [FormsModule, CommonModule, NgxMaskDirective, NgxMaskPipe],
+    imports: [FormsModule, CommonModule, TranslateModule],
     standalone: true,
     selector: 'app-new-chapter-modal',
     templateUrl: './subscription-modal.html',

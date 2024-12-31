@@ -1,6 +1,5 @@
 <main class="w-full h-[88vh] flex">
     <div class="flex flex-col items-center justify-center w-full px-40 gap-10">
-
         <table class="w-full text-sm text-left p-8 shadow-md">
             <thead
                 class="text-xs text-@text-theme-white dark:text-@text-theme-dark uppercase border border-stone-300 dark:border-border_dark">
@@ -14,16 +13,16 @@
                         </svg>
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Name
+                        {{'pages.mangas-list.table.name' | translate }}
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Week Day
+                        {{'pages.mangas-list.table.weekday' | translate }}
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Status
+                        {{'pages.mangas-list.table.status' | translate }}
                     </th>
                     <th class="px-6 py-4">
-                        Unsubscribe
+                        {{'pages.mangas-list.table.unsubscribe' | translate }}
                     </th>
                 </tr>
             </thead>
@@ -32,8 +31,7 @@
                 <tr class="border border-stone-300 dark:border-border_dark">
                     <th class="p-2 text-center">
                         <span
-                            class="font-extrabold text-@text-theme-white dark:text-@text-theme-dark text-center">{{$index
-                            + 1}}</span>
+                            class="font-extrabold text-@text-theme-white dark:text-@text-theme-dark text-center">{{$index + 1}}</span>
                     </th>
                     <th scope="row"
                         class="flex items-center px-6 py-4 text-@text-theme-white dark:text-@text-theme-dark whitespace-nowrap w-[30vw]">
@@ -46,23 +44,28 @@
                         </div>
                     </th>
                     <td class="px-6 py-4 text-@text-theme-white dark:text-@text-theme-dark">
-                        {{manga.date}}
+                        {{ 'general.days.' + manga.date | translate }}
                     </td>
+
                     <td class="px-6 py-4">
                         @if (manga.subscriptions && manga.subscriptions.length > 0) {
-                        <button class="btn btn-success  no-animation cursor-default">Already subscribed</button>
+                            <button class="btn btn-success no-animation cursor-default">{{'pages.mangas-list.table.already' | translate }}</button>
                         } @else {
-                        <button (click)="subscribe(manga.id)" class="btn btn-primary ">Subscribe</button>
+                            <button (click)="subscribe(manga.id)" class="btn btn-primary ">{{'pages.mangas-list.table.subscribe' | translate }}</button>
                         }
                     </td>
+
                     @if (manga.subscriptions && manga.subscriptions.length > 0) {
                     <td class="px-6 py-4">
-                        <button (click)="unSubscribe(manga.subscriptions[0].id, manga.id)"
-                            class="btn btn-error ">Unsubscribe</button>
+                        <button (click)="unSubscribe(manga.subscriptions[0].id, manga.id)" class="btn btn-error ">
+                            {{'pages.mangas-list.table.unsubscribe' | translate }}
+                        </button>
                     </td>
                     } @else {
                     <td class="px-6 py-4">
-                        <button [disabled]="true" class="btn !text-txt_disable">Unsubscribe</button>
+                        <button [disabled]="true" class="btn !text-txt_disable">
+                            {{'pages.mangas-list.table.unsubscribe' | translate }}
+                        </button>
                     </td>
                     }
 
@@ -92,11 +95,14 @@
 
             </tbody>
         </table>
-
-        <div class="join justify-self-end">
-            <button (click)="decrementPage()" class="join-item btn btn-primary">«</button>
-            <button class="join-item btn btn-primary">Page {{this.page}} of {{mangaPages}}</button>
-            <button (click)="incrementPage()" class="join-item btn btn-primary">»</button>
-        </div>
+        @if (mangaPages > 0) {
+            <div class="join justify-self-end">
+                <button (click)="decrementPage()" class="join-item btn btn-primary">«</button>
+                    <button class="join-item btn btn-primary">
+                        {{'pages.mangas-list.page' | translate }} {{this.page}} {{'pages.mangas-list.of' | translate }} {{mangaPages}}
+                    </button>
+                <button (click)="incrementPage()" class="join-item btn btn-primary">»</button>
+            </div>
+        }
     </div>
 </main>

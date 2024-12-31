@@ -39,9 +39,11 @@
         }
         }
     </div>
-    <div class="join justify-self-end">
-        <button (click)="decrementPage()" class="join-item btn btn-primary">«</button>
-        <button class="join-item btn btn-primary">{{'pages.subscriptions.page' | translate }} {{this.page}} {{'pages.subscriptions.of' | translate }} {{this.subscriptionsCount}}</button>
-        <button (click)="incrementPage()" class="join-item btn btn-primary">»</button>
-    </div>
+    @if (subscriptionsCount > 0) {
+        <div class="join justify-self-end">
+            <button (click)="decrementPage()" class="join-item btn btn-primary">«</button>
+            <button class="join-item btn btn-primary">{{'pages.subscriptions.page' | translate }} {{this.page}} {{'pages.subscriptions.of' | translate }} {{this.subscriptionsCount}}</button>
+            <button (click)="incrementPage()" class="join-item btn btn-primary">»</button>
+        </div>
+    }
 </main>
