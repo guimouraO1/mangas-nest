@@ -10,17 +10,17 @@ export const routes: Routes = [
     },
     {
         path: 'signin',
-        title: 'Nest | Sign in',
+        title: 'Sign in',
         loadComponent: () => import('./pages/login/login.component').then((p) => p.LoginComponent),
     },
     {
         path: 'signup',
-        title: 'Nest | Sign up',
+        title: 'Sign up',
         loadComponent: () => import('./pages/register/register.component').then((p) => p.RegisterComponent),
     },
     {
         path: 'list',
-        title: 'Nest | List of mangas',
+        title: 'List of mangas',
         loadComponent: () => import('./pages/mangas-list/mangas-list.component').then((p) => MangasListComponent),
         canActivate: [authGuard],
         data: {
@@ -29,7 +29,7 @@ export const routes: Routes = [
     },
     {
         path: 'admin',
-        title: 'Nest | Add manga',
+        title: 'Add new Manga',
         loadComponent: () => import('./pages/admin/admin.component').then((p) => p.AdminComponent),
         canActivate: [authGuard],
         data: {
@@ -38,7 +38,7 @@ export const routes: Routes = [
     },
     {
         path: 'subscriptions',
-        title: 'Nest | Recents mangas',
+        title: 'Subscriptions',
         loadComponent: () => import('./pages/subscriptions/subscriptions.component').then((p) => p.SubscriptionsComponent),
         canActivate: [authGuard],
         data: {
@@ -47,7 +47,7 @@ export const routes: Routes = [
     },
     {
         path: '**',
-        title: 'Nest | Not found',
+        title: 'Not Found',
         loadComponent: () => import('./pages/not-found/not-found.component').then((p) => p.NotFoundComponent),
     },
 ];

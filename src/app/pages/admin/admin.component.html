@@ -67,11 +67,11 @@
 
     @if (stepper) {
       <button type="button" [disabled]="mangaForm.errors?.['step1']" (click)="this.stepper = !this.stepper" 
-        class="btn btn-primary w-3/5 self-center  pt-auto">{{'pages.admin.form.next' | translate }}</button>
+        class="btn btn-primary w-3/5 self-center pt-auto disabled:text-@text-theme-disabled">{{'pages.admin.form.next' | translate }}</button>
       } @else {
       <div class="flex justify-between">
           <button type="button" (click)="this.stepper = !this.stepper" class="btn btn-secondary self-center w-40">{{'pages.admin.form.back' | translate }}</button>
-          <button [disabled]="this.mangaForm.invalid" (click)="addManga()" class="btn btn-primary self-center">{{'pages.admin.form.submit' | translate }}</button>  
+          <button [disabled]="this.mangaForm.invalid" (click)="addManga()" class="btn btn-primary self-center disabled:text-@text-theme-disabled">{{'pages.admin.form.submit' | translate }}</button>  
       </div>
       }
   </form>

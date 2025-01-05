@@ -12,15 +12,8 @@ module.exports = {
                 '@text-theme-white': "#595959",
                 '@icon-gray': "#6b7280",
                 '@border-gray': "#ced4da",
-                txt_white: "#fff",
-                txt_dark: '#d20000',
-                txt_disable: '#6c6c6c',
-                bg_card: "#343434",
-                border_dark: "#424242",
-
-                highlight: "#ef4c53",
-                star: "#fb923c",
-                
+                '@star': "#fb923c",
+                '@text-theme-disabled': "#7f7f7f"
             }
         }
     },

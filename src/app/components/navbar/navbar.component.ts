@@ -6,6 +6,7 @@ import { TranslateModule } from "@ngx-translate/core";
 import { LanguageService } from '../../services/language.service';
 import { firstValueFrom, Subject, takeUntil } from 'rxjs';
 import { TokenDecoded, TokenService } from '../../services/token.service';
+import { Languages } from '../../models/language.model';
 
 @Component({
     selector: 'app-navbar',
@@ -45,11 +46,11 @@ export class NavbarComponent implements OnDestroy {
         this.isSidenavOpened.set(false);
         this.tokenService.removeToken();
         this.authService.setIsUserAuthenticated(false);
-        await firstValueFrom(this.authService.endSession());
         this.router.navigate(['signin']);
+        await firstValueFrom(this.authService.endSession());
     }
 
-    changeLanguage(language: any): void {
+    changeLanguage(language: Languages): void {
         this.languageService.setLanguage(language);
         const dropdown = document.getElementById('dropdown') as HTMLDetailsElement;
         if (dropdown) {
