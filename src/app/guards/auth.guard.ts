@@ -17,10 +17,14 @@ export const authGuard: CanActivateFn = async (route: ActivatedRouteSnapshot, st
 
   const allowedRoles = route.data['roles'];
   const user = tokenService.decodePayloadJWT();
-  const isUserAuthenticated = authService.getIsUserAuthenticated();
+  const isUserAuthenticated = await firstValueFrom(authService.getIsUserAuthenticated());
 
   if (isUserAuthenticated && user && allowedRoles.includes(user.role)) {
     return true;
+  }
+
+  if (isUserAuthenticated && user && !allowedRoles.includes(user.role)) {
+    return router.createUrlTree(['/subscriptions']);
   }
 
   const translatedMessage = await firstValueFrom(translateService.get("guard.denied"));

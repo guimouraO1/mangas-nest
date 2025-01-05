@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
     FormBuilder,
     FormGroup,
@@ -19,7 +19,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
     imports: [ReactiveFormsModule, CommonModule, RouterLink, TranslateModule],
     templateUrl: './register.component.html',
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
     authService = inject(AuthService);
     notificationService = inject(NotificationService);
     translateService = inject(TranslateService);
@@ -43,6 +43,13 @@ export class RegisterComponent {
             ],
         }, { validators: [this.stepperValidator(), this.passwordsMatches()] });
     }
+
+    async ngOnInit() {
+        const isUserAuthenticated = await firstValueFrom(this.authService.getIsUserAuthenticated());
+        if (isUserAuthenticated) {
+             this.router.navigate(['subscriptions']);
+        }
+     }
 
     async signUp() {
         if (this.registerForm.invalid) {

@@ -57,7 +57,7 @@ export class SubscriptionsComponent implements OnInit {
   async getSubscriptionsCount() {
     try {
       const response = await firstValueFrom(this.subscriptionService.getSubscriptionsCount());
-      this.subscriptionsCount = response.subscriptionsCount;
+      this.subscriptionsCount = Math.ceil(response.subscriptionsCount / 4);;
     } catch (error) {
       console.log(error)
     }

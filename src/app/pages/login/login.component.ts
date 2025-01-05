@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
     FormBuilder,
     FormGroup,
@@ -21,7 +21,7 @@ import { TokenService } from '../../services/token.service';
     templateUrl: './login.component.html',
 })
 
-export class LoginComponent {
+export class LoginComponent implements OnInit {
     router: Router = inject(Router);
     authService = inject(AuthService);
     fb = inject(FormBuilder);
@@ -39,6 +39,13 @@ export class LoginComponent {
             email: ['', [Validators.required, Validators.email]],
             password: ['', [Validators.required, Validators.minLength(3)]],
         });
+    }
+
+    async ngOnInit() {
+       const isUserAuthenticated = await firstValueFrom(this.authService.getIsUserAuthenticated());
+       if (isUserAuthenticated) {
+            this.router.navigate(['subscriptions']);
+       }
     }
 
     async onSubmit() {

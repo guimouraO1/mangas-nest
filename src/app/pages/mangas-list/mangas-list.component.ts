@@ -62,7 +62,7 @@ export class MangasListComponent implements OnInit {
     async getMangasCount() {
         try {
             const response = await firstValueFrom(this.mangaService.getMangasCount());
-            this.mangaPages = response.mangasCount;
+            this.mangaPages = Math.ceil(response.mangasCount / 4);
         } catch (error) {
             console.log(error);
         }

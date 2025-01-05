@@ -72,27 +72,29 @@
                 </tr>
 
                 } @empty {
-                @for (item of [1,2,3,4,5]; track $index) {
-                <tr class="flex border border-opacity-25 border-border_dark  border-t-border_dark">
-                    <th class="p-2 text-center">
-                        <span
-                            class="font-extrabold text-@text-theme-white dark:text-@text-theme-dark text-center">{{item}}</span>
-                    </th>
-                    <th scope="row"
-                        class="flex items-center px-6 py-4 text-@text-theme-white dark:text-@text-theme-dark whitespace-nowrap w-[30vw]">
-                        <div class="skeleton h-10 w-10 shrink-0 rounded-full"></div>
-                        <div class="skeleton h-2 w-full m-2"></div>
-                    </th>
-                    <td class="px-6 py-4 text-@text-theme-white dark:text-@text-theme-dark">
-                        <div class="skeleton h-2 w-12"></div>
-                    </td>
-                    <td class="px-6 py-4">
-                        <div class="skeleton h-12 w-40"></div>
-                    </td>
-                </tr>
+                    @for (item of [1,2,3,4,5]; track $index) {
+                        <tr class="border border-@border-gray border-opacity-30 rounded-md">
+                            <th class="p-2 text-center">
+                                <span
+                                    class="font-extrabold text-@text-theme-white dark:text-@text-theme-dark text-center">{{item}}</span>
+                            </th>
+                            <th scope="row"
+                                class="flex items-center px-6 py-4 text-@text-theme-white dark:text-@text-theme-dark whitespace-nowrap w-[30vw]">
+                                <div class="skeleton h-10 w-10 shrink-0 rounded-full"></div>
+                                <div class="skeleton h-2 w-full m-2"></div>
+                            </th>
+                            <td class="px-6 py-4 text-@text-theme-white dark:text-@text-theme-dark">
+                                <div class="skeleton h-2 w-12"></div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="skeleton h-12 w-40"></div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="skeleton h-12 w-40"></div>
+                            </td>
+                        </tr>
+                    }
                 }
-                }
-
             </tbody>
         </table>
         @if (mangaPages > 0) {
