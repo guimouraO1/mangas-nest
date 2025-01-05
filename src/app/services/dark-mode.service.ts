@@ -9,13 +9,11 @@ export class DarkModeService {
   getInitialTheme(): void {
     let theme = localStorage.getItem('theme');
     if (!theme) return;
-    this.darkModeSignal.update((value) => theme);
+    this.darkModeSignal.update(() => theme);
   }
 
   updateDarkMode(): void {
-    this.darkModeSignal.update((value) =>
-      value === 'dark' ? 'light' : 'dark'
-    );
+    this.darkModeSignal.update((value) => value === 'dark' ? 'light' : 'dark');
     localStorage.setItem('theme', this.darkModeSignal());
   }
 }

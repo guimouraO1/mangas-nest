@@ -27,12 +27,11 @@ export class AdminComponent {
     fb = inject(FormBuilder);
     mangaService = inject(MangaService);
     notificationService = inject(NotificationService);
-    stepper: boolean = true;
     translateService = inject(TranslateService);
 
+    stepper: boolean = true;
     mangaForm: FormGroup;
     weekDays = Object.values(WeekDays);
-    inputValue: number = 0;
     maxFileSizeBytes = 2 * 1024 * 1024;
     file: File | null = null;
 
@@ -79,6 +78,7 @@ export class AdminComponent {
                 this.file = null;
                 return;
             }
+
             this.mangaForm.patchValue({
                 image: this.file,
             });
@@ -109,28 +109,26 @@ export class AdminComponent {
 
         const { image, ...mangaData } = this.mangaForm.value;
 
-
         try {
-            const response: any = await firstValueFrom(this.mangaService.getPresignedUrl(this.file.type));
-
+            const response = await firstValueFrom(this.mangaService.getPresignedUrl(this.file.type));
             await firstValueFrom(this.mangaService.uploadImageToS3(response.signedUrl, this.file));
 
             const newMangaData = {
                 ...mangaData,
                 url: `${environment.urlImages}${response.key}`
             };
-
             await firstValueFrom(this.mangaService.createManga(newMangaData));
+            
             const successMessage = await firstValueFrom(this.translateService.get("pages.admin.alerts.success"));
-
             this.notificationService.alert({
                 message: successMessage,
                 type: AlertType.Success,
             });
+
             this.stepper = true;
             this.mangaForm.reset();
         } catch (error) {
-
+            console.log(error);
         }
     }
 

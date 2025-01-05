@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
   providedIn: 'root'
 })
 export class LanguageService {
-    
+    DEFAULT_LANGUAGE = 'en';
     private languageSubject = new BehaviorSubject<Languages>('en');
     language$ = this.languageSubject.asObservable();
     translateService =  inject(TranslateService);
@@ -29,6 +29,8 @@ export class LanguageService {
     }
     
     setLanguage(language: Languages) {
+        localStorage.setItem('lg', language);
         this.languageSubject.next(language);
+        this.translateService.use(language);
     }
 }

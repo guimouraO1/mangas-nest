@@ -18,7 +18,7 @@ export class CustomSnackbarComponent {
     this.alert = this.data.alert;
   }
 
-  alert: Alert | undefined;
+  alert: Alert;
   AlertType = AlertType;
   matSnackBarRef: MatSnackBarRef<CustomSnackbarComponent> = inject(MatSnackBarRef);
 

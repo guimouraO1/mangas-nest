@@ -22,10 +22,7 @@ export class NewChapterModalComponent {
     chapter = signal<number>(1);
     chapterValue: any = 0;
 
-    constructor(
-        public dialogRef: MatDialogRef<NewChapterModalComponent, boolean>,
-        @Inject(MAT_DIALOG_DATA) public data: any
-    ) {
+    constructor(public dialogRef: MatDialogRef<NewChapterModalComponent, boolean>, @Inject(MAT_DIALOG_DATA) public data: any) {
         if (+this.data[0]?.number) {
             this.chapterValue = +this.data[0].number + 1;
             this.chapter.set(this.chapterValue);

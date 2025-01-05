@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import {
     FormBuilder,
-    FormControl,
     FormGroup,
     ReactiveFormsModule,
     Validators,
@@ -13,6 +12,7 @@ import { AlertType } from '../../models/notification.model';
 import { AuthService } from '../../services/auth.service';
 import { NotificationService } from '../../services/notification.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TokenService } from '../../services/token.service';
 
 @Component({
     selector: 'app-login',
@@ -27,25 +27,18 @@ export class LoginComponent {
     fb = inject(FormBuilder);
     notificationService = inject(NotificationService);
     translateService = inject(TranslateService);
+    tokenService = inject(TokenService);
 
     loginForm: FormGroup;
     isPasswordHiden = true;
     isButtonSigninDisable = false;
     alertType = AlertType;
 
-    constructor(authSerice: AuthService) {
+    constructor() {
         this.loginForm = this.fb.group({
             email: ['', [Validators.required, Validators.email]],
             password: ['', [Validators.required, Validators.minLength(3)]],
         });
-    }
-
-    get emailControl() {
-        return this.loginForm.get('email') as FormControl;
-    }
-
-    get passwordControl() {
-        return this.loginForm.get('password') as FormControl;
     }
 
     async onSubmit() {
@@ -56,16 +49,12 @@ export class LoginComponent {
         this.isButtonSigninDisable = true;
 
         try {
-            const res = await firstValueFrom(this.authService.signin(this.loginForm.value));
-
-            localStorage.setItem('token', res.token);
-
-            this.authService.setUser(this.authService.decodePayloadJWT(res.token));
-
+            const response = await firstValueFrom(this.authService.startSession(this.loginForm.value));
+            this.tokenService.setToken(response.token);
+            this.authService.setIsUserAuthenticated(true);
             this.router.navigate(['subscriptions']);
 
             const successMessage = await firstValueFrom(this.translateService.get("pages.signin.alerts.success"));
-            
             this.notificationService.alert({
                 message: successMessage,
                 type: AlertType.Success,

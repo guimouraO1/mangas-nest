@@ -1,11 +1,18 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { jwtDecode } from 'jwt-decode';
-import { BehaviorSubject, firstValueFrom, Observable, take } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { LoginForm } from '../models/login.model';
-import { User } from '../models/user.model';
 import { RegisterForm } from '../models/register.model';
+import { TokenService } from './token.service';
+
+interface RefreshTokenResponse {
+    token: string;
+}
+
+interface StartSessionResponse {
+    token: string;
+}
 
 @Injectable({
     providedIn: 'root',
@@ -13,55 +20,40 @@ import { RegisterForm } from '../models/register.model';
 export class AuthService {
     private http = inject(HttpClient);
     private urlApi = environment.url;
-    private userSubject = new BehaviorSubject<User | undefined>(undefined);
-    user$ = this.userSubject.asObservable();
+    private tokenService = inject(TokenService)
+    private isUserAuthenticated = new BehaviorSubject<boolean>(false);
+    public isUserAuthenticated$ = this.isUserAuthenticated.asObservable();
 
-    signin(loginForm: LoginForm): Observable<any> {
-        return this.http.post(`${this.urlApi}/auth`, loginForm);
+    verifyUserAuth(): void {
+        const user = this.tokenService.decodePayloadJWT();
+        if (user && user.role && user.sub) {
+            return this.setIsUserAuthenticated(true);
+        };
+
+        return this.setIsUserAuthenticated(false);
+    }
+
+    getIsUserAuthenticated(): Observable<boolean> {
+        return this.isUserAuthenticated$;
+    }
+
+    setIsUserAuthenticated(value: boolean): void {
+        this.isUserAuthenticated.next(value);
+    }
+
+    startSession(loginForm: LoginForm): Observable<StartSessionResponse> {
+        return this.http.post<StartSessionResponse>(`${this.urlApi}/auth/session`, loginForm);
+    }
+
+    endSession(): Observable<any> {
+        return this.http.post(`${this.urlApi}/auth/end-session`, {withCredentials: true});
+    }
+
+    refreshToken(): Observable<RefreshTokenResponse> {
+        return this.http.patch<RefreshTokenResponse>(`${this.urlApi}/token/refresh`, {withCredentials: true});
     }
 
     register(registerForm: RegisterForm): Observable<any> {
-        return this.http.post(`${this.urlApi}/signup`, registerForm);
-    }
-
-    getUserObserver(): Observable<User | undefined> {
-        return this.user$;
-    }
-
-    getUser(): User | undefined {
-        return this.userSubject.value;
-    }
-
-    logout(): void {
-        this.userSubject.next(undefined);
-    }
-
-    setUser(user: User): void {
-        this.userSubject.next(user);
-    }
-
-    protected setupRequestHeader() {
-        const token = localStorage.getItem('token');
-        return new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    }
-
-    async Authentication(): Promise<void> {
-        const headers = this.setupRequestHeader();
-
-        try {
-            const res: any = await firstValueFrom(this.http.get(`${this.urlApi}/authorize`, { headers }));
-            this.setUser(this.decodePayloadJWT(res.tokenJwt));
-        } catch (error) {
-            this.userSubject.next(undefined);
-        }
-    }
-
-    decodePayloadJWT(token: string) {
-        try {
-            const jwt: any = jwtDecode(token);
-            return jwt;
-        } catch (Error) {
-            return false;
-        }
+        return this.http.post(`${this.urlApi}/user`, registerForm);
     }
 }

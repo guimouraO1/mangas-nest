@@ -1,8 +1,22 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, TRANSLATIONS } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 import { Manga } from '../models/manga.model';
+
+interface GetMangasResponse {
+  mangas: Manga[];
+}
+
+interface GetMangasCountResponse {
+  mangasCount: number;
+}
+
+interface GetPresignedResponse {
+  signedUrl: string;
+  fileExtension: string;
+  key: string;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -11,45 +25,30 @@ export class MangaService {
   protected http = inject(HttpClient);
   private urlApi = environment.url;
 
-  getMangas(page: number, offset: number): Observable<Manga[]> {
-    const headers = this.setupRequestHeader();
-
+  getMangas(page: number, offset: number): Observable<GetMangasResponse> {
     let params = new HttpParams();
 
     params = params.set('page', page);
     params = params.set('offset', offset);
 
-    return this.http.get<Manga[]>(`${this.urlApi}/manga`, { params, headers });
+    return this.http.get<GetMangasResponse>(`${this.urlApi}/manga`, { params });
   }
 
-  getMangasCount(): Observable<any> {
-    const headers = this.setupRequestHeader();
-
-    return this.http.get<any>(`${this.urlApi}/manga/count`, { headers });
+  getMangasCount(): Observable<GetMangasCountResponse> {
+    return this.http.get<GetMangasCountResponse>(`${this.urlApi}/manga/count`);
   }
 
-  createManga(manga: Manga): Observable<Manga[]> {
-    const headers = this.setupRequestHeader();
-    return this.http.post<any>(`${this.urlApi}/manga`, manga, { headers });
+  createManga(manga: Manga): Observable<Manga> {
+    return this.http.post<Manga>(`${this.urlApi}/manga`, manga);
   }
 
-  getPresignedUrl(imageType: string) {
-    const headers = this.setupRequestHeader();
+  getPresignedUrl(imageType: string): Observable<GetPresignedResponse> {
     let params = new HttpParams().set('fileType', imageType);
-
-    return this.http.get<any>(`${this.urlApi}/uploads`, { params, headers });
+    return this.http.get<GetPresignedResponse>(`${this.urlApi}/manga/upload/image`, { params });
   }
 
   uploadImageToS3(urlPresigned: string, file: File) {
-    const headers = new HttpHeaders({
-      'Content-Type': file.type
-    });
-
+    const headers = new HttpHeaders({ 'Content-Type': file.type });
     return this.http.put(urlPresigned, file, { headers });
-  }
-
-  protected setupRequestHeader() {
-    const token = localStorage.getItem('token');
-    return new HttpHeaders().set('Authorization', `Bearer ${token}`);
   }
 }

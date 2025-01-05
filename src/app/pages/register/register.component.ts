@@ -20,14 +20,14 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
     templateUrl: './register.component.html',
 })
 export class RegisterComponent {
-    registerForm: FormGroup;
-    fb = inject(FormBuilder);
-    isPasswordHiden = true;
     authService = inject(AuthService);
     notificationService = inject(NotificationService);
     translateService = inject(TranslateService);
     router = inject(Router);
     
+    registerForm: FormGroup;
+    fb = inject(FormBuilder);
+    isPasswordHiden = true;
     isDisableButton: boolean = false;
     stepper: boolean = true;
 
@@ -55,7 +55,6 @@ export class RegisterComponent {
             await firstValueFrom(this.authService.register(formData));
             
             const successMessage = await firstValueFrom(this.translateService.get("pages.signup.alerts.success"));
-
             this.notificationService.alert({
                 message: successMessage,
                 type: AlertType.Success,
@@ -64,10 +63,8 @@ export class RegisterComponent {
             this.stepper = true;
             this.registerForm.reset();
             this.router.navigate(['signin']);
-
         } catch (err: any) {
             const errorMessage = await firstValueFrom(this.translateService.get("pages.signup.alerts.error"));
-
             this.notificationService.alert({
                 message: errorMessage,
                 type: AlertType.Error,

@@ -1,6 +1,7 @@
 import {
   HttpClient,
   provideHttpClient,
+  withInterceptors,
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import {
@@ -18,6 +19,7 @@ import { provideEnvironmentNgxMask } from 'ngx-mask';
 import {TranslateModule, TranslateLoader} from "@ngx-translate/core";
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { LanguageService } from './services/language.service';
+import { httpInterceptor } from './services/interceptor.service';
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (http: HttpClient) =>
   new TranslateHttpLoader(http, './i18n/', '.json');
@@ -26,8 +28,8 @@ export function initializer(darkModeService: DarkModeService) {
   return () => darkModeService.getInitialTheme();
 }
 
-export function authInitializer(authService: AuthService) {
-  return () => authService.Authentication();
+export function AuthInitializer(authService: AuthService) {
+  return () => authService.verifyUserAuth();
 }
 
 export function languageInitializer(languageService: LanguageService) {
@@ -38,10 +40,10 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withInterceptors([httpInterceptor])),
     {
       provide: APP_INITIALIZER,
-      useFactory: authInitializer,
+      useFactory: AuthInitializer,
       deps: [AuthService],
       multi: true,
     },

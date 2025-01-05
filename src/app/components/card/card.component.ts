@@ -5,7 +5,7 @@ import { ConfirmationModalComponent } from './confirmation-modal/confirmation-mo
 import { ChaptersService } from '../../services/chapters.service';
 import { NewChapterModalComponent } from './new-chapter-modal/new-chapter-modal.component';
 import { Subscription } from '../../models/subscriptions.model';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, take } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -23,7 +23,7 @@ export class CardComponent {
   async newChapter(subscriptionId: string) {
     const newChapter = this.dialog.open(NewChapterModalComponent, {data: this.subscription().chapters});
 
-    newChapter.afterClosed().subscribe(async (confirmed: number | boolean) => {
+    newChapter.afterClosed().pipe(take(1)).subscribe(async (confirmed: number | boolean) => {
       if (!confirmed) return;
       
       await firstValueFrom(this.chapterService.createChapter(+confirmed, subscriptionId)).catch();
@@ -38,7 +38,7 @@ export class CardComponent {
   deleteChapter(chapter: number, subscriptionId: string) {
     const deleteChapterConfirmation = this.dialog.open(ConfirmationModalComponent);
 
-    deleteChapterConfirmation.afterClosed().subscribe(async (confirmed: boolean) => {
+    deleteChapterConfirmation.afterClosed().pipe(take(1)).subscribe(async (confirmed: boolean) => {
       if (!confirmed) return;
 
       await firstValueFrom(this.chapterService.deleteChapter(+chapter, subscriptionId)).catch();

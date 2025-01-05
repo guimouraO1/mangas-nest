@@ -10,26 +10,12 @@ export class ChaptersService {
   private urlApi = environment.url;
   protected http = inject(HttpClient);
 
-  constructor() {}
-
-  protected setupRequestHeader() {
-    const token = localStorage.getItem('token');
-    return new HttpHeaders().set('Authorization', `Bearer ${token}`);
-  }
-
   createChapter(number: number, subscriptionId: string): Observable<any> {
-    const headers = this.setupRequestHeader();
-    const body = { subscriptionId, number };
-
-    return this.http.post<any>(`${this.urlApi}/chapter`, body, { headers });
+    return this.http.post<any>(`${this.urlApi}/chapter`, { subscriptionId, number });
   }
 
   deleteChapter(number: number, subscriptionId: string): Observable<any> {
-    const headers = this.setupRequestHeader();
-  
     const url = `${this.urlApi}/chapter/${subscriptionId}/${number}`;
-  
-    return this.http.delete<any>(url, { headers });
+    return this.http.delete(url);
   }
-  
 }

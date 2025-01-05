@@ -3,7 +3,6 @@ import { Component, inject, OnInit } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { CardComponent } from '../../components/card/card.component';
 import { SubscriptionService } from '../../services/subscription.service';
-import { environment } from '../../../environments/environment';
 import { Subscription } from '../../models/subscriptions.model';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -17,6 +16,7 @@ import { TranslateModule } from '@ngx-translate/core';
 export class SubscriptionsComponent implements OnInit {
   subscriptionService = inject(SubscriptionService);
   subscriptions: Subscription[] = [];
+
   isLoadingGetSubscriptions: boolean = false;
   offset: number = 4;
   page: number = 1;
@@ -42,10 +42,12 @@ export class SubscriptionsComponent implements OnInit {
   async getSubscriptions() {
     this.subscriptions = [];
     this.isLoadingGetSubscriptions = true;
+
     try {
-      const subscriptions: Subscription[] = await firstValueFrom(this.subscriptionService.getSubscriptions(this.page, this.offset));
+      const response = await firstValueFrom(this.subscriptionService.getSubscriptions(this.page, this.offset));
+
       this.isLoadingGetSubscriptions = false;
-      this.subscriptions = subscriptions;
+      this.subscriptions = response.subscriptions;
 
     } catch (error) {
       console.log(error)
@@ -54,10 +56,8 @@ export class SubscriptionsComponent implements OnInit {
 
   async getSubscriptionsCount() {
     try {
-      const res: any = await firstValueFrom(this.subscriptionService.getSubscriptionsCount());
-      
-      this.subscriptionsCount = res.subscriptions;
-
+      const response = await firstValueFrom(this.subscriptionService.getSubscriptionsCount());
+      this.subscriptionsCount = response.subscriptionsCount;
     } catch (error) {
       console.log(error)
     }

@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { authGuard } from './guard/auth.guard';
+import { authGuard } from './guards/auth.guard';
 import { MangasListComponent } from './pages/mangas-list/mangas-list.component';
 
 export const routes: Routes = [

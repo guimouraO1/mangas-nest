@@ -15,7 +15,6 @@ import { LanguageService } from './services/language.service';
     selector: 'app-root',
     standalone: true,
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss'],
     imports: [
         RouterOutlet,
         NavbarComponent,

@@ -52,52 +52,41 @@ export class MangasListComponent implements OnInit {
 
     async getMangas() {
         try {
-            const mangas = await firstValueFrom(
-                this.mangaService.getMangas(this.page, this.offset)
-            );
-            this.mangas = mangas;
-        } catch (error) {}
+            const response = await firstValueFrom(this.mangaService.getMangas(this.page, this.offset));
+            this.mangas = response.mangas;
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     async getMangasCount() {
         try {
-            const res = await firstValueFrom(
-                this.mangaService.getMangasCount()
-            );
-
-            this.mangaPages = res.mangas;
-        } catch (error) {}
+            const response = await firstValueFrom(this.mangaService.getMangasCount());
+            this.mangaPages = response.mangasCount;
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     async subscribe(mangaId: string) {
         try {
-            const dialogRef = this.dialog.open(SubscritionModalConfimation, {});
+            const dialogRef = this.dialog.open(SubscritionModalConfimation);
             const result = await firstValueFrom(dialogRef.afterClosed());
 
             if (!result.modal) return;
 
-            await firstValueFrom(
-                this.subscriptionService.subscribe(mangaId, +result.rating)
-            );
+            await firstValueFrom(this.subscriptionService.subscribe(mangaId, +result.rating));
 
-            const mangas = await firstValueFrom(
-                this.mangaService.getMangas(this.page, this.offset)
-            );
-            this.mangas = mangas;
+            const response = await firstValueFrom(this.mangaService.getMangas(this.page, this.offset));
+            this.mangas = response.mangas;
 
-            const successMessage = await firstValueFrom(
-                this.translateService.get('pages.mangas-list.alerts.subscribed')
-            );
-
+            const successMessage = await firstValueFrom(this.translateService.get('pages.mangas-list.alerts.subscribed'));
             this.notificationService.alert({
                 message: successMessage,
                 type: AlertType.Success,
             });
         } catch (error) {
-            const errorMessage = await firstValueFrom(
-                this.translateService.get('pages.mangas-list.alerts.error')
-            );
-
+            const errorMessage = await firstValueFrom(this.translateService.get('pages.mangas-list.alerts.error'));
             this.notificationService.alert({
                 message: errorMessage,
                 type: AlertType.Error,
@@ -107,17 +96,12 @@ export class MangasListComponent implements OnInit {
 
     async unSubscribe(subscriptionId: string, mangaId: string) {
         try {
-            const dialogRef = this.dialog.open(
-                UnSubscritionModalConfimation,
-                {}
-            );
+            const dialogRef = this.dialog.open(UnSubscritionModalConfimation);
             const result = await firstValueFrom(dialogRef.afterClosed());
 
             if (!result) return;
 
-            await firstValueFrom(
-                this.subscriptionService.unSubscribe(subscriptionId)
-            );
+            await firstValueFrom(this.subscriptionService.unSubscribe(subscriptionId));
 
             this.mangas = this.mangas.map((manga) => {
                 if (manga.id === mangaId) {
@@ -126,19 +110,13 @@ export class MangasListComponent implements OnInit {
                 return manga;
             });
 
-            const successMessage = await firstValueFrom(
-              this.translateService.get('pages.mangas-list.alerts.unsubscribed')
-          );
-
+            const successMessage = await firstValueFrom(this.translateService.get('pages.mangas-list.alerts.unsubscribed'));
             this.notificationService.alert({
                 message: successMessage,
                 type: AlertType.Success,
             });
         } catch (error: any) {
-            const errorMessage = await firstValueFrom(
-                this.translateService.get('pages.mangas-list.alerts.error')
-            );
-
+            const errorMessage = await firstValueFrom(this.translateService.get('pages.mangas-list.alerts.error'));
             this.notificationService.alert({
                 message: errorMessage,
                 type: AlertType.Error,

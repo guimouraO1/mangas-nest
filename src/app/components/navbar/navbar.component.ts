@@ -1,16 +1,11 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnDestroy, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { User } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
 import { DarkModeService } from '../../services/dark-mode.service';
-import { NotificationService } from '../../services/notification.service';
-import { TranslateModule, TranslateService } from "@ngx-translate/core";
+import { TranslateModule } from "@ngx-translate/core";
 import { LanguageService } from '../../services/language.service';
-
-enum Languages {
-    PT_BR = 'pt-br',
-    EN = 'en',
-}
+import { firstValueFrom, Subject, takeUntil } from 'rxjs';
+import { TokenDecoded, TokenService } from '../../services/token.service';
 
 @Component({
     selector: 'app-navbar',
@@ -18,43 +13,52 @@ enum Languages {
     imports: [RouterLink, TranslateModule],
     templateUrl: './navbar.component.html'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnDestroy {
     authService = inject(AuthService);
     darkModeService: DarkModeService = inject(DarkModeService);
     router: Router = inject(Router);
-    notificationService = inject(NotificationService);
-    languageService = inject(LanguageService)
+    languageService = inject(LanguageService);
+    tokenService = inject(TokenService);
 
-    user: User | undefined;
+    private ngUnsubscribe = new Subject<void>();
+    isUserAuthenticated: boolean = false;
     isSidenavOpened = signal<boolean>(false);
-    translateService = inject(TranslateService);
-
-    language: string = 'en';
+    language: string = this.languageService.DEFAULT_LANGUAGE;
+    user: TokenDecoded | null =  null; 
 
     constructor() {
-        this.authService.getUserObserver().subscribe((value) => this.user = value);
-        this.languageService.getLanguageObserver().subscribe((value) => this.language = value);
+        this.authService.getIsUserAuthenticated().pipe(takeUntil(this.ngUnsubscribe)).subscribe((value) => {
+            this.isUserAuthenticated = value;
+            
+            if (value) {
+                this.user = this.tokenService.decodePayloadJWT();
+            }
+        });
+        this.languageService.getLanguageObserver().pipe(takeUntil(this.ngUnsubscribe)).subscribe((value) => this.language = value);
     }
 
     toggleDarkMode() {
         this.darkModeService.updateDarkMode();
     }
 
-    signOut(): void {
+    async endSession() {
         this.isSidenavOpened.set(false);
-
-        this.authService.logout();
-        localStorage.removeItem('token');
+        this.tokenService.removeToken();
+        this.authService.setIsUserAuthenticated(false);
+        await firstValueFrom(this.authService.endSession());
         this.router.navigate(['signin']);
     }
 
     changeLanguage(language: any): void {
-        localStorage.setItem('lg', language);
         this.languageService.setLanguage(language);
-        this.translateService.use(language);
         const dropdown = document.getElementById('dropdown') as HTMLDetailsElement;
         if (dropdown) {
-            dropdown.removeAttribute('open'); // Fecha o dropdown
+            dropdown.removeAttribute('open');
         }
+    }
+
+    ngOnDestroy(): void {
+        this.ngUnsubscribe.next();
+        this.ngUnsubscribe.complete();
     }
 }
