@@ -50,7 +50,7 @@ export class AuthService {
     }
 
     refreshToken(): Observable<RefreshTokenResponse> {
-        return this.http.patch<RefreshTokenResponse>(`${this.urlApi}/token/refresh`, {withCredentials: true});
+        return this.http.patch<RefreshTokenResponse>(`${this.urlApi}/auth/refresh-token`, {withCredentials: true});
     }
 
     register(registerForm: RegisterForm): Observable<any> {
