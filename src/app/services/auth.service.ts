@@ -42,15 +42,15 @@ export class AuthService {
     }
 
     startSession(loginForm: LoginForm): Observable<StartSessionResponse> {
-        return this.http.post<StartSessionResponse>(`${this.urlApi}/auth/session`, loginForm);
+        return this.http.post<StartSessionResponse>(`${this.urlApi}/auth/session`, loginForm, { withCredentials:true });
     }
 
     endSession(): Observable<any> {
-        return this.http.post(`${this.urlApi}/auth/end-session`, {withCredentials: true});
+        return this.http.post(`${this.urlApi}/auth/end-session`, {}, {withCredentials: true});
     }
 
     refreshToken(): Observable<RefreshTokenResponse> {
-        return this.http.patch<RefreshTokenResponse>(`${this.urlApi}/auth/refresh-token`, {withCredentials: true});
+        return this.http.patch<RefreshTokenResponse>(`${this.urlApi}/auth/refresh-token`, {}, {withCredentials: true});
     }
 
     register(registerForm: RegisterForm): Observable<any> {
