@@ -1,5 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { firstValueFrom, Subject, takeUntil } from 'rxjs';
 import { MangaService } from '../../services/manga.service';
 import { Manga } from '../../models/manga.model';
 import { SubscriptionService } from '../../services/subscription.service';
@@ -10,6 +10,9 @@ import { AlertType } from '../../models/notification.model';
 import { UnSubscritionModalConfimation } from './unsubscription-modal/unsubscription-modal.component';
 import { NgOptimizedImage } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { CreateMangaModal } from './create-manga/create-manga-modal';
+import { AuthService } from '../../services/auth.service';
+import { TokenDecoded, TokenService } from '../../services/token.service';
 
 @Component({
     selector: 'app-mangas-list',
@@ -18,23 +21,40 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
     templateUrl: './mangas-list.component.html',
     styleUrl: './mangas-list-component.scss',
 })
-export class MangasListComponent implements OnInit {
+export class MangasListComponent implements OnInit, OnDestroy {
     subscriptionService = inject(SubscriptionService);
     mangaService = inject(MangaService);
     dialog = inject(MatDialog);
     notificationService = inject(NotificationService);
     translateService = inject(TranslateService);
+    authService = inject(AuthService);
+    tokenService = inject(TokenService);
 
     offset: number = 4;
     page: number = 1;
     mangaPages: number = 1;
+    private ngUnsubscribe = new Subject<void>();
 
     mangas: Manga[] = [];
     subscriptions: string[] = [];
+    isUserAuthenticated: boolean = false;
+    user: TokenDecoded | null = null;
+    isLoading: boolean = false;
 
     async ngOnInit() {
+        this.isLoading = true;
         await this.getMangasCount();
         await this.getMangas();
+
+        this.authService.getIsUserAuthenticated().pipe(takeUntil(this.ngUnsubscribe)).subscribe((value) => {
+            this.isUserAuthenticated = value;
+            
+            if (value) {
+                this.user = this.tokenService.decodePayloadJWT();
+            }
+        });
+
+        this.isLoading = false;
     }
 
     async incrementPage() {
@@ -122,5 +142,16 @@ export class MangasListComponent implements OnInit {
                 type: AlertType.Error,
             });
         }
+    }
+
+
+    async createManga() {
+        const dialogRef = this.dialog.open(CreateMangaModal);
+        const result = await firstValueFrom(dialogRef.afterClosed());
+    }
+
+    ngOnDestroy(): void {
+        this.ngUnsubscribe.next();
+        this.ngUnsubscribe.complete();
     }
 }

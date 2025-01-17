@@ -11,8 +11,12 @@ export const httpInterceptor: HttpInterceptorFn = (request, next) => {
     const authService = inject(AuthService);
     const tokenService = inject(TokenService);
 
-    const token = tokenService.getToken();
+    const isS3Request = request.url.startsWith('https://mangas-nest-uploads.s3.us-east-1.amazonaws.com/');
+    if (isS3Request) {
+        return next(request);
+    }
 
+    const token = tokenService.getToken();
     if (token) {
         request = request.clone({ setHeaders: { Authorization: `Bearer ${token}` } });
     }

@@ -28,15 +28,6 @@ export const routes: Routes = [
         }
     },
     {
-        path: 'admin',
-        title: 'Add new Manga',
-        loadComponent: () => import('./pages/admin/admin.component').then((p) => p.AdminComponent),
-        canActivate: [authGuard],
-        data: {
-            roles: ['admin']
-        }
-    },
-    {
         path: 'subscriptions',
         title: 'Subscriptions',
         loadComponent: () => import('./pages/subscriptions/subscriptions.component').then((p) => p.SubscriptionsComponent),

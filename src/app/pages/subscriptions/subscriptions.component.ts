@@ -17,7 +17,7 @@ export class SubscriptionsComponent implements OnInit {
   subscriptionService = inject(SubscriptionService);
   subscriptions: Subscription[] = [];
 
-  isLoadingGetSubscriptions: boolean = false;
+  isLoadingGetSubscriptions: boolean = true;
   offset: number = 4;
   page: number = 1;
   subscriptionsCount: number = 1;
@@ -40,17 +40,19 @@ export class SubscriptionsComponent implements OnInit {
   }
 
   async getSubscriptions() {
-    this.subscriptions = [];
     this.isLoadingGetSubscriptions = true;
+
+    this.subscriptions = [];
 
     try {
       const response = await firstValueFrom(this.subscriptionService.getSubscriptions(this.page, this.offset));
 
-      this.isLoadingGetSubscriptions = false;
       this.subscriptions = response.subscriptions;
 
     } catch (error) {
       console.log(error)
+    } finally {
+      this.isLoadingGetSubscriptions = false;
     }
   }
 

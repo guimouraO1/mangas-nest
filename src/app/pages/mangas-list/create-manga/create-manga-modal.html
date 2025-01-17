@@ -1,4 +1,9 @@
-<main class="w-full h-[88vh] flex">
+<main  [ngClass]="darkModeService.darkModeSignal()" class="w-full flex bg-@theme-ligth dark:bg-@theme-dark rounded shadow p-16 relative">
+  
+  <svg (click)="cancel()" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 absolute right-2 top-2 cursor-pointer hover:stroke-error">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+  </svg>
+  
   <form [formGroup]="mangaForm" class="m-auto w-[500px] flex flex-col p-8 rounded-md gap-4">
     <span
       class="text-center text-3xl font-bold text-@text-theme-white dark:text-@text-theme-dark mb-4">{{'pages.admin.form.title'
@@ -39,12 +44,6 @@
           }
         </select>
       </div>
-    </div>
-
-    <div>
-      <label for="helper-text" class="text-sm text-@text-theme-white dark:text-@text-theme-dark">{{'pages.admin.form.about' | translate }}</label>
-      <textarea placeholder="{{'pages.admin.form.some-text' | translate }}" formControlName="about" id="about"
-        class="text-sm textarea textarea-lg w-full max-h-20 text-@text-theme-white dark:text-@text-theme-dark dark:bg-@theme-dark bg-@white border-@border-gray border-opacity-15"></textarea>
     </div>
   } @else {
     <label for="helper-text" class="text-sm text-@text-theme-white dark:text-@text-theme-dark">{{'pages.admin.form.anime-image' | translate }}</label>

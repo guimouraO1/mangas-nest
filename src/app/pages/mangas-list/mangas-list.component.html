@@ -1,110 +1,137 @@
 <main class="w-full h-[88vh] flex">
     <div class="flex flex-col items-center justify-center w-full px-40 gap-10">
-        <table class="w-full text-sm text-left p-8 shadow-md">
-            <thead
-                class="text-xs text-@text-theme-white dark:text-@text-theme-dark uppercase border border-@border-gray border-opacity-30 rounded-md">
-                <tr>
-                    <th scope="col" class="flex justify-center p-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-                            class="size-5 fill-@texttext-@text-theme-white dark:text-@text-theme-dark">
-                            <path fill-rule="evenodd"
-                                d="M6 4.75A.75.75 0 0 1 6.75 4h10.5a.75.75 0 0 1 0 1.5H6.75A.75.75 0 0 1 6 4.75ZM6 10a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H6.75A.75.75 0 0 1 6 10Zm0 5.25a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H6.75a.75.75 0 0 1-.75-.75ZM1.99 4.75a1 1 0 0 1 1-1H3a1 1 0 0 1 1 1v.01a1 1 0 0 1-1 1h-.01a1 1 0 0 1-1-1v-.01ZM1.99 15.25a1 1 0 0 1 1-1H3a1 1 0 0 1 1 1v.01a1 1 0 0 1-1 1h-.01a1 1 0 0 1-1-1v-.01ZM1.99 10a1 1 0 0 1 1-1H3a1 1 0 0 1 1 1v.01a1 1 0 0 1-1 1h-.01a1 1 0 0 1-1-1V10Z"
-                                clip-rule="evenodd" />
-                        </svg>
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        {{'pages.mangas-list.table.name' | translate }}
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        {{'pages.mangas-list.table.weekday' | translate }}
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        {{'pages.mangas-list.table.status' | translate }}
-                    </th>
-                    <th class="px-6 py-4">
-                        {{'pages.mangas-list.table.unsubscribe' | translate }}
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (manga of mangas; track $index) {
-                <tr class="border border-@border-gray border-opacity-30 rounded-md">
-                    <th class="p-2 text-center">
-                        <span
-                            class="font-extrabold text-@text-theme-white dark:text-@text-theme-dark text-center">{{$index + 1}}</span>
-                    </th>
-                    <th scope="row"
-                        class="flex items-center px-6 py-4 text-@text-theme-white dark:text-@text-theme-dark whitespace-nowrap w-[30vw]">
-                        <figure class="relative w-14 h-14 rounded-full overflow-hidden p-1">
-                            <div class="skeleton w-full h-full p-1 rounded-full"></div>
-                            <img fill ngSrc="{{ manga.url }}" class="object-cover">
-                        </figure>
-                        <div class="ps-3">
-                            <div class="text-base font-semibold">{{manga.name}}</div>
-                        </div>
-                    </th>
-                    <td class="px-6 py-4 text-@text-theme-white dark:text-@text-theme-dark">
-                        {{ 'general.days.' + manga.date | translate }}
-                    </td>
+        <div class="w-full flex flex-col gap-3">
+            @if (isUserAuthenticated && this.user && this.user.role === 'admin') {
+            <button class="btn btn-primary self-end btn-outline hover:!text-white" (click)="createManga()">Create
+                manga</button>
+            }
+            @if (isLoading) {
+            <button class="skeleton w-32 h-14 self-end" (click)="createManga()"></button>
+            }
+            <table class="w-full text-sm text-left p-8 shadow-md">
+                <thead
+                    class="text-xs text-@text-theme-white dark:text-@text-theme-dark uppercase border border-@border-gray border-opacity-30 rounded-md">
+                    <tr>
+                        <th scope="col" class="flex justify-center p-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                class="size-5 fill-@texttext-@text-theme-white dark:text-@text-theme-dark">
+                                <path fill-rule="evenodd"
+                                    d="M6 4.75A.75.75 0 0 1 6.75 4h10.5a.75.75 0 0 1 0 1.5H6.75A.75.75 0 0 1 6 4.75ZM6 10a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H6.75A.75.75 0 0 1 6 10Zm0 5.25a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H6.75a.75.75 0 0 1-.75-.75ZM1.99 4.75a1 1 0 0 1 1-1H3a1 1 0 0 1 1 1v.01a1 1 0 0 1-1 1h-.01a1 1 0 0 1-1-1v-.01ZM1.99 15.25a1 1 0 0 1 1-1H3a1 1 0 0 1 1 1v.01a1 1 0 0 1-1 1h-.01a1 1 0 0 1-1-1v-.01ZM1.99 10a1 1 0 0 1 1-1H3a1 1 0 0 1 1 1v.01a1 1 0 0 1-1 1h-.01a1 1 0 0 1-1-1V10Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            {{'pages.mangas-list.table.name' | translate }}
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            {{'pages.mangas-list.table.weekday' | translate }}
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            {{'pages.mangas-list.table.status' | translate }}
+                        </th>
+                        <th class="px-6 py-4">
+                            {{'pages.mangas-list.table.unsubscribe' | translate }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!isLoading) {
+                    @for (manga of mangas; track $index) {
+                    <tr class="border border-@border-gray border-opacity-30 rounded-md">
+                        <th class="p-2 text-center">
+                            <span
+                                class="font-extrabold text-@text-theme-white dark:text-@text-theme-dark text-center">{{$index
+                                + 1}}</span>
+                        </th>
+                        <th scope="row"
+                            class="flex items-center px-6 py-4 text-@text-theme-white dark:text-@text-theme-dark whitespace-nowrap w-[30vw]">
+                            <figure class="relative w-14 h-14 rounded-full overflow-hidden p-1">
+                                <div class="skeleton w-full h-full p-1 rounded-full"></div>
+                                <img fill ngSrc="{{ manga.url }}" class="object-cover">
+                            </figure>
+                            <div class="ps-3">
+                                <div class="text-base font-semibold">{{manga.name}}</div>
+                            </div>
+                        </th>
+                        <td class="px-6 py-4 text-@text-theme-white dark:text-@text-theme-dark">
+                            {{ 'general.days.' + manga.date | translate }}
+                        </td>
 
-                    <td class="px-6 py-4">
+                        <td class="px-6 py-4">
+                            @if (manga.subscriptions && manga.subscriptions.length > 0) {
+                            <button
+                                class="btn btn-success no-animation cursor-default">{{'pages.mangas-list.table.already'
+                                | translate }}</button>
+                            } @else {
+                            <button (click)="subscribe(manga.id)"
+                                class="btn btn-primary ">{{'pages.mangas-list.table.subscribe' | translate }}</button>
+                            }
+                        </td>
+
                         @if (manga.subscriptions && manga.subscriptions.length > 0) {
-                            <button class="btn btn-success no-animation cursor-default">{{'pages.mangas-list.table.already' | translate }}</button>
+                        <td class="px-6 py-4">
+                            <button (click)="unSubscribe(manga.subscriptions[0].id, manga.id)" class="btn btn-error ">
+                                {{'pages.mangas-list.table.unsubscribe' | translate }}
+                            </button>
+                        </td>
                         } @else {
-                            <button (click)="subscribe(manga.id)" class="btn btn-primary ">{{'pages.mangas-list.table.subscribe' | translate }}</button>
+                        <td class="px-6 py-4">
+                            <button [disabled]="true" class="btn disabled:text-@text-theme-disabled">
+                                {{'pages.mangas-list.table.unsubscribe' | translate }}
+                            </button>
+                        </td>
                         }
-                    </td>
 
-                    @if (manga.subscriptions && manga.subscriptions.length > 0) {
-                    <td class="px-6 py-4">
-                        <button (click)="unSubscribe(manga.subscriptions[0].id, manga.id)" class="btn btn-error ">
-                            {{'pages.mangas-list.table.unsubscribe' | translate }}
-                        </button>
-                    </td>
-                    } @else {
-                    <td class="px-6 py-4">
-                        <button [disabled]="true" class="btn disabled:text-@text-theme-disabled">
-                            {{'pages.mangas-list.table.unsubscribe' | translate }}
-                        </button>
-                    </td>
+                    </tr>
+
+                    } @empty {
+                        <div class="join justify-self-end">
+                            <button (click)="decrementPage()" class="join-item btn btn-primary">«</button>
+                            <button class="join-item btn btn-primary">
+                                {{'pages.mangas-list.page' | translate }} {{this.page}} {{'pages.mangas-list.of' | translate }}
+                                {{mangaPages}}
+                            </button>
+                            <button (click)="incrementPage()" class="join-item btn btn-primary">»</button>
+                        </div>
                     }
-
-                </tr>
-
-                } @empty {
-                    @for (item of [1,2,3,4,5]; track $index) {
-                        <tr class="border border-@border-gray border-opacity-30 rounded-md">
-                            <th class="p-2 text-center">
-                                <span
-                                    class="font-extrabold text-@text-theme-white dark:text-@text-theme-dark text-center">{{item}}</span>
-                            </th>
-                            <th scope="row"
-                                class="flex items-center px-6 py-4 text-@text-theme-white dark:text-@text-theme-dark whitespace-nowrap w-[30vw]">
-                                <div class="skeleton h-10 w-10 shrink-0 rounded-full"></div>
-                                <div class="skeleton h-2 w-full m-2"></div>
-                            </th>
-                            <td class="px-6 py-4 text-@text-theme-white dark:text-@text-theme-dark">
-                                <div class="skeleton h-2 w-12"></div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="skeleton h-12 w-40"></div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="skeleton h-12 w-40"></div>
-                            </td>
-                        </tr>
                     }
-                }
-            </tbody>
-        </table>
+                    @else {
+                    @for (item of ['item','item','item','item']; track $index) {
+                    <tr class="border border-@border-gray border-opacity-30 rounded-md">
+                        <th class="p-2 text-center">
+                            <span
+                                class="font-extrabold text-@text-theme-white dark:text-@text-theme-dark text-center">{{item}}</span>
+                        </th>
+                        <th scope="row"
+                            class="flex items-center px-6 py-4 text-@text-theme-white dark:text-@text-theme-dark whitespace-nowrap w-[30vw]">
+                            <div class="skeleton h-14 w-14 shrink-0 rounded-full"></div>
+                            <div class="skeleton h-2 w-full m-2"></div>
+                        </th>
+                        <td class="px-6 py-4 text-@text-theme-white dark:text-@text-theme-dark">
+                            <div class="skeleton h-2 w-12"></div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="skeleton h-12 w-40"></div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="skeleton h-12 w-40"></div>
+                        </td>
+                    </tr>
+                    }
+                    }
+                </tbody>
+            </table>
+        </div>
+
         @if (mangaPages > 0) {
-            <div class="join justify-self-end">
-                <button (click)="decrementPage()" class="join-item btn btn-primary">«</button>
-                    <button class="join-item btn btn-primary">
-                        {{'pages.mangas-list.page' | translate }} {{this.page}} {{'pages.mangas-list.of' | translate }} {{mangaPages}}
-                    </button>
-                <button (click)="incrementPage()" class="join-item btn btn-primary">»</button>
-            </div>
+        <div class="join justify-self-end">
+            <button (click)="decrementPage()" class="join-item btn btn-primary">«</button>
+            <button class="join-item btn btn-primary">
+                {{'pages.mangas-list.page' | translate }} {{this.page}} {{'pages.mangas-list.of' | translate }}
+                {{mangaPages}}
+            </button>
+            <button (click)="incrementPage()" class="join-item btn btn-primary">»</button>
+        </div>
         }
     </div>
 </main>

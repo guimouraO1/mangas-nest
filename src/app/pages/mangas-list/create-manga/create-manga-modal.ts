@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
     FormBuilder,
     FormControl,
@@ -8,26 +8,29 @@ import {
     Validators,
 } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
-import { WeekDays } from '../../models/manga.model';
-import { AlertType } from '../../models/notification.model';
-import { MangaService } from '../../services/manga.service';
-import { NotificationService } from '../../services/notification.service';
-import { environment } from '../../../environments/environment';
+import { WeekDays } from '../../../models/manga.model';
+import { AlertType } from '../../../models/notification.model';
+import { MangaService } from '../../../services/manga.service';
+import { NotificationService } from '../../../services/notification.service';
+import { environment } from '../../../../environments/environment';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
+import { DarkModeService } from '../../../services/dark-mode.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 
 @Component({
-    selector: 'app-admin',
+    selector: 'app-create-manga-modal',
     standalone: true,
     imports: [ReactiveFormsModule, FormsModule, TranslateModule, CommonModule],
-    templateUrl: './admin.component.html',
+    templateUrl: './create-manga-modal.html',
 })
-export class AdminComponent {
+export class CreateMangaModal {
     fb = inject(FormBuilder);
     mangaService = inject(MangaService);
     notificationService = inject(NotificationService);
     translateService = inject(TranslateService);
+    darkModeService: DarkModeService = inject(DarkModeService);
 
     stepper: boolean = true;
     mangaForm: FormGroup;
@@ -35,7 +38,8 @@ export class AdminComponent {
     maxFileSizeBytes = 2 * 1024 * 1024;
     file: File | null = null;
 
-    constructor() {
+    
+    constructor(public dialogRef: MatDialogRef<CreateMangaModal>) {
         this.mangaForm = this.fb.group({
             name: new FormControl('', [
                 Validators.required,
@@ -49,6 +53,10 @@ export class AdminComponent {
             ]),
             image: new FormControl(null, [Validators.required])
         }, { validators: this.stepperValidator() });
+    }
+
+    cancel(): void {
+        this.dialogRef.close();
     }
 
     async onFileChange(event: any) {
@@ -117,6 +125,7 @@ export class AdminComponent {
                 ...mangaData,
                 url: `${environment.urlImages}${response.key}`
             };
+            console.log(newMangaData)
             await firstValueFrom(this.mangaService.createManga(newMangaData));
             
             const successMessage = await firstValueFrom(this.translateService.get("pages.admin.alerts.success"));
