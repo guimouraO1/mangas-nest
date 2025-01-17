@@ -1,5 +1,5 @@
 export const environment = {
-  url: 'http://localhost:3000',
+  url: 'https://api.mangasnest.com',
   urlImages: 'https://mangas-nest-uploads.s3.us-east-1.amazonaws.com/',
   // url: 'https://api.mangasnest.com'
 };
