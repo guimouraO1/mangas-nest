@@ -1,0 +1,28 @@
+<div [attr.data-theme]="themeService.getTheme()" class="flex flex-col m-2 md:w-150 rounded bg-base-100 p-4">
+    <div class="h-full w-full flex flex-col gap-2">
+        <span class="text-2xl font-bold">{{ 'components.subscribe.title' | translate }}</span>
+        <span class="text-sm opacity-60">{{ 'components.subscribe.subtitle' | translate }}</span>
+        <div class="w-full grid grid-cols-2 gap-2 pt-2">
+    </div>
+    <div class="flex flex-row gap-2 mb-4">
+        <span class="text-base-content/50">Select your rating for manga</span>
+        <div class="rating flex items-center justify-center">
+          <input type="radio" name="rating" class="mask mask-star-2 bg-warning" [value]="1"
+            (change)="onRatingChange(1)" [checked]="rating.value === 1" />
+          <input type="radio" name="rating" class="mask mask-star-2 bg-warning" [value]="2"
+            (change)="onRatingChange(2)" [checked]="rating.value === 2" />
+          <input type="radio" name="rating" class="mask mask-star-2 bg-warning" [value]="3"
+            (change)="onRatingChange(3)" [checked]="rating.value === 3" />
+          <input type="radio" name="rating" class="mask mask-star-2 bg-warning" [value]="4"
+            (change)="onRatingChange(4)" [checked]="rating.value === 4" />
+          <input type="radio" name="rating" class="mask mask-star-2 bg-warning" [value]="5"
+            (change)="onRatingChange(5)" [checked]="rating.value === 5" />
+        </div>
+      </div>
+    <div class="w-full">
+        <div class="flex gap-2 items-end justify-end w-full">
+            <button (click)="closeDialog(false)" class="btn btn-error btn-soft">{{ 'components.subscribe.cancel' | translate }}</button>
+            <button (click)="closeDialog(true)" class="btn btn-success btn-soft">{{ 'components.subscribe.confirm' | translate }}</button>
+        </div>
+    </div>
+</div>

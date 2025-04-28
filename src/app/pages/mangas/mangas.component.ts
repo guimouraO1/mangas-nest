@@ -8,6 +8,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TokenService } from '../../services/token.service';
 import { CommonModule } from '@angular/common';
+import { Dialog } from '@angular/cdk/dialog';
+import { SubscribeModalComponent } from './modal/subscribe-modal/subscribe-modal.component';
+import { SubscriptionsService } from '../../services/subscription.service';
+import { UnsubscribeModalComponent } from './modal/unsubscribe-modal/unsubscribe-modal.component';
 
 @Component({
     selector: 'app-mangas',
@@ -16,9 +20,11 @@ import { CommonModule } from '@angular/common';
 })
 export class MangasComponent implements OnInit, OnDestroy {
     mangaService = inject(MangaService);
+    subscriptionService = inject(SubscriptionsService);
     tokenService = inject(TokenService);
     router = inject(Router);
     route = inject(ActivatedRoute);
+    dialog = inject(Dialog);
     protected readonly toast = toast;
 
     isLoading = true;
@@ -44,6 +50,40 @@ export class MangasComponent implements OnInit, OnDestroy {
         });
 
         await this.getMangas();
+    }
+
+    async subscribe() {
+        const dialogRef = this.dialog.open<{result: boolean, rating: number } | undefined>(SubscribeModalComponent);
+        const response = await firstValueFrom(dialogRef.closed);
+
+        if (!response || !response.result || !this.selectedManga || !response.rating) {
+            return;
+        }
+
+        try {
+            await firstValueFrom(this.subscriptionService.subscribe(this.selectedManga.id, response.rating));
+            this.selectedManga = null;
+            await this.getMangas();
+        } catch (error: any) {
+            toast.success(error.message);
+        }
+    }
+
+    async unsubscribe() {
+        const dialogRef = this.dialog.open(UnsubscribeModalComponent);
+        const response = await firstValueFrom(dialogRef.closed);
+
+        if (!response || !this.selectedManga) {
+            return;
+        }
+
+        try {
+            await firstValueFrom(this.subscriptionService.unSubscribe(this.selectedManga.id));
+            this.selectedManga = null;
+            await this.getMangas();
+        } catch (error: any) {
+            toast.success(error.message);
+        }
     }
 
     verifyToken() {

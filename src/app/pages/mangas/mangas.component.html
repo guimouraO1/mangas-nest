@@ -74,11 +74,11 @@
             </div>
 
                 @if (selectedManga && !selectedManga.subscribed) {
-                    <button class="btn btn-success btn-soft w-full md:w-50">{{'pages.mangas.subscribe' | translate }}</button>
+                    <button class="btn btn-success btn-soft w-full md:w-50" (click)="subscribe()">{{'pages.mangas.subscribe' | translate }}</button>
                 }
 
                 @if (selectedManga && selectedManga.subscribed) {
-                    <button class="btn btn-error btn-soft w-full md:w-50">{{'pages.mangas.unsubscribe' | translate }}</button>
+                    <button class="btn btn-error btn-soft w-full md:w-50" (click)="unsubscribe()">{{'pages.mangas.unsubscribe' | translate }}</button>
                 }
 
                 @if(isAdmin) {

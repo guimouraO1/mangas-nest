@@ -24,6 +24,7 @@ export class TokenService {
     setToken(token: string) {
         localStorage.setItem('AccessToken', token);
     }
+
     decodeToken(): JwtPayload | null {
         const token = this.getAccessToken();
         if (!token) return null;

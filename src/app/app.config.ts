@@ -17,6 +17,7 @@ export const appConfig: ApplicationConfig = {
     providers: [
         provideZoneChangeDetection({ eventCoalescing: true }),
         provideRouter(routes),
+        provideHttpClient(withInterceptors([httpInterceptor])),
         importProvidersFrom([TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
@@ -34,7 +35,6 @@ export const appConfig: ApplicationConfig = {
             const authService = inject(AuthService);
             authService.initializeVerifyIsUserAuthenticated();
         }),
-        provideHttpClient(withInterceptors([httpInterceptor])),
         provideEnvironmentNgxMask(),
         provideAnimations()
     ]

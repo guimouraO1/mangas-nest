@@ -14,6 +14,18 @@
                 "subscriptions": "Inscrições",
                 "mangas": "Mangas"
             }
+        },
+        "subscribe": {
+            "title": "Inscrever-se",
+            "subtitle": "Tem certeza de que deseja se inscrever neste mangá?",
+            "cancel": "Cancelar",
+            "confirm": "Inscrever-se"
+        },
+        "unsubscribe": {
+            "title": "Desinscrever-se",
+            "subtitle": "Tem certeza de que deseja se desinscrever neste mangá?",
+            "cancel": "Cancelar",
+            "confirm": "Desinscrever"
         }
     },
     "pages": {

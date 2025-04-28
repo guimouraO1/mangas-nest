@@ -14,6 +14,18 @@
                 "subscriptions": "Subscriptions",
                 "mangas": "Mangas"
             }
+        },
+        "subscribe": {
+            "title": "Subscribe",
+            "subtitle": "Are you sure you want to subscribe this manga?",
+            "cancel": "Cancel",
+            "confirm": "Subscribe"
+        },
+        "unsubscribe": {
+            "title": "Unsubscribe",
+            "subtitle": "Are you sure you want to unsubscribe this manga?",
+            "cancel": "Cancel",
+            "confirm": "Unsubscribe"
         }
     },
     "pages": {

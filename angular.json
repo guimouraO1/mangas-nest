@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "wallet-wise": {
+    "mangasnest": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/wallet-wise",
+            "outputPath": "dist/mangasnest",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -71,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "wallet-wise:build:production"
+              "buildTarget": "mangasnest:build:production"
             },
             "development": {
-              "buildTarget": "wallet-wise:build:development"
+              "buildTarget": "mangasnest:build:development"
             }
           },
           "defaultConfiguration": "development"

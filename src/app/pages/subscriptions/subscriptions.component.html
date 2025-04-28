@@ -18,7 +18,12 @@
   }
   @else {
   <div class="w-full flex flex-col items-center justify-center gap-4 p-2 md:p-0 flex-wrap min-h-[calc(100vh-4rem)] bg-base-100">
-      <p>{{ subscriptions }}</p>
+      @for (subscription of subscriptions; track $index) {
+        <p>{{ subscription.id }}</p>
+        <p>{{ subscription.rating }}</p>
+        <p>{{ subscription.chapters }}</p>
+        <img class="w-12 rounded-2xl" src="{{subscription.manga.url}}" alt="">
+      }
   </div>
 
 
