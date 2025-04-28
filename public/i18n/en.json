@@ -1,0 +1,62 @@
+{
+    "weekdays": {
+        "sun": "Sunday",
+        "mon": "Monday",
+        "tue": "Tuesday",
+        "wed": "Wednesday",
+        "thu": "Thursday",
+        "fri": "Friday",
+        "sat": "Saturday"
+    },
+    "components": {
+        "navbar": {
+            "pages": {
+                "subscriptions": "Subscriptions",
+                "mangas": "Mangas"
+            }
+        }
+    },
+    "pages": {
+        "mangas": {
+            "filters": {
+                "name": {
+                    "submit": "Search",
+                    "placeholder": "Search by name",
+                    "remove": "Remove filter name"
+                }
+            },
+            "addManga": "Add new Manga",
+            "table": {
+                "headers": {
+                    "image": "Image",
+                    "name": "Manga name",
+                    "about": "About",
+                    "weekday": "Week day",
+                    "status": "Status"
+                },
+                "body": {
+                    "status": {
+                        "subscribed": "Subscribed",
+                        "notSubscribed": "Not subscribed"
+                    }
+                },
+                "pagination": {
+                    "of": "of"
+                }
+            },
+            "subscribe": "Subscribe",
+            "unsubscribe": "Unsubscribe"
+        },
+        "sign-in": {
+            "form": {
+                "title": "Welcome back",
+                "subtitle": "Keep up with your manga readings",
+                "email": "E-mail",
+                "emailPlaceholder": "your@mail.com",
+                "password": "Password",
+                "passwordPlaceholder": "Your password",
+                "button": "Sign-in"
+            }
+        }
+    }
+}

@@ -1,0 +1,16 @@
+<main [attr.data-theme]="themeService.getTheme()" class="h-screen">
+  <router-outlet />
+</main>
+
+
+<ngx-sonner-toaster position="bottom-right" [expand]="true" [toastOptions]="{
+    unstyled: true,
+    classes: {
+      toast: 'rounded-sm',
+      success: 'bg-success/15 w-full p-4 flex flex-row items-center gap-2 text-success text-sm',
+      error: 'bg-error/15 w-full p-4 flex flex-row items-center gap-2 text-error text-sm',
+      warning: 'bg-warning/15 w-full p-4 flex flex-row items-center gap-2 text-warning text-sm',
+      info: 'bg-info/15 w-full p-4 flex flex-row items-center gap-2 text-info text-sm',
+      actionButton: '!btn !btn-xs !btn-outline'
+    }
+}" />

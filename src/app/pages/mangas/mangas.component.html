@@ -1,0 +1,166 @@
+<div class="flex min-h-[calc(100vh-4rem)] w-full gap-2">
+    @if (isLoading) {
+        <div class="w-full flex flex-col items-center p-2 md:p-0 justify-center gap-4 flex-wrap min-h-[calc(100vh-4rem)] bg-base-100">
+    <div class="w-4/5 flex flex-col items-center gap-2">
+      <div class="flex flex-wrap md:flex-nowrap md:flex-row items-center gap-2 justify-between w-full">
+        <div class="flex gap-2 w-full flex-col md:flex-row">
+          <div class="skeleton p-2 w-full md:w-60 h-9"></div>
+        </div>
+        <div class="skeleton p-2 w-full md:w-60 h-9"></div>
+      </div>
+      <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 w-full">
+          <table class="table">
+            <thead>
+              <tr>
+                <th><input disabled type="checkbox" class="checkbox" /></th>
+                <th><div class="skeleton p-2 w-20 h-6"></div></th>
+                <th><div class="skeleton p-2 w-40 h-6"></div></th>
+                <th><div class="skeleton p-2 w-40 h-6"></div></th>
+                <th><div class="skeleton p-2 w-30 h-6"></div></th>
+                <th><div class="skeleton p-2 w-30 h-6"></div></th>
+              </tr>
+            </thead>
+            <tbody>
+                @for (item of [].constructor(5); track $index) {
+                  <tr class="hover:bg-base-300">
+                    <td class="w-10"><input disabled type="checkbox" class="checkbox" /></td>
+                    <td class="w-24"><div class="skeleton p-2 w-16 h-16 rounded"></div></td>
+                    <td><div class="skeleton p-2 w-full h-4"></div></td>
+                    <td><div class="skeleton p-2 w-full h-4"></div></td>
+                    <td class="w-20"><div class="skeleton p-2 w-full h-4"></div></td>
+                    <td class="w-20"><div class="skeleton p-2 w-full h-4"></div></td>
+                }
+
+            </tbody>
+          </table>
+      </div>
+      <div class="skeleton p-2 w-60 h-9 self-end"></div>
+    </div>
+        </div>
+      } 
+      @else if (isError) {
+        <!-- <div class="flex flex-col gap-1 items-center justify-center min-h-[calc(100vh-4rem)] w-full">
+          <span class="text-2xl md:text-5xl font-bold">{{'pages.home.isError.title' | translate }}</span>
+          <span class="text-sm md:text-md opacity-50">{{'pages.home.isError.subtitle' | translate }}</span>
+          <button class="btn btn-error btn-soft btn-wide">{{'pages.home.isError.button' | translate }}</button>
+        </div> -->
+      }
+      @else {
+     <div class="w-full flex flex-col items-center justify-center gap-4 p-2 md:p-0 flex-wrap min-h-[calc(100vh-4rem)] bg-base-100">
+        <div class="w-4/5 flex flex-col items-center gap-2">
+
+            <!-- filters -->
+            <div class="flex items-center gap-2 justify-between w-full flex-wrap md:flex-nowrap">
+            <div class="flex gap-2 w-full flex-wrap md:flex-nowrap">
+                <div class="join w-full md:w-80">            
+                <input [formControl]="selectedName" class="input join-item border-neutral/10 focus:outline-none focus:border-neutral" 
+                    placeholder="{{'pages.mangas.filters.name.placeholder' | translate }}" />
+                <button (click)="searchByName()" [disabled]="selectedName.value === ''"  class="btn btn-neutral btn-soft join-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 join-item">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                    </svg>{{'pages.mangas.filters.name.submit' | translate }}</button>
+                </div>
+
+                @if (selectedName.value) {
+                    <button (click)="removeNameFilter()" class="btn btn-error btn-soft w-full md:w-60">{{'pages.mangas.filters.name.remove' | translate }}</button>
+                }
+                
+                <!-- <select class="select w-full md:w-60 focus:outline-none focus:border-neutral">
+                    <option value="" disabled selected>{{'pages..placeholder' | translate }}</option>
+                    <option value="">{{'pages.transactions.filters.transactionsType.none' | translate }}</option>
+                    <option value="withdraw">{{'pages.transactions.filters.transactionsType.withdraw' | translate }}</option>
+                    <option value="deposit">{{'pages.transactions.filters.transactionsType.deposit' | translate }}</option>
+                </select> -->
+            </div>
+
+                @if (selectedManga && !selectedManga.subscribed) {
+                    <button class="btn btn-success btn-soft w-full md:w-50">{{'pages.mangas.subscribe' | translate }}</button>
+                }
+
+                @if (selectedManga && selectedManga.subscribed) {
+                    <button class="btn btn-error btn-soft w-full md:w-50">{{'pages.mangas.unsubscribe' | translate }}</button>
+                }
+
+                @if(isAdmin) {
+                    <button class="btn btn-neutral btn-soft w-full md:w-50">{{'pages.mangas.addManga' | translate }}</button>
+                }
+            </div>
+
+            <!-- filters -->
+            
+
+            <!-- table -->
+            <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 w-full">
+                <table class="table">
+                <thead>
+                    <tr>
+                        <th><input disabled type="checkbox" class="checkbox" /></th>
+                        <th>{{'pages.mangas.table.headers.image' | translate }}</th>
+                        <th>{{'pages.mangas.table.headers.name' | translate }}</th>
+                        <th>{{'pages.mangas.table.headers.about' | translate }}</th>
+                        <th>{{'pages.mangas.table.headers.weekday' | translate }}</th>
+                        <th>{{'pages.mangas.table.headers.status' | translate }}</th>
+                    </tr>
+                </thead>
+                @for (manga of mangas; track manga.id) {
+                <tbody>
+                    <tr class="hover:bg-base-300">
+                        <td class="w-8"><input 
+                            [checked]="selectedManga && selectedManga.id === manga.id" 
+                            type="checkbox" 
+                            class="checkbox"
+                            (change)="toggleSelection(manga)"
+                        />
+                        </td>
+                        <td class="w-24">
+                            <div class="avatar w-16">
+                                <div class="w-full rounded">
+                                    <img src="{{manga.url}}" />
+                                </div>
+                            </div>
+                        </td>
+                        <td class="w-80 truncate">
+                            <span class="text-sm opacity-80 truncate">{{manga.name}}</span>
+                        </td>
+                        <td class="w-80 truncate">
+                            <span class="text-sm opacity-80">{{manga.about ?? ''}}</span>
+                        </td>
+                        <td class="truncate w-20">
+                            <span class="text-sm opacity-80">{{'weekdays.' + manga.date | translate }}</span>
+                        </td>
+                        <td class="truncate w-20">
+                            @if (manga.subscribed) {
+                                <div class="badge badge-soft badge-neutral select-none">{{'pages.mangas.table.body.status.subscribed' | translate }}</div>
+                            } @else {
+                                <div class="badge badge-soft badge-error select-none">{{'pages.mangas.table.body.status.notSubscribed' | translate }}</div>
+                            }
+                        </td>
+                    </tr>
+                </tbody>
+                }
+                </table>
+            </div>
+            <!-- table -->
+
+            <!-- pagination -->
+            <div class="self-end flex items-center gap-2">
+            <span class="text-sm mr-4 opacity-65 select-none">{{ startIndex }}-{{ endIndex }} {{'pages.mangas.table.pagination.of' | translate }} {{ mangasCount }}</span>
+            <div class="join flex gap-2">
+                <button (click)="previousPage()" [disabled]="page <= 1" class="join-item btn btn-sm btn-soft">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5" />
+                </svg>
+                </button>
+                <button (click)="nextPage()" [disabled]="page * offset >= mangasCount" class="join-item btn btn-sm btn-ghost btn-soft">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+                </svg>          
+                </button>
+            </div>
+            </div>
+            <!-- pagination -->
+        </div>
+
+    </div>
+    }
+</div>

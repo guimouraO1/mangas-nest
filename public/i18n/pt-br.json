@@ -1,0 +1,62 @@
+{
+    "weekdays": {
+        "sun": "Domingo",
+        "mon": "Segunda-feira",
+        "tue": "Terça-feira",
+        "wed": "Quarta-feira",
+        "thu": "Quinta-feira",
+        "fri": "Sexta-feira",
+        "sat": "Sábado"
+    },
+    "components": {
+        "navbar": {
+            "pages": {
+                "subscriptions": "Inscrições",
+                "mangas": "Mangas"
+            }
+        }
+    },
+    "pages": {
+        "mangas": {
+            "filters": {
+                "name": {
+                    "submit": "Pesquisar",
+                    "placeholder": "Pesquisar por nome",
+                    "remove": "Remover filtro nome"
+                }
+            },
+            "addManga": "Adicionar novo manga",
+            "table": {
+                "headers": {
+                    "image": "Imagem",
+                    "name": "Nome do manga",
+                    "about": "Sobre",
+                    "weekday": "Dia da semana",
+                    "status": "Status"
+                },
+                "body": {
+                    "status": {
+                        "subscribed": "Inscrito",
+                        "notSubscribed": "Não inscrito"
+                    }
+                },
+                "pagination": {
+                    "of": "de"
+                }
+            },
+            "subscribe": "Inscrever-se",
+            "unsubscribe": "Unsubscribe"
+        },
+        "sign-in": {
+            "form": {
+                "title": "Bem-vindo de volta",
+                "subtitle": "Mantenha suas leituras de mangas em dia",
+                "email": "E-mail",
+                "emailPlaceholder": "seu@email.com",
+                "password": "Senha",
+                "passwordPlaceholder": "Sua senha",
+                "button": "Entrar"
+            }
+        }
+    }
+}
