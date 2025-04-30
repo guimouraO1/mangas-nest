@@ -20,7 +20,7 @@ export const httpInterceptor: HttpInterceptorFn = (request: HttpRequest<unknown>
     }
 
     return next(request).pipe(
-        // delay(500),
+        delay(600),
         catchError((error: HttpErrorResponse) => {
             if (error.status !== 401) {
                 return throwError(() => error);

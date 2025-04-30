@@ -1,41 +1,54 @@
 <div class="flex min-h-[calc(100vh-4rem)] w-full gap-2">
     @if (isLoading) {
-        <div class="w-full flex flex-col items-center p-2 md:p-0 justify-center gap-4 flex-wrap min-h-[calc(100vh-4rem)] bg-base-100">
-    <div class="w-4/5 flex flex-col items-center gap-2">
-      <div class="flex flex-wrap md:flex-nowrap md:flex-row items-center gap-2 justify-between w-full">
-        <div class="flex gap-2 w-full flex-col md:flex-row">
-          <div class="skeleton p-2 w-full md:w-60 h-9"></div>
-        </div>
-        <div class="skeleton p-2 w-full md:w-60 h-9"></div>
-      </div>
-      <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 w-full">
-          <table class="table">
-            <thead>
-              <tr>
-                <th><input disabled type="checkbox" class="checkbox" /></th>
-                <th><div class="skeleton p-2 w-20 h-6"></div></th>
-                <th><div class="skeleton p-2 w-40 h-6"></div></th>
-                <th><div class="skeleton p-2 w-40 h-6"></div></th>
-                <th><div class="skeleton p-2 w-30 h-6"></div></th>
-                <th><div class="skeleton p-2 w-30 h-6"></div></th>
-              </tr>
-            </thead>
-            <tbody>
-                @for (item of [].constructor(5); track $index) {
-                  <tr class="hover:bg-base-300">
-                    <td class="w-10"><input disabled type="checkbox" class="checkbox" /></td>
-                    <td class="w-24"><div class="skeleton p-2 w-16 h-16 rounded"></div></td>
-                    <td><div class="skeleton p-2 w-full h-4"></div></td>
-                    <td><div class="skeleton p-2 w-full h-4"></div></td>
-                    <td class="w-20"><div class="skeleton p-2 w-full h-4"></div></td>
-                    <td class="w-20"><div class="skeleton p-2 w-full h-4"></div></td>
-                }
+        <div class="w-full flex flex-col items-center justify-center gap-4 p-2 md:p-0 flex-wrap min-h-[calc(100vh-4rem)] bg-base-100">
+            <div class="w-4/5 flex flex-col items-center gap-2">
+          
+              <!-- skeleton filtros -->
+              <div class="flex items-center gap-2 justify-between w-full flex-wrap md:flex-nowrap">
+                <div class="flex gap-2 w-full flex-wrap md:flex-nowrap">
+                  <div class="skeleton h-10 w-full md:w-80"></div>
 
-            </tbody>
-          </table>
-      </div>
-      <div class="skeleton p-2 w-60 h-9 self-end"></div>
-    </div>
+                </div>
+                <div class="skeleton h-10 w-full md:w-60 "></div>
+              </div>
+              <!-- /skeleton filtros -->
+          
+              <!-- skeleton tabela -->
+              <div class="overflow-x-auto border border-base-content/5 bg-base-100 w-full rounded-4xl">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th><input disabled type="checkbox" class="checkbox" /></th>
+                      <th><div class="skeleton h-6 w-20"></div></th>
+                      <th><div class="skeleton h-6 w-40"></div></th>
+                      <th><div class="skeleton h-6 w-40"></div></th>
+                      <th><div class="skeleton h-6 w-30"></div></th>
+                      <th><div class="skeleton h-6 w-20"></div></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (item of [].constructor(4); track $index) {
+                    <tr class="hover:bg-base-300">
+                      <td class="w-8"><input disabled type="checkbox" class="checkbox" /></td>
+                      <td class="w-24"><div class="skeleton w-16 h-16 rounded"></div></td>
+                      <td class="w-80"><div class="skeleton h-4 w-full"></div></td>
+                      <td class="w-80"><div class="skeleton h-4 w-full"></div></td>
+                      <td class="w-20"><div class="skeleton h-4 w-full"></div></td>
+                      <td class="w-20"><div class="skeleton h-4 w-full"></div></td>
+                    </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+              <!-- /skeleton tabela -->
+          
+              <!-- skeleton paginação -->
+              <div class="self-end flex items-center gap-2">
+                <div class="skeleton h-8 w-40"></div>
+              </div>
+              <!-- /skeleton paginação -->
+          
+            </div>
         </div>
       } 
       @else if (isError) {
@@ -48,23 +61,28 @@
       @else {
      <div class="w-full flex flex-col items-center justify-center gap-4 p-2 md:p-0 flex-wrap min-h-[calc(100vh-4rem)] bg-base-100">
         <div class="w-4/5 flex flex-col items-center gap-2">
-
             <!-- filters -->
             <div class="flex items-center gap-2 justify-between w-full flex-wrap md:flex-nowrap">
-            <div class="flex gap-2 w-full flex-wrap md:flex-nowrap">
-                <div class="join w-full md:w-80">            
-                <input [formControl]="selectedName" class="input join-item border-neutral/10 focus:outline-none focus:border-neutral" 
-                    placeholder="{{'pages.mangas.filters.name.placeholder' | translate }}" />
-                <button (click)="searchByName()" [disabled]="selectedName.value === ''"  class="btn btn-neutral btn-soft join-item">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 join-item">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                    </svg>{{'pages.mangas.filters.name.submit' | translate }}</button>
-                </div>
+                <div class="flex gap-2 w-full flex-wrap md:flex-nowrap">
+                    <div class="join w-full md:w-80"> 
 
-                @if (selectedName.value) {
-                    <button (click)="removeNameFilter()" class="btn btn-error btn-soft w-full md:w-60">{{'pages.mangas.filters.name.remove' | translate }}</button>
-                }
-            </div>
+                        <!-- placeholder="{{'pages.mangas.filters.name.placeholder' | translate }}" -->
+                        <input 
+                            [formControl]="selectedName"
+                            class="input join-item border-neutral/10 focus:outline-none focus:border-neutral" 
+                        />
+
+                        <!-- [disabled]="selectedName.value === ''"   dentro do button -->
+                        <button disabled (click)="searchByName()"  class="btn btn-neutral btn-soft join-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 join-item">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                            </svg>{{'pages.mangas.filters.name.submit' | translate }}</button>
+                        </div>
+                    <!-- 
+                    @if (selectedName.value) {
+                        <button (click)="removeNameFilter()" class="btn btn-error btn-soft w-full md:w-60">{{'pages.mangas.filters.name.remove' | translate }}</button>
+                    } -->
+                </div>
 
                 @if (selectedManga && !selectedManga.subscribed) {
                     <button (click)="subscribe()" class="btn btn-success btn-soft w-full md:w-50">{{'pages.mangas.subscribe' | translate }}</button>
@@ -135,23 +153,22 @@
 
             <!-- pagination -->
             <div class="self-end flex items-center gap-2">
-            <span class="text-sm mr-4 opacity-65 select-none">{{ startIndex }}-{{ endIndex }} {{'pages.mangas.table.pagination.of' | translate }} {{ mangasCount }}</span>
-            <div class="join flex gap-2">
-                <button (click)="previousPage()" [disabled]="page <= 1" class="join-item btn btn-sm btn-soft">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5" />
-                </svg>
-                </button>
-                <button (click)="nextPage()" [disabled]="page * offset >= mangasCount" class="join-item btn btn-sm btn-ghost btn-soft">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
-                </svg>          
-                </button>
-            </div>
+                <span class="text-sm mr-4 opacity-65 select-none">{{ startIndex }}-{{ endIndex }} {{'pages.mangas.table.pagination.of' | translate }} {{ mangasCount }}</span>
+                <div class="join flex gap-2">
+                    <button (click)="previousPage()" [disabled]="page <= 1" class="join-item btn btn-sm btn-soft">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5" />
+                    </svg>
+                    </button>
+                    <button (click)="nextPage()" [disabled]="page * offset >= mangasCount" class="join-item btn btn-sm btn-ghost btn-soft">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+                    </svg>          
+                    </button>
+                </div>
             </div>
             <!-- pagination -->
         </div>
-
     </div>
     }
 </div>

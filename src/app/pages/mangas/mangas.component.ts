@@ -38,7 +38,7 @@ export class MangasComponent implements OnInit, OnDestroy {
     mangasCount = 0;
     selectedManga: Manga | null = null;
 
-    selectedName = new FormControl<string>('');
+    selectedName = new FormControl<string>({ value: '', disabled: true });
     private destroy$ = new Subject<void>();
 
     isAdmin: boolean = false;

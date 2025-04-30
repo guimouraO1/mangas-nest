@@ -4,6 +4,7 @@ import { SubscriptionsService } from '../../services/subscription.service';
 import { firstValueFrom } from 'rxjs';
 import { toast } from 'ngx-sonner';
 import { Subscription } from '../../models/subscriptions.model';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-subscriptions',
@@ -12,6 +13,7 @@ import { Subscription } from '../../models/subscriptions.model';
 })
 export class SubscriptionsComponent implements OnInit {
     private subscriptionsService = inject(SubscriptionsService);
+    private router = inject(Router);
     protected readonly toast = toast;
 
     isLoading = true;
@@ -43,4 +45,32 @@ export class SubscriptionsComponent implements OnInit {
 
         this.isLoading = false;
     }
+
+    async addFilterParam(filter: any) {
+        this.router.navigate([], { queryParams: filter, queryParamsHandling: 'merge' });
+        await this.getSubscriptions();
+    }
+
+    get startIndex(): number {
+        return (this.page - 1) * this.offset + 1;
+    }
+
+    get endIndex(): number {
+        return Math.min(this.page * this.offset, this.subscriptionsCount);
+    }
+
+    async nextPage() {
+        if ((this.page * this.offset) < this.subscriptionsCount) {
+            this.page++;
+            await this.addFilterParam({ page: this.page });
+        }
+    }
+
+    async previousPage() {
+        if (this.page > 1) {
+            this.page--;
+            await this.addFilterParam({ page: this.page });
+        }
+    }
+
 }
