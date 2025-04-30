@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable, TRANSLATIONS } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Manga } from '../models/manga.model';
+import { CreateManga, Manga } from '../models/manga.model';
 
 interface GetMangasResponse {
   mangas: Manga[];
@@ -25,7 +25,7 @@ export class MangaService {
         return this.http.get<GetMangasResponse>(`${this.urlApi}/manga`, { params });
     }
 
-    createManga(manga: Manga): Observable<Manga> {
-        return this.http.post<Manga>(`${this.urlApi}/manga`, manga);
+    createManga(manga: CreateManga) {
+        return this.http.post(`${this.urlApi}/manga`, manga);
     }
 }

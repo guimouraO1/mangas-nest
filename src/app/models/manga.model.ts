@@ -10,6 +10,15 @@ export interface Manga {
   subscribed: boolean;
 }
 
+export interface CreateManga {
+  name: string;
+  date: WeekDays;
+  url: string;
+  about?: string | null;
+}
+
+export type WeekDaysType = 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun';
+
 export enum WeekDays {
   Mon = 'mon',
   Tue = 'tue',

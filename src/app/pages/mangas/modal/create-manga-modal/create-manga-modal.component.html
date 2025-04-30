@@ -1,0 +1,55 @@
+<div [attr.data-theme]="themeService.getTheme()" class="flex flex-col m-2 md:w-200 rounded bg-base-100 p-4">
+    <div class="h-full w-full flex flex-col gap-2">
+        <span class="text-2xl font-bold">{{ 'components.createManga.title' | translate }}</span>
+        <span class="text-sm opacity-60">{{ 'components.createManga.subtitle' | translate }}</span>
+        <div class="w-full grid grid-cols-2 gap-2 pt-2">
+    </div>
+    <form [formGroup]="createMangaForm" class="w-full md:grid md:grid-cols-2 flex flex-col gap-2 pt-2 mb-4">
+        <label class="input w-full focus-within:outline-none focus-within:border-neutral" [ngClass]="this.createMangaForm.get('name')?.errors && this.createMangaForm.get('name')?.dirty ? 'border-error !outline-error' : ''">
+            <span class="label w-60">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+                  </svg>
+                  {{ 'components.createManga.inputs.name' | translate }}</span>
+            <input formControlName="name" class="input join-item focus:outline-none focus:border-neutral w-full">
+        </label>
+        <label class="input w-full focus-within:outline-none focus-within:border-neutral" [ngClass]="this.createMangaForm.get('about')?.errors && this.createMangaForm.get('about')?.dirty ? 'border-error !outline-error' : ''">
+            <span class="label w-60">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" />
+                  </svg>                  
+                  {{ 'components.createManga.inputs.about' | translate }}</span>
+            <input formControlName="about" class="input join-item focus:outline-none focus:border-neutral w-full">
+        </label>
+        <label class="input w-full focus-within:outline-none focus-within:border-neutral" [ngClass]="this.createMangaForm.get('url')?.errors && this.createMangaForm.get('url')?.dirty ? 'border-error !outline-error' : ''">
+            <span class="label w-60">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                  </svg>
+                  {{ 'components.createManga.inputs.url' | translate }}</span>
+            <input formControlName="url" class="input join-item focus:outline-none focus:border-neutral w-full">
+        </label>
+        <label class="select w-full focus-within:outline-none focus-within:border-neutral">
+            <span class="label w-60">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
+                </svg>                  
+                {{ 'components.createManga.inputs.weekDay' | translate }}</span>
+            <select formControlName="date" class="select w-full focus:outline-none focus:border-neutral">
+                <option value="mon">{{ 'weekdays.mon' | translate }}</option>
+                <option value="tue">{{ 'weekdays.tue' | translate }}</option>
+                <option value="wed">{{ 'weekdays.wed' | translate }}</option>
+                <option value="thu">{{ 'weekdays.thu' | translate }}</option>
+                <option value="fri">{{ 'weekdays.fri' | translate }}</option>
+                <option value="sat">{{ 'weekdays.sat' | translate }}</option>
+                <option value="sun">{{ 'weekdays.sun' | translate }}</option>
+            </select>
+        </label>
+    </form>
+    <div class="w-full">
+        <div class="flex gap-2 items-end justify-end w-full">
+            <button (click)="closeDialog(false)" class="btn btn-error btn-soft">{{ 'components.createManga.cancel' | translate }}</button>
+            <button [disabled]="createMangaForm.invalid" (click)="closeDialog(true)" class="btn btn-success btn-soft">{{ 'components.createManga.confirm' | translate }}</button>
+        </div>
+    </div>
+</div>

@@ -64,30 +64,21 @@
                 @if (selectedName.value) {
                     <button (click)="removeNameFilter()" class="btn btn-error btn-soft w-full md:w-60">{{'pages.mangas.filters.name.remove' | translate }}</button>
                 }
-                
-                <!-- <select class="select w-full md:w-60 focus:outline-none focus:border-neutral">
-                    <option value="" disabled selected>{{'pages..placeholder' | translate }}</option>
-                    <option value="">{{'pages.transactions.filters.transactionsType.none' | translate }}</option>
-                    <option value="withdraw">{{'pages.transactions.filters.transactionsType.withdraw' | translate }}</option>
-                    <option value="deposit">{{'pages.transactions.filters.transactionsType.deposit' | translate }}</option>
-                </select> -->
             </div>
 
                 @if (selectedManga && !selectedManga.subscribed) {
-                    <button class="btn btn-success btn-soft w-full md:w-50" (click)="subscribe()">{{'pages.mangas.subscribe' | translate }}</button>
+                    <button (click)="subscribe()" class="btn btn-success btn-soft w-full md:w-50">{{'pages.mangas.subscribe' | translate }}</button>
                 }
 
                 @if (selectedManga && selectedManga.subscribed) {
-                    <button class="btn btn-error btn-soft w-full md:w-50" (click)="unsubscribe()">{{'pages.mangas.unsubscribe' | translate }}</button>
+                    <button (click)="unsubscribe()" class="btn btn-error btn-soft w-full md:w-50">{{'pages.mangas.unsubscribe' | translate }}</button>
                 }
 
                 @if(isAdmin) {
-                    <button class="btn btn-neutral btn-soft w-full md:w-50">{{'pages.mangas.addManga' | translate }}</button>
+                    <button (click)="createManga()" class="btn btn-neutral btn-soft w-full md:w-50">{{'pages.mangas.addManga' | translate }}</button>
                 }
             </div>
-
             <!-- filters -->
-            
 
             <!-- table -->
             <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 w-full">

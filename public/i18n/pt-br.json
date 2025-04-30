@@ -21,6 +21,18 @@
             "cancel": "Cancelar",
             "confirm": "Inscrever-se"
         },
+        "createManga": {
+            "title": "Criação de Mangá",
+            "subtitle": "Tem certeza de que deseja criar um novo mangá?",
+            "cancel": "Cancelar",
+            "confirm": "Criar",
+            "inputs": {
+                "name": "Nome do mangá",
+                "about": "Descrição",
+                "url": "URL da imagem do mangá",
+                "weekDay": "Dia da semana"
+            }
+        },
         "unsubscribe": {
             "title": "Desinscrever-se",
             "subtitle": "Tem certeza de que deseja se desinscrever neste mangá?",
@@ -42,7 +54,7 @@
                 "headers": {
                     "image": "Imagem",
                     "name": "Nome do manga",
-                    "about": "Sobre",
+                    "about": "Descrição",
                     "weekday": "Dia da semana",
                     "status": "Status"
                 },

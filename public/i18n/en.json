@@ -15,6 +15,18 @@
                 "mangas": "Mangas"
             }
         },
+        "createManga": {
+            "title": "Create Manga",
+            "subtitle": "Are you sure you want to create a new manga?",
+            "cancel": "Cancel",
+            "confirm": "Create",
+            "inputs": {
+                "name": "Manga Title",
+                "about": "Manga Description",
+                "url": "Manga Image URL",
+                "weekDay": "Release Day"
+            }
+        },
         "subscribe": {
             "title": "Subscribe",
             "subtitle": "Are you sure you want to subscribe this manga?",
@@ -41,8 +53,8 @@
             "table": {
                 "headers": {
                     "image": "Image",
-                    "name": "Manga name",
-                    "about": "About",
+                    "name": "Manga title",
+                    "about": "Description",
                     "weekday": "Week day",
                     "status": "Status"
                 },

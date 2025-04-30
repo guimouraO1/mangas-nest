@@ -2,7 +2,7 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { firstValueFrom, Subject, takeUntil } from 'rxjs';
 import { MangaService } from '../../services/manga.service';
-import { Manga } from '../../models/manga.model';
+import { CreateManga, Manga } from '../../models/manga.model';
 import { toast } from 'ngx-sonner';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -12,6 +12,7 @@ import { Dialog } from '@angular/cdk/dialog';
 import { SubscribeModalComponent } from './modal/subscribe-modal/subscribe-modal.component';
 import { SubscriptionsService } from '../../services/subscription.service';
 import { UnsubscribeModalComponent } from './modal/unsubscribe-modal/unsubscribe-modal.component';
+import { CreateMangaModalComponent } from './modal/create-manga-modal/create-manga-modal.component';
 
 @Component({
     selector: 'app-mangas',
@@ -65,7 +66,7 @@ export class MangasComponent implements OnInit, OnDestroy {
             this.selectedManga = null;
             await this.getMangas();
         } catch (error: any) {
-            toast.success(error.message);
+            toast.error(error.message);
         }
     }
 
@@ -82,7 +83,23 @@ export class MangasComponent implements OnInit, OnDestroy {
             this.selectedManga = null;
             await this.getMangas();
         } catch (error: any) {
-            toast.success(error.message);
+            toast.error(error.message);
+        }
+    }
+
+    async createManga() {
+        const dialogRef = this.dialog.open(CreateMangaModalComponent);
+        const response: any = await firstValueFrom(dialogRef.closed);
+
+        if (!response?.result || !response.manga) {
+            return;
+        }
+
+        try {
+            await firstValueFrom(this.mangaService.createManga(response.manga as CreateManga));
+            await this.getMangas();
+        } catch (error: any) {
+            toast.error(error.message);
         }
     }
 
