@@ -5,6 +5,10 @@ import { firstValueFrom } from 'rxjs';
 import { toast } from 'ngx-sonner';
 import { Subscription } from '../../models/subscriptions.model';
 import { Router } from '@angular/router';
+import { CreateChapterModalComponent } from './modal/create-chapter-modal/create-chapter-modal.component';
+import { Dialog } from '@angular/cdk/dialog';
+import { ChaptersService } from '../../services/chapters.service';
+import { DeleteChapterModalComponent } from './modal/delete-chapter-modal/delete-chapter-modal.component';
 
 @Component({
     selector: 'app-subscriptions',
@@ -14,7 +18,10 @@ import { Router } from '@angular/router';
 export class SubscriptionsComponent implements OnInit {
     private subscriptionsService = inject(SubscriptionsService);
     private router = inject(Router);
+    private chaptersService = inject(ChaptersService);
+
     protected readonly toast = toast;
+    dialog = inject(Dialog);
 
     isLoading = true;
     isError = false;
@@ -73,4 +80,37 @@ export class SubscriptionsComponent implements OnInit {
         }
     }
 
+    async addChapter(subscription: Subscription) {
+        const chapter = subscription?.chapters?.[0]?.number ?? 0;
+        const dialogRef = this.dialog.open(CreateChapterModalComponent, { data: chapter + 1 });
+        const response: any = await firstValueFrom(dialogRef.closed);
+
+        if (!response?.result  || !response.chapter) {
+            return;
+        }
+
+        try {
+            await firstValueFrom(this.chaptersService.createChapter(response.chapter, subscription.id));
+
+            await this.getSubscriptions();
+        } catch (error: any) {
+            toast.error(error.error.message);
+        }
+    }
+
+    async deleteChapter(subscription: Subscription, chapter: number) {
+        const dialogRef = this.dialog.open(DeleteChapterModalComponent);
+        const response: boolean | unknown = await firstValueFrom(dialogRef.closed);
+
+        if (!response) {
+            return;
+        }
+
+        try {
+            await firstValueFrom(this.chaptersService.deleteChapter(chapter, subscription.id));
+            await this.getSubscriptions();
+        } catch (error: any) {
+            toast.error(error.error.message);
+        }
+    }
 }

@@ -38,6 +38,19 @@
             "subtitle": "Tem certeza de que deseja se desinscrever neste mangá?",
             "cancel": "Cancelar",
             "confirm": "Desinscrever"
+        },
+        "createChapter": {
+            "title": "Novo Capítulo",
+            "subtitle": "Tem certeza de que deseja criar um novo capítulo?",
+            "input": "Capítulo",
+            "cancel": "Cancelar",
+            "confirm": "Criar"
+        },
+        "deleteChapter": {
+            "title": "Excluir Capítulo",
+            "subtitle": "Tem certeza de que deseja excluir este capítulo?",
+            "cancel": "Cancelar",
+            "confirm": "Excluir"
         }
     },
     "pages": {

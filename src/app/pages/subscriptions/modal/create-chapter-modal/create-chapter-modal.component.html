@@ -1,0 +1,23 @@
+<div [attr.data-theme]="themeService.getTheme()" class="flex flex-col m-2 md:w-120 rounded bg-base-100 p-4">
+    <div class="h-full w-full flex flex-col gap-2">
+        <span class="text-2xl font-bold">{{ 'components.createChapter.title' | translate }}</span>
+        <span class="text-sm opacity-60">{{ 'components.createChapter.subtitle' | translate }}</span>
+        <div class="w-full grid grid-cols-2 gap-2 pt-2">
+    </div>
+    <form class="w-full flex flex-col gap-2 pt-2 mb-4">
+        <label class="input w-full focus-within:outline-none focus-within:border-neutral">
+            <span class="label w-60">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                  </svg>
+                  {{ 'components.createChapter.input' | translate }}</span>
+            <input [formControl]="chapter" mask="99999" class="input join-item focus:outline-none focus:border-neutral w-full">
+        </label>
+    </form>
+    <div class="w-full">
+        <div class="flex gap-2 items-end justify-end w-full">
+            <button type="button" (click)="closeDialog(false)" class="btn btn-error btn-soft">{{ 'components.createChapter.cancel' | translate }}</button>
+            <button [disabled]="chapter.invalid" (click)="closeDialog(true)" class="btn btn-success btn-soft">{{ 'components.createChapter.confirm' | translate }}</button>
+        </div>
+    </div>
+</div>

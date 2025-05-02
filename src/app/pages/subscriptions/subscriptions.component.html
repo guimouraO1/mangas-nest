@@ -1,82 +1,70 @@
-<div class="flex min-h-[calc(100vh-4rem)] w-full gap-2">
+<div class="min-h-[calc(100vh-4rem)] w-full">
   @if (isLoading) {
     <div class="w-full flex flex-col items-center p-2 md:p-0 justify-center gap-4 flex-wrap min-h-[calc(100vh-4rem)] bg-base-100">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full px-4 md:px-20 mt-10 md:mt-0">
-        <div class="skeleton w-full h-164 md:h-60 rounded-xl"></div>
-        <div class="skeleton w-full h-164 md:h-60 rounded-xl"></div>
-        <div class="skeleton w-full h-164 md:h-60 rounded-xl"></div>
-        <div class="skeleton w-full h-164 md:h-60 rounded-xl"></div>
+        <div class="skeleton w-full h-[164px] md:h-60 rounded-xl"></div>
+        <div class="skeleton w-full h-[164px] md:h-60 rounded-xl"></div>
+        <div class="skeleton w-full h-[164px] md:h-60 rounded-xl"></div>
+        <div class="skeleton w-full h-[164px] md:h-60 rounded-xl"></div>
       </div>
-      <div class="skeleton w-30 h-10 md:h-10 rounded-xl self-end mx-20" ></div>
+      <div class="skeleton w-30 h-10 md:h-10 rounded-xl self-end mx-20"></div>
     </div>
   } 
   @else if (isError) {
     <div class="flex flex-col gap-1 items-center justify-center min-h-[calc(100vh-4rem)] w-full">
-      <span class="text-2xl md:text-5xl font-bold">{{'pages.home.isError.title' | translate }}</span>
-      <span class="text-sm md:text-md opacity-50">{{'pages.home.isError.subtitle' | translate }}</span>
-      <button class="btn btn-error btn-soft btn-wide">{{'pages.home.isError.button' | translate }}</button>
+      <span class="text-2xl md:text-5xl font-bold">{{ 'pages.home.isError.title' | translate }}</span>
+      <span class="text-sm md:text-md opacity-50">{{ 'pages.home.isError.subtitle' | translate }}</span>
+      <button class="btn btn-error btn-soft btn-wide">{{ 'pages.home.isError.button' | translate }}</button>
     </div>
   }
-  @else {
-    <div class="w-full flex flex-col items-center justify-center gap-4 p-2 md:p-0 flex-wrap min-h-[calc(100vh-4rem)] bg-base-100">
-      <div class="flex flex-col items-center md:grid md:grid-cols-2 w-full gap-4 px-4 md:px-20">
 
+  @else {
+    <div class="w-full flex flex-col items-center p-2 md:p-0 justify-center gap-4 flex-wrap min-h-[calc(100vh-4rem)] bg-base-100">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full px-4 md:px-20 mt-10 md:mt-0">
         @for (subscription of subscriptions; track subscription.id) {
-          <ng-container>
-            <div class="mt-10 md:mt-0 w-90 md:w-full bg-base-200 shadow-sm rounded-2xl flex flex-col items-center justify-center 
-              md:flex-row overflow-hidden h-full">
-              
-              <!-- Imagem responsiva -->
-              <img 
-                class="w-full md:min-w-42 md:w-42 lg:h-auto object-cover" 
-                [src]="subscription.manga.url" 
-                [alt]="subscription.manga.name" 
-              />
-        
-              <!-- Conteúdo do card -->
-              <div class="p-4 flex flex-col w-full h-full">
-                <h2 class="text-md lg:text-2xl">{{ subscription.manga.name }}</h2>
-                
-                <div class="flex items-center gap-2 mt-2">
-                  <span class="text-sm lg:text-xl text-base-content/40">Last read chapters </span>
+          <div class="w-full h-180 md:h-60 rounded-xl flex flex-col md:flex-row overflow-hidden relative bg-base-200">
+            <img class="object-cover w-full md:w-60 md:h-60" [src]="subscription.manga.url" />
+            <div class="bg-base-200 w-full p-4 truncate">
+              <div class="w-full overflow-hidden truncate flex flex-col gap-10">
+                <span class="text-md lg:text-2xl font-bold truncate mt-4">{{ subscription.manga.name }}</span>
+                <div class="flex flex-row flex-wrap gap-1 overflow-hidden">
                   @for (chapter of subscription.chapters; track chapter.id) {
-                    <ng-container>
-                      <button class="btn btn-secondary btn-soft btn-square">
-                        {{ chapter.number }}
-                      </button>
-                    </ng-container>
+                    <span class="badge badge-lg badge-soft badge-primary">
+                      {{ chapter.number }}
+                      <svg (click)="deleteChapter(subscription, chapter.number)" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
+                        class="size-5 cursor-pointer hover:stroke-error">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                      </svg>                      
+                    </span>
                   }
                 </div>
-        
-                <!-- botão alinhado à direita no fim do card -->
-                <div class="mt-auto flex justify-end pt-4">
-                  <button class="btn btn-neutral btn-soft">
-                    Add chapter
-                  </button>
-                </div>
               </div>
-        
-            </div>
-          </ng-container>
-        }
-        @if (subscriptionsCount > 0) {
-          <div class="col-span-2 justify-self-end flex items-center gap-2 self-end">
-            <span class="text-sm mr-4 opacity-65 select-none">{{ startIndex }}-{{ endIndex }} {{'pages.mangas.table.pagination.of' | translate }} {{ subscriptionsCount }}</span>
-            <div class="join flex gap-2">
-                <button (click)="previousPage()" [disabled]="page <= 1" class="join-item btn btn-sm btn-soft">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5" />
-                </svg>
-                </button>
-                <button (click)="nextPage()" [disabled]="page * offset >= subscriptionsCount" class="join-item btn btn-sm btn-ghost btn-soft">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
-                </svg>          
-                </button>
+              <button (click)="addChapter(subscription)" class="btn btn-neutral btn-soft absolute right-4 bottom-4">
+                Add chapter
+              </button>
             </div>
           </div>
         }
+      </div>
+      @if (subscriptionsCount > 0) {
+        <div class="flex items-center gap-2 self-end md:px-20">
+          <span class="text-sm mr-4 opacity-65 select-none">
+            {{ startIndex }}-{{ endIndex }} {{ 'pages.mangas.table.pagination.of' | translate }} {{ subscriptionsCount }}
+          </span>
+          <div class="join flex gap-2">
+            <button (click)="previousPage()" [disabled]="page <= 1" class="join-item btn btn-sm btn-soft">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5" />
+              </svg>
+            </button>
+            <button (click)="nextPage()" [disabled]="page * offset >= subscriptionsCount" class="join-item btn btn-sm btn-ghost btn-soft">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+              </svg>          
+            </button>
+          </div>
         </div>
+      }
     </div>
-  }
+ }
 </div>
